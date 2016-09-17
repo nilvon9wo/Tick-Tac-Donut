@@ -49,7 +49,12 @@ function build(callback) {
 function stop() {
     console.log('Stopping...');
     if (node){
-        node.kill();
+        try {
+            node && node.kill();
+        } catch (error) {
+            console.error('Failed to stop node: ' + error);
+        }
+        
     }
 }
 
