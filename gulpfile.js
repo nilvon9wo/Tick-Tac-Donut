@@ -23,6 +23,7 @@ var nodemon = require('gulp-nodemon');
 var runSeq = require('run-sequence');
 var source = require('vinyl-source-stream');
 var sourceMaps = require('gulp-sourcemaps');
+var spawn = require('child_process').spawn;
 var typeScript = require('gulp-typescript');
 var typeScriptify = require('tsify');
 var typeScriptLint = require('gulp-tslint');
@@ -33,14 +34,23 @@ var development = environments.development;
 var staging = environments.make('staging');
 var production = environments.production;
 
+var node;
+
 function build(callback) {
     console.log('Building...');
     return runSeq(
             'clean-fast',
-            ['transpile-ts', 'transcribe-html', 'transcribe-images', 'concat-css'],
+            ['transpile-ts', 'transcribe-html', 'transcribe-images', 'transcribe-css'],
             'transcribe-ui-js',
             callback
             );
+}
+
+function stop() {
+    console.log('Stopping...');
+    if (node){
+        node.kill();
+    }
 }
 
 function transpile() {
@@ -50,6 +60,50 @@ function transpile() {
             .src()
             .pipe(typeScript(tsProject))
             .js.pipe(gulp.dest(ES5));
+}
+
+function transcribeCss() {
+    console.log('Transcribing CSS...');
+    return gulp.src([SRC + '/**/*.css'])
+            .pipe(concatCss('index.css'))
+            .pipe(gulp.dest(CLIENT));
+}
+
+function transcribeHtml() {
+    console.log('Transcribing HTML...');
+    return gulp.src([SRC + '/**/*.html'])
+            .pipe(gulp.dest(CLIENT));
+}
+
+function transcribeImages () {
+    console.log('Transcribing Images...');
+    return gulp.src([SRC + '/**/*.png'])
+            .pipe(gulp.dest(CLIENT));
+}
+
+function transcribeUiJs() {
+    console.log('Transcribing UI JavaScript...');
+    function pointTo(scripts) {
+        return scripts.map(function (script) {
+            return ES5 + '/' + script + '.js';
+        });
+    }
+
+    return browserify({
+        basedir: '.',
+        debug: true,
+        entries: pointTo(UI_SCRIPTS),
+        cache: {},
+        packageCache: {}
+    })
+            //.transform(production('babelify'))
+            .bundle()
+            .pipe(source('index.js'))
+            .pipe(buffer())
+            .pipe(sourceMaps.init({loadMaps: true}))
+            //.pipe(production(uglify()))
+            .pipe(sourceMaps.write('./'))
+            .pipe(gulp.dest(CLIENT));
 }
 
 function tslint() {
@@ -92,75 +146,48 @@ gulp.task('clean-ui-fast', function (callback) {
 
 // Transformation tasks --------------------------------------
 
-gulp.task('default', ['build']);
+gulp.task('default', ['start']);
 
 gulp.task('build', build);
-
 gulp.task('build-api', ['transpile']);
-
 gulp.task('build-ui', ['build']);
 
 gulp.task('transpile', ['transpile-ts']);
-
 gulp.task('transpile-ts', transpile);
+gulp.task('transcribe-css', transcribeCss);
+gulp.task('transcribe-html', transcribeHtml);
+gulp.task('transcribe-images', transcribeImages);
+gulp.task('transcribe-ui-js', transcribeUiJs);
 
-gulp.task('transcribe-ui-js', function () {
-    function pointTo(scripts) {
-        return scripts.map(function (script) {
-            return ES5 + '/' + script + '.js';
-        });
-    }
 
-    return browserify({
-        basedir: '.',
-        debug: true,
-        entries: pointTo(UI_SCRIPTS),
-        cache: {},
-        packageCache: {}
-    })
-            //.transform(production('babelify'))
-            .bundle()
-            .pipe(source('index.js'))
-            .pipe(buffer())
-            .pipe(sourceMaps.init({loadMaps: true}))
-            //.pipe(production(uglify()))
-            .pipe(sourceMaps.write('./'))
-            .pipe(gulp.dest(CLIENT));
-});
 
-gulp.task('transcribe-html', function () {
-    return gulp.src([SRC + '/**/*.html'])
-            .pipe(gulp.dest(CLIENT));
-});
-
-gulp.task('concat-css', function () {
-    return gulp.src([SRC + '/**/*.css'])
-            .pipe(concatCss('index.css'))
-            .pipe(gulp.dest(CLIENT));
-});
-
-gulp.task('transcribe-images', function () {
-    return gulp.src([SRC + '/**/*.png'])
-            .pipe(gulp.dest(CLIENT));
-});
 
 // Misc tasks --------------------------------------
 
+gulp.task('stop', stop);
+
 gulp.task('start', function () {
-    runSeq('tslint', 'build', function () {
-        require('child_process').spawn;
-        nodemon({
+    runSeq('stop', 'tslint', 'build', function () {
+        node = nodemon({
             ext: 'css html js json sh ts',
+            ignore: [ES5, CLIENT],
             legacyWatch: true,
             readable: true,
             script: ES5 + '/app.js',
             stdout: true
-        })
-                .on('restart', function () {
+        });
+        node.on('restart', function () {
                     gulpUtil.log('---------- Restarted! ----------');
                     tslint();
+                    transpile();
+                    transcribeCss();
+                    transcribeHtml();
+                    transcribeImages();
+                    transcribeUiJs();
                 });
     });
 });
 
 gulp.task('tslint', tslint);
+
+process.on('exit', stop);
