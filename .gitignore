@@ -1,5 +1,6 @@
 /.env
 /es5/
+/images/
 /nbproject/
 /node_modules/
 /public/

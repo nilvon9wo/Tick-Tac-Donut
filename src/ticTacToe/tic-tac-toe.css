@@ -1,3 +1,7 @@
+.body {
+    background-image: url("ticTacToe/images/wood.png");
+}
+
 .ticTactoe--title {
     width: 700px;
     height: 75px;

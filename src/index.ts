@@ -4,7 +4,7 @@
 'use strict';
 
 import DefaultLogger from './logger/DefaultLogger';
-import TicTacToeUIController from './TicTacToe/TicTacToeUIController';
+import TicTacToeUIController from './ticTacToe/TicTacToeUIController';
 
 // Declare app level module which depends on views, and components
 angular.module('TicTacToeApp', ['ngRoute'])
@@ -14,6 +14,6 @@ angular.module('TicTacToeApp', ['ngRoute'])
         $routeProvider
             .when('/', {
                 controller: 'TicTacToeUIController',
-                templateUrl: './TicTacToe/ticTacToe.html'
+                templateUrl: './ticTacToe/tic-tac-toe.html'
             });
     });
