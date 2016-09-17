@@ -3,12 +3,11 @@ import TicTacToeMarker from './TicTacToeMarker';
 import TicTacToeStatus from './TicTacToeStatus';
 
 class TicTacToeState {
-    public emptyCells = this.board.emptyCells;
+    public board: TicTacToeBoard;
 
     private turn: TicTacToeMarker;
     private oMoveCount: number = 0;
     private result: TicTacToeStatus;
-    private board: TicTacToeBoard;
 
     constructor(oldState?: TicTacToeState) {
         this.turn = null;

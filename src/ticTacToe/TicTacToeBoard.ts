@@ -1,40 +1,41 @@
 import TicTacToeBadLocationError from './TicTacToeBadLocationError';
 import TicTacToeBadPlayerError from './TicTacToeBadPlayerError';
 import TicTacToeMarker from './TicTacToeMarker';
-import TicTacToePlayer from './TicTacToePlayer';
 import TicTacToeStatus from './TicTacToeStatus';
 
 class TicTacToeBoard {
-    private squares: Array<TicTacToePlayer>;
+    private squares: Array<TicTacToeMarker>;
 
     constructor() {
-        this.squares = new Array<TicTacToePlayer>();
-    }
-
-    public set(location: number, player: TicTacToePlayer) {
-        if (location < 0 || location > 8) {
-            throw new TicTacToeBadLocationError('Invalid y coordinate: ' + location);
-        }
-
-        this.squares[location] = player;
+        this.squares = new Array<TicTacToeMarker>();
     }
 
     public clone() {
         const newBoard = new TicTacToeBoard();
-        this.squares.forEach(function(player: TicTacToePlayer, index: number) {
-            newBoard.squares[index] = player;
+        this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
+            newBoard.squares[index] = marker;
         });
         return newBoard;
     }
 
-    public emptyCells() {
-        const emptyCells = new Array<number>();
-        this.squares.forEach(function(player: TicTacToePlayer, index: number) {
-            if (!player) {
-                emptyCells.push(index);
-            }
-        });
-        return emptyCells;
+    public insertAt(index: number, marker: TicTacToeMarker) {
+        const board = $('.ticTacToe--board-cell');
+        const targetCell = $(board[index]);
+
+        if (targetCell.hasClass('ticTacToe--board-cell--empty')) {
+            const symbol = marker.toString().toLowerCase();
+            targetCell.html(symbol);
+            targetCell.removeClass('ticTacToe--board-cell--empty');
+            targetCell.addClass('ticTacToe--board-cell--' + symbol);
+        }
+    }
+
+    public set(location: number, marker: TicTacToeMarker) {
+        if (location < 0 || location > 8) {
+            throw new TicTacToeBadLocationError('Invalid y coordinate: ' + location);
+        }
+
+        this.squares[location] = marker;
     }
 
     public status(): TicTacToeStatus {
@@ -106,14 +107,16 @@ class TicTacToeBoard {
         return TicTacToeStatus.STILL_RUNNING;
     }
 
-    private selectWinner(rowOwner: TicTacToePlayer): TicTacToeStatus {
-        switch (rowOwner.marker) {
-            case (TicTacToeMarker.O): return TicTacToeStatus.O_WON;
-            case (TicTacToeMarker.X): return TicTacToeStatus.X_WON;
-        }
-
-        throw new TicTacToeBadPlayerError('Invalid player: ' + rowOwner.marker);
+    private emptyCells() {
+        const emptyCells = new Array<number>();
+        this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
+            if (!marker) {
+                emptyCells.push(index);
+            }
+        });
+        return emptyCells;
     }
+
 
     private isDraw(): TicTacToeStatus {
         const available = this.emptyCells();
@@ -123,6 +126,16 @@ class TicTacToeBoard {
             return TicTacToeStatus.STILL_RUNNING;
         }
     }
+
+    private selectWinner(marker: TicTacToeMarker): TicTacToeStatus {
+        switch (marker) {
+            case (TicTacToeMarker.O): return TicTacToeStatus.O_WON;
+            case (TicTacToeMarker.X): return TicTacToeStatus.X_WON;
+        }
+
+        throw new TicTacToeBadPlayerError('Invalid player: ' + marker);
+    }
+
 }
 
 export default TicTacToeBoard;

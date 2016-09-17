@@ -26,7 +26,7 @@
 }
 
 div[class^="ticTacToe--board-cell"] {
-    border: 2px dashed lightskyblue;
+    border: 2px dashed #111;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -42,8 +42,23 @@ div[class^="ticTacToe--board-cell"] {
 }
 
 .ticTacToe--board-cell {
-    background: url("empty.png");
     background-repeat: no-repeat;   
+}
+
+.ticTacToe--board-cell--empty {
+    background: url("./empty.png");
+}
+
+.ticTacToe--board-cell--x {
+    color: red;
+    background: url("./tick.png");
+    text-indent: -9999px;
+}
+
+.ticTacToe--board-cell--o {
+    background: url("./doughnut.png");
+    color: green;
+    text-indent: -9999px;
 }
 
 .ticTacToe--control {
@@ -62,7 +77,7 @@ div[class^="ticTacToe--board-cell"] {
 
 div[class^="ticTacToe--level"] {
     margin: 0 15px;
-    color: lightskyblue;
+    color: #111;                  
     cursor: pointer;
 }
 
@@ -100,10 +115,13 @@ div[class^="ticTacToe--action"]:hover {
 
 div[class^="ticTacToe--ingame"] {
     display:none;
-    color:lightskyblue;
+    color:#111;
 }
 
 div[class^="ticTacToe--ingame"] > p {
     margin: 0px;
 }
 
+.ticTacToe--ingame--computer-image {
+    opacity:0.5;
+}

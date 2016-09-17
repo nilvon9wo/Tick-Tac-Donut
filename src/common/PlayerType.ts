@@ -1,6 +1,6 @@
-enum TicTacToeMarker {
+enum PlayerType {
     HUMAN,
     COMPUTER
 }
 
-export default TicTacToeMarker;
+export default PlayerType;
