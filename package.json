@@ -1,0 +1,64 @@
+{
+  "name": "tick-tack-doughnuts",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "Brian Kessler",
+  "contributors": [],
+  "dependencies": {
+    "angularjs": "0.0.1",
+    "express": "^4.14.0"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "prestart": "npm install",
+    "start-api": "node dist/api/app.js",
+    "start-ui": "http-server -a localhost -p 8000 -c-1 ./app",
+    "pretest": "npm install",
+    "preupdate-webdriver": "npm install"
+  },
+  "description": "A game of tic-tac-toe.",
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "bower": "^1.7.7",
+    "browserify": "^13.1.0",
+    "bunyan": "^1.8.1",
+    "child_process": "^1.0.2",
+    "del": "^2.2.2",
+    "envs": "^0.1.6",
+    "grunt-contrib-jshint": "^1.0.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cli": "^1.2.2",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-environments": "^0.1.1",
+    "gulp-file-cache": "0.0.1",
+    "gulp-nodemon": "^2.1.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-tslint": "^6.1.1",
+    "gulp-typescript": "^2.13.6",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
+    "http-server": "^0.9.0",
+    "run-sequence": "^1.2.2",
+    "tsify": "^1.0.6",
+    "tslint": "^3.15.1",
+    "typescript": "^1.8.10",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nilvon9wo/Tick-Tack-Doughnuts.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nilvon9wo/Tick-Tack-Doughnuts/issues"
+  },
+  "homepage": "https://github.com/nilvon9wo/Tick-Tack-Doughnuts#readme"
+}
