@@ -3,10 +3,22 @@ var ES5 = 'es5';
 var CLIENT = __dirname + '/public';
 
 var UI_SCRIPTS = [
+    'common/DifficultyLevel',
     'common/ModelInterface',
+    'common/PlayerType',
     'common/UIControllerInterface',
     'logger/DefaultLogger',
     'logger/LoggerInterface',
+    'ticTacToe/TicTacToeBadLocationError',
+    'ticTacToe/TicTacToeBadPlayerError',
+    'ticTacToe/TicTacToeBoard',
+    'ticTacToe/TicTacToeComputerPlayer',
+    'ticTacToe/TicTacToeGame',
+    'ticTacToe/TicTacToeHumanPlayer',
+    'ticTacToe/TicTacToeMarker',
+    'ticTacToe/TicTacToePlayer',
+    'ticTacToe/TicTacToeState',
+    'ticTacToe/TicTacToeStatus',
     'ticTacToe/TicTacToeUIController',
     'ticTacToe/TicTacToeUIControllerInterface',
     'index'
