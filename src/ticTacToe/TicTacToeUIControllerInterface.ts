@@ -1,9 +1,9 @@
 import PlayerType from '../common/PlayerType';
-import TicTacToeMarker from './TicTacToeMarker';
+import TicTacToeMarker from './Markers/TicTacToeMarker';
+import TicTacToeComputerPlayerHelper from './Players/TicTacToeComputerPlayerHelper';
 
 interface TicTacToeUIControllerInterface extends ng.IScope {
-    computerMarker: TicTacToeMarker;
-    humanMarker: TicTacToeMarker;
+    computerPlayerHelper?: TicTacToeComputerPlayerHelper;
     insertAt: (index: number, symbol: TicTacToeMarker) => void;
     refresh: () => void;
     selectLevel: () => void;

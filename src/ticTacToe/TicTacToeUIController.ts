@@ -2,9 +2,10 @@
 
 import PlayerType from '../common/PlayerType';
 import LoggerInterface from '../logger/LoggerInterface';
-import TicTacToeComputerPlayer from './TicTacToeComputerPlayer';
+import TicTacToeComputerPlayer from './Players/TicTacToeComputerPlayer';
+import TicTacToeComputerPlayerHelper from './Players/TicTacToeComputerPlayerHelper';
 import TicTacToeGame from './TicTacToeGame';
-import TicTacToeHumanPlayer from './TicTacToeHumanPlayer';
+import TicTacToeHumanPlayer from './Players/TicTacToeHumanPlayer';
 import TicTacToeUIControllerInterface from './TicTacToeUIControllerInterface';
 import UIControllerInterface from '../common/UIControllerInterface';
 
@@ -14,39 +15,40 @@ class TicTacToeUIController implements UIControllerInterface {
     private computer: TicTacToeComputerPlayer;
     private initialControlsVisible: boolean;
     private game: TicTacToeGame;
+    private computerPlayerHelper: TicTacToeComputerPlayerHelper;
 
     constructor($scope: TicTacToeUIControllerInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
+        this.computerPlayerHelper = $scope.computerPlayerHelper || new TicTacToeComputerPlayerHelper();
         this.initialControlsVisible = true;
         this.currentView = '';
         this.human = new TicTacToeHumanPlayer();
-        this.computer = new TicTacToeComputerPlayer();
 
         $scope.refresh = () => this.game.refresh($logger);
         $scope.start = () => this.start($logger);
-        $scope.selectLevel = this.computer.selectLevel;
+        $scope.selectLevel = this.computerPlayerHelper.selectLevel;
         $scope.switchViewTo = this.switchViewTo;
     }
 
     private start($logger: LoggerInterface) {
         $logger.log('Starting the game...');
-        this.computer.setLevel();
+        this.computer = this.computerPlayerHelper.setLevel();
         this.game = new TicTacToeGame(this.computer);
         this.game.start();
     }
 
-    private switchViewTo (turn: PlayerType) {
-            if (this.initialControlsVisible) {
-                this.initialControlsVisible = false;
-                $('.ticTacToe--initialization').fadeOut({
-                    done: () => this.switchTurn(turn),
-                    duration: 'slow'
-                });
-            } else {
-                $(this.currentView).fadeOut({
-                    done: () => this.switchTurn(turn),
-                    duration: 'false'
-                });
-            }
+    private switchViewTo(turn: PlayerType) {
+        if (this.initialControlsVisible) {
+            this.initialControlsVisible = false;
+            $('.ticTacToe--initialization').fadeOut({
+                done: () => this.switchTurn(turn),
+                duration: 'slow'
+            });
+        } else {
+            $(this.currentView).fadeOut({
+                done: () => this.switchTurn(turn),
+                duration: 'false'
+            });
+        }
     }
 
     private switchTurn(turn: PlayerType) {
@@ -57,9 +59,6 @@ class TicTacToeUIController implements UIControllerInterface {
             this.computer.startFlicker();
         }
     };
-
-
-
 }
 
 export default TicTacToeUIController;

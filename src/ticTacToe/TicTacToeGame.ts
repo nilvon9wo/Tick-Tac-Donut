@@ -1,6 +1,6 @@
 import LoggerInterface from '../logger/LoggerInterface';
-import TicTacToeComputerPlayer from './TicTacToeComputerPlayer';
-import TicTacToeMarker from './TicTacToeMarker';
+import TicTacToeComputerPlayer from './Players/TicTacToeComputerPlayer';
+import TicTacToeMarker from './Markers/TicTacToeMarker';
 import TicTacToeState from './TicTacToeState';
 import TicTacToeStatus from './TicTacToeStatus';
 

@@ -1,6 +1,6 @@
 import TicTacToeBadLocationError from './TicTacToeBadLocationError';
-import TicTacToeBadPlayerError from './TicTacToeBadPlayerError';
-import TicTacToeMarker from './TicTacToeMarker';
+import TicTacToeBadPlayerError from './Players/TicTacToeBadPlayerError';
+import TicTacToeMarker from './Markers/TicTacToeMarker';
 import TicTacToeStatus from './TicTacToeStatus';
 
 class TicTacToeBoard {

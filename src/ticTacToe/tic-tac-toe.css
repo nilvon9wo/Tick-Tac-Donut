@@ -46,17 +46,17 @@ div[class^="ticTacToe--board-cell"] {
 }
 
 .ticTacToe--board-cell--empty {
-    background: url("./empty.png");
+    background: url("./Markers/empty.png");
 }
 
 .ticTacToe--board-cell--x {
     color: red;
-    background: url("./tick.png");
+    background: url("./Markers/tick.png");
     text-indent: -9999px;
 }
 
 .ticTacToe--board-cell--o {
-    background: url("./doughnut.png");
+    background: url("./Markers/doughnut.png");
     color: green;
     text-indent: -9999px;
 }

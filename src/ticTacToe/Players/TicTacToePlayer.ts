@@ -1,5 +1,5 @@
-import PlayerType from '../common/PlayerType';
-import TicTacToeMarker from './TicTacToeMarker';
+import PlayerType from '../../common/PlayerType';
+import TicTacToeMarker from '../Markers/TicTacToeMarker';
 
 interface TicTacToePlayer {
     playerType: PlayerType;
