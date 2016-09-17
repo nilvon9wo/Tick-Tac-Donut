@@ -3,6 +3,13 @@ var ES5 = 'es5';
 var CLIENT = __dirname + '/public';
 
 var UI_SCRIPTS = [
+    'common/ModelInterface',
+    'common/UIControllerInterface',
+    'logger/DefaultLogger',
+    'logger/LoggerInterface',
+    'ticTacToe/TicTacToeUIController',
+    'ticTacToe/TicTacToeUIControllerInterface',
+    'index'
 ];
 
 var browserify = require('browserify');
@@ -30,7 +37,7 @@ function build(callback) {
     console.log('Building...');
     return runSeq(
             'clean-fast',
-            ['transpile', 'transcribe-html', 'concat-css'],
+            ['transpile-ts', 'transcribe-html', 'transcribe-images', 'concat-css'],
             'transcribe-ui-js',
             callback
             );
@@ -93,18 +100,9 @@ gulp.task('build-api', ['transpile']);
 
 gulp.task('build-ui', ['build']);
 
-gulp.task('transpile', transpile);
+gulp.task('transpile', ['transpile-ts']);
 
-gulp.task('transcribe-html', function () {
-    return gulp.src([SRC + '/**/*.html'])
-            .pipe(gulp.dest(CLIENT));
-});
-
-gulp.task('concat-css', function () {
-    return gulp.src([SRC + '/**/*.css'])
-            .pipe(concatCss('index.css'))
-            .pipe(gulp.dest(CLIENT));
-});
+gulp.task('transpile-ts', transpile);
 
 gulp.task('transcribe-ui-js', function () {
     function pointTo(scripts) {
@@ -120,13 +118,29 @@ gulp.task('transcribe-ui-js', function () {
         cache: {},
         packageCache: {}
     })
-            //.transform('babelify')
+            //.transform(production('babelify'))
             .bundle()
             .pipe(source('index.js'))
             .pipe(buffer())
             .pipe(sourceMaps.init({loadMaps: true}))
-            //.pipe(uglify())
+            //.pipe(production(uglify()))
             .pipe(sourceMaps.write('./'))
+            .pipe(gulp.dest(CLIENT));
+});
+
+gulp.task('transcribe-html', function () {
+    return gulp.src([SRC + '/**/*.html'])
+            .pipe(gulp.dest(CLIENT));
+});
+
+gulp.task('concat-css', function () {
+    return gulp.src([SRC + '/**/*.css'])
+            .pipe(concatCss('index.css'))
+            .pipe(gulp.dest(CLIENT));
+});
+
+gulp.task('transcribe-images', function () {
+    return gulp.src([SRC + '/**/*.png'])
             .pipe(gulp.dest(CLIENT));
 });
 

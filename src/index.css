@@ -1,6 +1,6 @@
-.ticTactoe--title {
-    width: 700px;
-    height: 75px;
-    background: url("ticTacToe/images/tick-tack-doughnut-title.png");
-    text-indext: -9999px;
+body {
+    background-image: url("./ticTacToe/wood.png");
+    background-repeat: repeat;
+    padding-left: 100px;
 }
+

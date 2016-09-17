@@ -13,6 +13,7 @@ const port: number = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/../public'));
 
 app.listen(port);
 

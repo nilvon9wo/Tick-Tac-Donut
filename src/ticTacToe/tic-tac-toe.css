@@ -1,10 +1,8 @@
-.body {
-    background-image: url("ticTacToe/images/wood.png");
-}
-
 .ticTactoe--title {
+    background: url("tick-tack-doughnut-title.png");
+    background-repeat: no-repeat;
+    height: 120px;
+    margin-left: 130px;
+    text-indent: -9999px;
     width: 700px;
-    height: 75px;
-    background: url("ticTacToe/images/tick-tack-doughnut-title.png");
-    text-indext: -9999px;
 }

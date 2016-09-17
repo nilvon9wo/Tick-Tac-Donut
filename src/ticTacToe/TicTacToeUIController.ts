@@ -6,7 +6,9 @@ import UIControllerInterface from '../common/UIControllerInterface';
 
 class TicTacToeUIController implements UIControllerInterface {
     constructor($scope: TicTacToeUIControllerInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
-        $scope.refresh = () => {};
+        $scope.refresh = () => {
+            $logger.log('Requesting...');
+        };
     }
 }
 

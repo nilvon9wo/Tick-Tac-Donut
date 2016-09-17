@@ -1,2 +1,2 @@
 #!/bin/bash
-export $(cat .env | xargs) && gulp start-dev-api
+export $(cat .env | xargs) && gulp start
