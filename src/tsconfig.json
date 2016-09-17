@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitUseStrict": true,
+        "removeComments": true,
+        "sourceMap": false,
+        "target": "es5"
+    },
+    "exclude": [
+        "dist",
+        "nbproject",
+        "node_modules"
+    ]
+}
