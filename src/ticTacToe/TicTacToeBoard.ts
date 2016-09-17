@@ -75,17 +75,17 @@ class TicTacToeBoard {
 
     private checkColumns(): TicTacToeStatus {
         return this.check({
-            squaresUntil: 2,
+            additionalSquaresRequired: [3, 6],
             squareIncrement: 1,
-            additionalSquaresRequired: [3, 6]
+            squaresUntil: 2
         });
     }
 
     private checkRows(): TicTacToeStatus {
         return this.check({
-            squaresUntil: 6,
+            additionalSquaresRequired: [1, 2],
             squareIncrement: 3,
-            additionalSquaresRequired: [1, 2]
+            squaresUntil: 6
         });
     }
 

@@ -1,5 +1,5 @@
 class TicTacToeBadPlayerError extends Error {
-    public name = "TicTacToeBadPlayerError";
+    public name = 'TicTacToeBadPlayerError';
     constructor(public message?: string) {
         super(message);
     }

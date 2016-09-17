@@ -1,5 +1,5 @@
 class TicTacToeBadLocationError extends Error {
-    public name = "TicTacToeBadLocationError";
+    public name = 'TicTacToeBadLocationError';
     constructor(public message?: string) {
         super(message);
     }
