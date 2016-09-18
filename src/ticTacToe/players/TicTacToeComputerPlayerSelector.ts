@@ -16,16 +16,16 @@ class TicTacToeComputerPlayerSelector {
         });
     }
 
-    public setLevel() {
-        const selectedDifficulty = $('ticTacToe--level--selected').attr('id');
+    public selectLevel() {
+        const selectedDifficulty = $('.ticTacToe--level--selected');
+        const attr = selectedDifficulty.attr('id');
 
-        switch (selectedDifficulty) {
+        switch (attr) {
             case 'impossible': return new TicTacToeImpossibleComputerPlayer();
             case 'moderate': return new TicTacToeModerateComputerPlayer();
             default: return new TicTacToeEasyComputerPlayer();
         }
     }
-
 }
 
 export default TicTacToeComputerPlayerSelector;

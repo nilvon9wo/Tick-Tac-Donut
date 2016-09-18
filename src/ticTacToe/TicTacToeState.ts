@@ -5,7 +5,7 @@ import TicTacToeStateStatus from './TicTacToeStateStatus';
 class TicTacToeState {
     public board: TicTacToeBoard;
     public oMoveCount: number = 0;
-    public emptyCells: () => Array<number> = this.board.emptyCells;
+    public emptyCells: () => Array<number>;
     public result: TicTacToeStateStatus;
     public turn: TicTacToeMarker;
 
@@ -13,7 +13,8 @@ class TicTacToeState {
         this.turn = null;
         this.oMoveCount = 0;
         this.result = TicTacToeStateStatus.STILL_RUNNING;
-        this.board = new TicTacToeBoard;
+        this.board = new TicTacToeBoard();
+        this.emptyCells = this.board.emptyCells;
 
         if (oldState) {
             this.copyFromOldState(oldState);

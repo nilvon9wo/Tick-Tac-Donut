@@ -23,7 +23,7 @@ class TicTacToeUIController implements UIControllerInterface {
     }
 
     private startGame ($scope: TicTacToeUIControllerInterface, $logger: LoggerInterface) {
-        this.computer = this.computerPlayerSelector.setLevel();
+        this.computer = this.computerPlayerSelector.selectLevel();
         this.human = $scope.human || new TicTacToeHumanPlayer();
         this.game = new TicTacToeGame(this.human, this.computer, $logger);
         $scope.insertAt = this.game.state.board.insertAt;
