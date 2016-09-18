@@ -21,7 +21,7 @@ class TicTacToeComputerPlayerAction {
 
         nextState.advanceTurn();
 
-        return nextBoard;
+        return nextState;
     }
 }
 

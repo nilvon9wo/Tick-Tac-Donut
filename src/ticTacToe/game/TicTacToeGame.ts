@@ -62,6 +62,14 @@ class TicTacToeGame {
         this.status = TicTacToeGameStatus.BEGINNING;
     }
 
+    public score(state: TicTacToeState) {
+        switch (state.result) {
+            case TicTacToeStateStatus.X_WON: return 10 - state.oMoveCount;
+            case TicTacToeStateStatus.O_WON: return 10 + state.oMoveCount;
+            default: return 0;
+        }
+    }
+
     private makeSquaresClickable() {
         $('ticTacToe--board-cell').each(() => {
             const $this = $(this);

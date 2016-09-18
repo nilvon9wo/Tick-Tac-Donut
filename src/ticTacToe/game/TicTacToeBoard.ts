@@ -18,6 +18,16 @@ class TicTacToeBoard {
         return newBoard;
     }
 
+    public emptyCells() {
+        const emptyCells = new Array<number>();
+        this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
+            if (!marker) {
+                emptyCells.push(index);
+            }
+        });
+        return emptyCells;
+    }
+
     public insertAt(index: number, marker: TicTacToeMarker) {
         const board = $('.ticTacToe--board-cell');
         const targetCell = $(board[index]);
@@ -118,17 +128,6 @@ class TicTacToeBoard {
         }
         return TicTacToeStateStatus.STILL_RUNNING;
     }
-
-    private emptyCells() {
-        const emptyCells = new Array<number>();
-        this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
-            if (!marker) {
-                emptyCells.push(index);
-            }
-        });
-        return emptyCells;
-    }
-
 
     private isDraw(): TicTacToeStateStatus {
         const available = this.emptyCells();

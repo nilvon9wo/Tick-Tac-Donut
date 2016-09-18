@@ -5,6 +5,7 @@ import TicTacToeStateStatus from './TicTacToeStateStatus';
 class TicTacToeState {
     public board: TicTacToeBoard;
     public oMoveCount: number = 0;
+    public emptyCells: () => Array<number> = this.board.emptyCells;
     public result: TicTacToeStateStatus;
     public turn: TicTacToeMarker;
 
