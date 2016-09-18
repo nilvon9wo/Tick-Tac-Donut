@@ -49,7 +49,7 @@ class TicTacToeGame {
                 this.view.switchViewTo(TicTacToeGameViewState.HUMAN);
             } else {
                 this.view.switchViewTo(TicTacToeGameViewState.COMPUTER);
-                this.computer.takeTurn(this.state.turn);
+                this.computer.takeTurn(this.state);
             }
         }
     }

@@ -12,7 +12,13 @@ class TicTacToeComputerPlayerActionComparitor {
     };
 
     public DESCENDING = function(firstAction: TicTacToeComputerPlayerAction, secondAction: TicTacToeComputerPlayerAction) {
-        return !this.ASCENDING;
+        if (firstAction.miniMaxValue > secondAction.miniMaxValue) {
+            return -1;
+        } else if (firstAction.miniMaxValue < secondAction.miniMaxValue) {
+            return 1;
+        } else {
+            return 0;
+        }
     };
 }
 

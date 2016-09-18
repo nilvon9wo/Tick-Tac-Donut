@@ -3,7 +3,7 @@ import TicTacToeState from '../TicTacToeState';
 
 class TicTacToeComputerPlayerAction {
     public miniMaxValue: number;
-    private movePosition: number;
+    public movePosition: number;
 
     constructor(position: number) {
         this.movePosition = position;

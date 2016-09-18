@@ -18,6 +18,7 @@ var UI_SCRIPTS = [
         'ticTacToe/markers/TicTacToeMarker',
         'ticTacToe/players/TicTacToeBadPlayerError',
         'ticTacToe/players/TicTacToeComputerPlayerAction',
+        'ticTacToe/players/TicTacToeComputerPlayerActionCalculator',
         'ticTacToe/players/TicTacToeComputerPlayerActionComparitor',
         'ticTacToe/players/TicTacToeComputerPlayerInterface',
         'ticTacToe/players/TicTacToeComputerPlayerSelector',

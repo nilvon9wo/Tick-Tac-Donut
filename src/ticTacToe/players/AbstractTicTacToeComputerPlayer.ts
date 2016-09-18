@@ -2,46 +2,22 @@ import PlayerType from '../../common/PlayerType';
 import TicTacToeGame from '../game/TicTacToeGame';
 import TicTacToeMarker from '../markers/TicTacToeMarker';
 import TicTacToeComputerPlayerAction from './TicTacToeComputerPlayerAction';
+import TicTacToeComputerPlayerActionCalculator from './TicTacToeComputerPlayerActionCalculator';
 import TicTacToeComputerPlayerInterface from './TicTacToeComputerPlayerInterface';
 import TicTacToeState from '../TicTacToeState';
 
 abstract class AbstractTicTacToeComputerPlayer implements TicTacToeComputerPlayerInterface {
     public playerType = PlayerType.HUMAN;
+    protected actionCalculator: TicTacToeComputerPlayerActionCalculator;
+    protected game: TicTacToeGame;
     private aiFlickerHandle: any;
-    private game: TicTacToeGame;
 
-    constructor() {
+    constructor(actionCalculator?: TicTacToeComputerPlayerActionCalculator) {
+        this.actionCalculator = actionCalculator || new TicTacToeComputerPlayerActionCalculator(); 
         this.aiFlickerHandle = 0;
     };
 
-    public abstract takeTurn(marker: TicTacToeMarker): void;
-
-    public miniMaxValue(state: TicTacToeState) {
-        if (state.isTerminal()) {
-            return this.game.score(state);
-        }
-
-        let stateScore = (state.turn === TicTacToeMarker.X) ? -1000 : 1000;
-
-        const availablePositions = state.emptyCells();
-        const availableNextStates = availablePositions.map((position) => {
-            const action = new TicTacToeComputerPlayerAction(position);
-            return action.applyTo(state);
-        });
-
-        availableNextStates.forEach((nextState) => {
-            const nextScore = this.miniMaxValue(nextState);
-            if (state.turn === TicTacToeMarker.X) {
-                if (nextScore > stateScore) {
-                    stateScore = nextScore;
-                }
-            } else if (nextScore < stateScore) {
-                stateScore = nextScore;
-            }
-        });
-
-        return stateScore;
-    };
+    public abstract takeTurn(state: TicTacToeState): void;
 
     public plays(game: TicTacToeGame) {
         this.game = game;
