@@ -64,10 +64,13 @@ class TicTacToeBoard {
             }
 
             const owner = this.squares[i];
+            const secondRequiredSquare = i + j;
+            const thirdRequiredSquare = i + 2 * j;
             if (
-                owner === this.squares[i + j] &&
-                owner === this.squares[i + 2 * j]
+                owner === this.squares[secondRequiredSquare] &&
+                owner === this.squares[thirdRequiredSquare]
             ) {
+                this.markWinner([i, secondRequiredSquare, thirdRequiredSquare]);
                 return this.selectWinner(owner);
             }
         }
@@ -97,10 +100,13 @@ class TicTacToeBoard {
             }
 
             const owner = this.squares[i];
+            const secondRequiredSquare = i + config.additionalSquaresRequired[0];
+            const thirdRequiredSquare = i + config.additionalSquaresRequired[1];
             if (
-                owner === this.squares[i + config.additionalSquaresRequired[0]] &&
-                owner === this.squares[i + config.additionalSquaresRequired[1]]
+                owner === this.squares[secondRequiredSquare] &&
+                owner === this.squares[thirdRequiredSquare]
             ) {
+                this.markWinner([i, secondRequiredSquare, thirdRequiredSquare]);
                 return this.selectWinner(owner);
             }
         }
@@ -125,6 +131,15 @@ class TicTacToeBoard {
         } else {
             return TicTacToeStatus.STILL_RUNNING;
         }
+    }
+
+    private markWinner(winningSquares: Array<number>) {
+        const board = $('.ticTacToe--board-cell--background');
+        winningSquares.forEach((index) => {
+            const targetSquare = $(board[index]);
+            targetSquare.removeClass('ticTacToe--board-cell--background');
+            targetSquare.addClass('ticTacToe--board-cell--win');
+        });
     }
 
     private selectWinner(marker: TicTacToeMarker): TicTacToeStatus {

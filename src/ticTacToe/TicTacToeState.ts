@@ -32,9 +32,9 @@ class TicTacToeState {
     }
 
     private copyFromOldState(oldState: TicTacToeState) {
-            this.board = oldState.board.clone();
-            this.result = oldState.result;
-            this.turn = oldState.turn;
+        this.board = oldState.board.clone();
+        this.result = oldState.result;
+        this.turn = oldState.turn;
     }
 }
 

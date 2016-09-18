@@ -10,7 +10,7 @@ class TicTacToeComputerPlayerAction {
         this.miniMaxValue = 0;
     }
 
-    public applyTo (state: TicTacToeState) {
+    public applyTo(state: TicTacToeState) {
         const nextState = new TicTacToeState(state);
         const nextBoard = nextState.board;
         nextBoard.set(this.movePosition, state.turn);
