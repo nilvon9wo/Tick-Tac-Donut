@@ -67,9 +67,10 @@ class TicTacToeGame {
     }
 
     private makeSquaresClickable() {
-        $('ticTacToe--board-cell').each(() => {
+        $('.ticTacToe--board-cell--background').each(function(){
             const $this = $(this);
             $this.click(() => {
+                console.log('click!', this);
                 if (
                     this.status === TicTacToeGameStatus.RUNNING &&
                     this.currentTurn === TicTacToeMarker.X &&
