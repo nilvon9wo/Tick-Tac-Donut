@@ -5,14 +5,14 @@ import TicTacToeComputerPlayerAction from './TicTacToeComputerPlayerAction';
 class TicTacToeEasyComputerPlayer extends AbstractTicTacToeComputerPlayer {
 
     public takeTurn(state: TicTacToeState) {
-        const available = state.emptyCells();
+        state.toggleTurn();
+        const available = state.board.emptyCells();
+
         const randomCell = available[Math.floor(Math.random() * available.length)];
-
         const chosenAction = new TicTacToeComputerPlayerAction(randomCell);
-
-        this.game.state.board.insertAt(chosenAction.movePosition, state.turn);
-        const nextState = chosenAction.applyTo(state);
-        this.game.advanceTo(nextState);
+        
+        state.board.insertAt(chosenAction.movePosition, state.turn);
+        console.log('INSERTED', chosenAction.movePosition, state.turn);
     }
 }
 

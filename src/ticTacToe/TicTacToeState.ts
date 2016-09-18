@@ -10,18 +10,14 @@ class TicTacToeState {
     public turn: TicTacToeMarker;
 
     constructor(oldState?: TicTacToeState) {
-        this.turn = null;
-        this.oMoveCount = 0;
-        this.result = TicTacToeStateStatus.STILL_RUNNING;
-        this.board = new TicTacToeBoard();
+        this.board = oldState && oldState.board || new TicTacToeBoard();
         this.emptyCells = this.board.emptyCells;
-
-        if (oldState) {
-            this.copyFromOldState(oldState);
-        }
+        this.oMoveCount = 0;
+        this.result = oldState && oldState.result || TicTacToeStateStatus.STILL_RUNNING;
+        this.turn = oldState && oldState.turn;
     }
 
-    public advanceTurn() {
+    public toggleTurn() {
         this.turn = (this.turn === TicTacToeMarker.X) ?
             TicTacToeMarker.O :
             TicTacToeMarker.X;
@@ -30,12 +26,6 @@ class TicTacToeState {
     public isTerminal(): boolean {
         this.result = this.board.status();
         return this.result !== TicTacToeStateStatus.STILL_RUNNING;
-    }
-
-    private copyFromOldState(oldState: TicTacToeState) {
-        this.board = oldState.board.clone();
-        this.result = oldState.result;
-        this.turn = oldState.turn;
     }
 }
 

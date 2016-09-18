@@ -26,6 +26,7 @@ class TicTacToeUIController implements UIControllerInterface {
         this.computer = this.computerPlayerSelector.selectLevel();
         this.human = $scope.human || new TicTacToeHumanPlayer();
         this.game = new TicTacToeGame(this.human, this.computer, $logger);
+        this.computer.plays(this.game);
         $scope.refresh = () => this.game.refresh($logger);
         $('.ticTacToe--board').show();
         $('.ticTacToe--initialization').hide();

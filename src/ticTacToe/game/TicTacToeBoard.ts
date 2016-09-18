@@ -20,24 +20,24 @@ class TicTacToeBoard {
 
     public emptyCells() {
         const emptyCells = new Array<number>();
-        this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
-            if (!marker) {
-                emptyCells.push(index);
-            }
-        });
+        
+        if (this.squares) {
+            this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
+                if (!marker) {
+                    emptyCells.push(index);
+                }
+            });
+        }
         return emptyCells;
     }
 
     public insertAt(index: number, marker: TicTacToeMarker) {
-        console.log('insertAt', index, marker);
         const board = $('.ticTacToe--board-cell--background');
-        console.log('length', board.length);
         const targetCell = $(board[index]);
 
         if (targetCell.hasClass('ticTacToe--board-cell--empty')) {
             targetCell.removeClass('ticTacToe--board-cell--empty');
             const symbol = TicTacToeMarker[marker].toLowerCase();
-            console.log('inserting...', symbol);
             const newMarker = $('<div/>', {
                 class: 'ticTacToe--board-cell--' + symbol,
                 text: symbol

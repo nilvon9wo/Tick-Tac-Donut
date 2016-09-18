@@ -42,12 +42,12 @@ class TicTacToeGame {
             this.status = TicTacToeGameStatus.FINISHED;
             this.view.switchViewTo(this.winner(state.result));
         } else {
-            const nextPlayer = this.upNext();
+            const nextPlayer = this.nextUp();
             if (nextPlayer === this.human) {
                 this.view.switchViewTo(TicTacToeGameViewState.HUMAN);
             } else {
                 this.view.switchViewTo(TicTacToeGameViewState.COMPUTER);
-                this.computer.takeTurn(this.state);
+                this.computer.takeTurn(state);
             }
         }
     }
@@ -83,16 +83,16 @@ class TicTacToeGame {
                     const board = nextState.board;
                     board.set(index, self.currentTurn);
                     board.insertAt(index, self.currentTurn);
-                    nextState.advanceTurn();
+                    nextState.toggleTurn();
                     self.advanceTo(nextState);
                 }
             });
         });
     }
 
-    private upNext() {
-        const turn = this.state.turn.toString();
-        const turnMarker = (turn === 'X') ? TicTacToeMarker.X : TicTacToeMarker.O;
+    private nextUp() {
+        const isXTurn = this.state.turn &&  TicTacToeMarker[this.state.turn] === 'X'; 
+        const turnMarker = isXTurn ? TicTacToeMarker.X : TicTacToeMarker.O;
         return this.playerByMarker.get(turnMarker);
     }
 
@@ -101,7 +101,7 @@ class TicTacToeGame {
             return TicTacToeGameViewState.DRAW;
         }
 
-        const winnerString = result.toString().charAt(0);
+        const winnerString = TicTacToeStateStatus[result].charAt(0);
         const winnerMarker = (winnerString === 'X') ?  TicTacToeMarker.X : TicTacToeMarker.O;
         const winner = this.playerByMarker.get(winnerMarker);
 

@@ -6,6 +6,7 @@ class TicTacToeModerateComputerPlayer extends AbstractTicTacToeComputerPlayer {
     private PLAYER_SKILL = 50;
 
     public takeTurn(state: TicTacToeState) {
+        state.toggleTurn();
         const availableActions = this.actionCalculator.sortedAvailableActions(state, this.game);
 
         const isActingSmart = Math.random() * this.MAX_SKILL <= this.PLAYER_SKILL;

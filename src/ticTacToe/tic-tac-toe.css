@@ -33,7 +33,7 @@ div[class^="ticTacToe--board-cell"] {
     float:left;
     font-family: "Arial Narrow";
     font-weight: bold;
-    font-size: 200px;
+    font-size: 180px;
     height: 233px;
     line-height: 233px;
     text-align: center;
@@ -46,7 +46,7 @@ div[class^="ticTacToe--board-cell"] {
 }
 
 .ticTacToe--board-cell--win {
-    background: url("./markers/win.png");
+    background: url("./game/win.png");
     background-repeat: no-repeat;   
 }
 

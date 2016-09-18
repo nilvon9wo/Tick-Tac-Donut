@@ -4,6 +4,7 @@ import TicTacToeState from '../TicTacToeState';
 class TicTacToeImpossibleComputerPlayer extends AbstractTicTacToeComputerPlayer {
 
     public takeTurn(state: TicTacToeState) {
+        state.toggleTurn();
         const availableActions = this.actionCalculator.sortedAvailableActions(state, this.game);
 
         const chosenAction = availableActions[0];
