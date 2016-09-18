@@ -3,8 +3,9 @@ import TicTacToeImpossibleComputerPlayer from './TicTacToeImpossibleComputerPlay
 import TicTacToeModerateComputerPlayer from './TicTacToeModerateComputerPlayer';
 
 class TicTacToeComputerPlayerSelector {
-    public selectLevel() {
-        $('.ticTacToe--level').each(function() {
+    public makeLevelsSelectable() {
+        const levels = $('[class^="ticTacToe--level--"]');
+        levels.each(function() {
             const $this = $(this);
             $this.click(function() {
                 $('.ticTacToe--level--selected').toggleClass('ticTacToe--level--not-selected');

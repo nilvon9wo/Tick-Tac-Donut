@@ -72,7 +72,10 @@ function stop() {
     console.log('Stopping...');
     if (node) {
         try {
-            node && node.kill();
+            node &&
+            node.kill &&
+            (typeof node.kill === 'function') &&
+            node.kill();
         }
         catch (error) {
             console.error('Failed to stop node: ' + error);
