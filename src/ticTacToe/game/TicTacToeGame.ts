@@ -27,11 +27,13 @@ class TicTacToeGame {
         this.computer = computer;
         this.human = human;
         this.logger = logger;
-        this.playerByMarker.set(TicTacToeMarker.O, computer);
         this.playerByMarker.set(TicTacToeMarker.X, human);
+        this.playerByMarker.set(TicTacToeMarker.O, computer);
         this.refresh(logger);
-        this.makeSquaresClickable();
         this.view = new TicTacToeGameView(computer);
+        this.status = TicTacToeGameStatus.RUNNING;
+        this.currentTurn = TicTacToeMarker.X;
+        this.makeSquaresClickable();
     }
 
     public advanceTo(state: TicTacToeState) {
@@ -67,22 +69,22 @@ class TicTacToeGame {
     }
 
     private makeSquaresClickable() {
-        $('.ticTacToe--board-cell--background').each(function(){
+        const self = this;
+        $('[class^="ticTacToe--board-cell--"]').each(function() {
             const $this = $(this);
-            $this.click(() => {
-                console.log('click!', this);
+            $this.click(function() {
                 if (
-                    this.status === TicTacToeGameStatus.RUNNING &&
-                    this.currentTurn === TicTacToeMarker.X &&
-                    $this.hasClass('ticTacToe--board-cell-empty')
+                    self.status === TicTacToeGameStatus.RUNNING &&
+                    self.currentTurn === TicTacToeMarker.X &&
+                    $this.hasClass('ticTacToe--board-cell--empty')
                 ) {
                     const index = parseInt($this.data('index'), 10);
-                    const nextState = new TicTacToeState(this.state);
+                    const nextState = new TicTacToeState(self.state);
                     const board = nextState.board;
-                    board.set(index, this.currentTurn);
-                    board.insertAt(index, this.currentTurn);
+                    board.set(index, self.currentTurn);
+                    board.insertAt(index, self.currentTurn);
                     nextState.advanceTurn();
-                    this.advanceTo(nextState);
+                    self.advanceTo(nextState);
                 }
             });
         });

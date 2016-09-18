@@ -29,14 +29,19 @@ class TicTacToeBoard {
     }
 
     public insertAt(index: number, marker: TicTacToeMarker) {
-        const board = $('.ticTacToe--board-cell');
+        console.log('insertAt', index, marker);
+        const board = $('[class^="ticTacToe--board-cell"]');
         const targetCell = $(board[index]);
 
         if (targetCell.hasClass('ticTacToe--board-cell--empty')) {
-            const symbol = marker.toString().toLowerCase();
-            targetCell.html(symbol);
             targetCell.removeClass('ticTacToe--board-cell--empty');
-            targetCell.addClass('ticTacToe--board-cell--' + symbol);
+            const symbol = TicTacToeMarker[marker].toLowerCase();
+            console.log('inserting...', symbol);
+            const newMarker = $('<div/>',{
+                class: 'ticTacToe--board-cell--' + symbol,
+                text: symbol
+            });
+            newMarker.appendTo(targetCell);
         }
     }
 
