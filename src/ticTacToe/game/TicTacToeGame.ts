@@ -1,33 +1,56 @@
+/// <reference path="../../../declarations/es6-collections/es6-collections.d.ts" />
+
 import LoggerInterface from '../../logger/LoggerInterface';
-import PlayerType from '../../common/PlayerType';
 import TicTacToeComputerPlayerInterface from '../players/TicTacToeComputerPlayerInterface';
-import TicTacToeMarker from '../markers/TicTacToeMarker';
-import TicTacToeState from '../TicTacToeState';
 import TicTacToeGameStatus from './TicTacToeGameStatus';
+import TicTacToeGameView from './TicTacToeGameView';
+import TicTacToeGameViewState from './TicTacToeGameViewState';
+import TicTacToeHumanPlayer from '../players/TicTacToeHumanPlayer';
+import TicTacToeMarker from '../markers/TicTacToeMarker';
+import TicTacToePlayerInterface from '../players/TicTacToePlayerInterface';
+import TicTacToeState from '../TicTacToeState';
+import TicTacToeStateStatus from '../TicTacToeStateStatus';
 
 class TicTacToeGame {
-    public currentView: string;
     public state: TicTacToeState;
 
     private computer: TicTacToeComputerPlayerInterface;
     private currentTurn: TicTacToeMarker;
+    private human: TicTacToeHumanPlayer;
     private logger: LoggerInterface;
-    private initialControlsVisible: boolean;
     private status: TicTacToeGameStatus;
+    private playerByMarker: Map<TicTacToeMarker, TicTacToePlayerInterface> =
+        new Map<TicTacToeMarker, TicTacToePlayerInterface>();
+    private view: TicTacToeGameView;
 
-    constructor(computer: TicTacToeComputerPlayerInterface, $logger: LoggerInterface) {
+    constructor(
+            human: TicTacToeHumanPlayer,
+            computer: TicTacToeComputerPlayerInterface,
+            logger: LoggerInterface
+            ) {
         this.computer = computer;
-        this.currentView = '';
-        this.initialControlsVisible = true;
-        this.logger = $logger;
+        this.human = human;
+        this.logger = logger;
+        this.playerByMarker.set(TicTacToeMarker.O, computer);
+        this.playerByMarker.set(TicTacToeMarker.X, human);
         this.refresh();
         this.makeSquaresClickable();
+        this.view = new TicTacToeGameView(computer);
     }
 
     public advanceTo(state: TicTacToeState) {
         this.logger.log('Advanding...');
         if (state.isTerminal()) {
-            console.log('Evaluating...');
+            this.status = TicTacToeGameStatus.FINISHED;
+            this.view.switchViewTo(this.winner(state.result));
+        } else {
+            const nextPlayer = this.upNext();
+            if (nextPlayer === this.human) {
+                this.view.switchViewTo(TicTacToeGameViewState.HUMAN);
+            } else {
+                this.view.switchViewTo(TicTacToeGameViewState.COMPUTER);
+                this.computer.takeTurn(this.state.turn);
+            }
         }
     }
 
@@ -38,30 +61,6 @@ class TicTacToeGame {
         this.currentTurn = TicTacToeMarker.X;
         this.status = TicTacToeGameStatus.BEGINNING;
     }
-
-    public switchViewTo(turn: PlayerType) {
-        if (this.initialControlsVisible) {
-            this.initialControlsVisible = false;
-            $('.ticTacToe--initialization').fadeOut({
-                done: () => this.switchTurn(turn),
-                duration: 'slow'
-            });
-        } else {
-            $(this.currentView).fadeOut({
-                done: () => this.switchTurn(turn),
-                duration: 'false'
-            });
-        }
-    }
-
-    private switchTurn(turn: PlayerType) {
-        this.currentView = '.ticTacToe--ingame--' + turn.toString().toLowerCase();
-        $(this.currentView).fadeIn('fast');
-
-        if (turn === PlayerType.COMPUTER) {
-            this.computer.startFlicker();
-        }
-    };
 
     private makeSquaresClickable() {
         $('ticTacToe--board-cell').each(() => {
@@ -83,6 +82,30 @@ class TicTacToeGame {
             });
         });
     }
+
+    private upNext() {
+        const turn = this.state.turn.toString();
+        const turnMarker = (turn === 'X') ? TicTacToeMarker.X : TicTacToeMarker.O;
+        return this.playerByMarker.get(turnMarker);
+    }
+
+    private winner(result: TicTacToeStateStatus) {
+        if (result === TicTacToeStateStatus.DRAW) {
+            return TicTacToeGameViewState.DRAW;
+        }
+
+        const winnerString = result.toString().charAt(0);
+        const winnerMarker = (winnerString === 'X') ?  TicTacToeMarker.X : TicTacToeMarker.O;
+        const winner = this.playerByMarker.get(winnerMarker);
+
+        if (winner === this.human) {
+            return TicTacToeGameViewState.HUMAN_WON;
+        }
+
+        return TicTacToeGameViewState.COMPUTER_WON;
+    }
+
+
 }
 
 export default TicTacToeGame;

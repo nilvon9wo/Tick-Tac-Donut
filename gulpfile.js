@@ -3,11 +3,18 @@ var ES5 = 'es5';
 var CLIENT = __dirname + '/public';
 
 var UI_SCRIPTS = [
-        'common/DifficultyLevel', 'common/ModelInterface', 'common/PlayerType',
-        'common/UIControllerInterface', 'logger/DefaultLogger',
-        'logger/LoggerInterface', 'ticTacToe/game/TicTacToeBadLocationError',
-        'ticTacToe/game/TicTacToeBoard', 'ticTacToe/game/TicTacToeGame',
+        'common/DifficultyLevel',
+        'common/ModelInterface',
+        'common/PlayerType',
+        'common/UIControllerInterface',
+        'logger/DefaultLogger',
+        'logger/LoggerInterface',
+        'ticTacToe/game/TicTacToeBadLocationError',
+        'ticTacToe/game/TicTacToeBoard',
+        'ticTacToe/game/TicTacToeGame',
         'ticTacToe/game/TicTacToeGameStatus',
+        'ticTacToe/game/TicTacToeGameView',
+        'ticTacToe/game/TicTacToeGameViewState',
         'ticTacToe/markers/TicTacToeMarker',
         'ticTacToe/players/TicTacToeBadPlayerError',
         'ticTacToe/players/TicTacToeComputerPlayerAction',
@@ -19,9 +26,11 @@ var UI_SCRIPTS = [
         'ticTacToe/players/TicTacToeModerateComputerPlayer',
         'ticTacToe/players/TicTacToeHumanPlayer',
         'ticTacToe/players/TicTacToePlayerInterface',
-        'ticTacToe/TicTacToeState', 'ticTacToe/TicTacToeStateStatus',
+        'ticTacToe/TicTacToeState',
+        'ticTacToe/TicTacToeStateStatus',
         'ticTacToe/TicTacToeUIController',
-        'ticTacToe/TicTacToeUIControllerInterface', 'index'
+        'ticTacToe/TicTacToeUIControllerInterface',
+        'index'
 ];
 
 var browserify = require('browserify');
@@ -51,7 +60,9 @@ var node;
 function build(callback) {
     console.log('Building...');
     return runSeq('clean-fast', [
-            'transpile-ts', 'transcribe-html', 'transcribe-images',
+            'transpile-ts',
+            'transcribe-html',
+            'transcribe-images',
             'transcribe-css'
     ], 'transcribe-ui-js', callback);
 }
@@ -156,7 +167,9 @@ gulp.task('clean-ui-all', function(callback) {
 
 gulp.task('clean-ui-fast', function(callback) {
     return del([
-            CLIENT + '/**/*', CLIENT + '/**/*.*', '!' + CLIENT,
+            CLIENT + '/**/*',
+            CLIENT + '/**/*.*',
+            '!' + CLIENT,
             '!' + CLIENT + '/bower_components',
             '!' + CLIENT + '/bower_components/**'
     ], callback);

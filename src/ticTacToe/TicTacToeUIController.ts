@@ -16,7 +16,7 @@ class TicTacToeUIController implements UIControllerInterface {
     private human: TicTacToeHumanPlayer;
 
     constructor($scope: TicTacToeUIControllerInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
-        this.computerPlayerSelector = $scope.computerPlayerHelper || new TicTacToeComputerPlayerSelector();
+        this.computerPlayerSelector = $scope.computerPlayerSelector || new TicTacToeComputerPlayerSelector();
         this.human = new TicTacToeHumanPlayer();
 
         $scope.start = () => this.start($scope, $logger);
@@ -26,10 +26,10 @@ class TicTacToeUIController implements UIControllerInterface {
     public start($scope: TicTacToeUIControllerInterface, $logger: LoggerInterface) {
         $logger.log('Starting the game...');
         this.computer = this.computerPlayerSelector.setLevel();
-        this.game = new TicTacToeGame(this.computer, $logger);
+        this.human = $scope.human || new TicTacToeHumanPlayer();
+        this.game = new TicTacToeGame(this.human, this.computer, $logger);
         $scope.insertAt = this.game.state.board.insertAt;
         $scope.refresh = this.game.refresh;
-        $scope.switchViewTo = this.game.switchViewTo;
     }
 }
 
