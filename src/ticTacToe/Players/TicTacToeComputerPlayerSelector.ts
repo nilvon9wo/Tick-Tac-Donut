@@ -2,7 +2,7 @@ import TicTacToeEasyComputerPlayer from './TicTacToeEasyComputerPlayer';
 import TicTacToeImpossibleComputerPlayer from './TicTacToeImpossibleComputerPlayer';
 import TicTacToeModerateComputerPlayer from './TicTacToeModerateComputerPlayer';
 
-class TicTacToeComputerPlayerHelper {
+class TicTacToeComputerPlayerSelector {
     public selectLevel() {
         $('.ticTacToe--level').each(function() {
             const $this = $(this);
@@ -27,4 +27,4 @@ class TicTacToeComputerPlayerHelper {
 
 }
 
-export default TicTacToeComputerPlayerHelper;
+export default TicTacToeComputerPlayerSelector;

@@ -2,8 +2,8 @@
 
 import PlayerType from '../common/PlayerType';
 import LoggerInterface from '../logger/LoggerInterface';
-import TicTacToeComputerPlayerHelper from './Players/TicTacToeComputerPlayerHelper';
 import TicTacToeComputerPlayerInterface from './Players/TicTacToeComputerPlayerInterface';
+import TicTacToeComputerPlayerSelector from './Players/TicTacToeComputerPlayerSelector';
 import TicTacToeGame from './TicTacToeGame';
 import TicTacToeHumanPlayer from './Players/TicTacToeHumanPlayer';
 import TicTacToeUIControllerInterface from './TicTacToeUIControllerInterface';
@@ -15,10 +15,10 @@ class TicTacToeUIController implements UIControllerInterface {
     private computer: TicTacToeComputerPlayerInterface;
     private initialControlsVisible: boolean;
     private game: TicTacToeGame;
-    private computerPlayerHelper: TicTacToeComputerPlayerHelper;
+    private computerPlayerHelper: TicTacToeComputerPlayerSelector;
 
     constructor($scope: TicTacToeUIControllerInterface, $http: ng.IHttpService, private $logger: LoggerInterface) {
-        this.computerPlayerHelper = $scope.computerPlayerHelper || new TicTacToeComputerPlayerHelper();
+        this.computerPlayerHelper = $scope.computerPlayerHelper || new TicTacToeComputerPlayerSelector();
         this.initialControlsVisible = true;
         this.currentView = '';
         this.human = new TicTacToeHumanPlayer();
