@@ -12,6 +12,7 @@ var UI_SCRIPTS = [
     'ticTacToe/game/TicTacToeBadLocationError',
     'ticTacToe/game/TicTacToeBoard',
     'ticTacToe/game/TicTacToeGame',
+    'ticTacToe/game/TicTacToeGameStatus',
     'ticTacToe/markers/TicTacToeMarker',
     'ticTacToe/players/TicTacToeBadPlayerError',
     'ticTacToe/players/TicTacToeComputerPlayerAction',
