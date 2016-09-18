@@ -1,7 +1,5 @@
 import PlayerType from '../../common/PlayerType';
 import TicTacToeGame from '../game/TicTacToeGame';
-import TicTacToeMarker from '../markers/TicTacToeMarker';
-import TicTacToeComputerPlayerAction from './TicTacToeComputerPlayerAction';
 import TicTacToeComputerPlayerActionCalculator from './TicTacToeComputerPlayerActionCalculator';
 import TicTacToeComputerPlayerInterface from './TicTacToeComputerPlayerInterface';
 import TicTacToeState from '../TicTacToeState';
@@ -13,7 +11,7 @@ abstract class AbstractTicTacToeComputerPlayer implements TicTacToeComputerPlaye
     private aiFlickerHandle: any;
 
     constructor(actionCalculator?: TicTacToeComputerPlayerActionCalculator) {
-        this.actionCalculator = actionCalculator || new TicTacToeComputerPlayerActionCalculator(); 
+        this.actionCalculator = actionCalculator || new TicTacToeComputerPlayerActionCalculator();
         this.aiFlickerHandle = 0;
     };
 
