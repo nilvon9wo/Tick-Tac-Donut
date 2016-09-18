@@ -23,17 +23,13 @@ class TicTacToeGame {
         new Map<TicTacToeMarker, TicTacToePlayerInterface>();
     private view: TicTacToeGameView;
 
-    constructor(
-            human: TicTacToeHumanPlayer,
-            computer: TicTacToeComputerPlayerInterface,
-            logger: LoggerInterface
-            ) {
+    constructor(human: TicTacToeHumanPlayer, computer: TicTacToeComputerPlayerInterface, logger: LoggerInterface) {
         this.computer = computer;
         this.human = human;
         this.logger = logger;
         this.playerByMarker.set(TicTacToeMarker.O, computer);
         this.playerByMarker.set(TicTacToeMarker.X, human);
-        this.refresh();
+        this.refresh(logger);
         this.makeSquaresClickable();
         this.view = new TicTacToeGameView(computer);
     }
@@ -54,8 +50,8 @@ class TicTacToeGame {
         }
     }
 
-    public refresh() {
-        this.logger.log('Reseting the board...');
+    public refresh(logger: LoggerInterface) {
+        logger.log('Reseting the board...');
         this.state = new TicTacToeState();
         this.state.board.reset();
         this.currentTurn = TicTacToeMarker.X;

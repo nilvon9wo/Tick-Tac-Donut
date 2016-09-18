@@ -1,6 +1,6 @@
 <h1 class="ticTacToe--title">Tick 'Tac Donut</h1>
 
-<div class="ticTacToe--main-container" ng-controller="TicTacToeUIController"> 
+<div class="ticTacToe--main-container" data-ng-controller="TicTacToeUIController"> 
     <div class="ticTacToe--control">
         <div class="ticTacToe--initialization">
             <div class="ticTacToe--levels">
@@ -22,12 +22,12 @@
             <div class="ticTacToe--ingame--computer-won">Ha!  I beat you!</div>
             <div class="ticTacToe--ingame--draw">We have reached an impasse...</div>
         </div>
-        <!-- 
-           <div class="ticTacToe--action--refresh" data-ng-click="refresh()">Refresh</div>
-         -->
     </div>
 
     <div class="ticTacToe--board">
+	    <!-- 
+	       <div class="ticTacToe--action--refresh" data-ng-click="refresh()">Refresh</div>
+	     -->
         <div class="ticTacToe--board-cell--background" data-index="0"><span class="ticTacToe--board-cell--empty"></span></div>
         <div class="ticTacToe--board-cell--background" data-index="1"><span class="ticTacToe--board-cell--empty"></span></div>
         <div class="ticTacToe--board-cell--background" data-index="2"><span class="ticTacToe--board-cell--empty"></span></div>
