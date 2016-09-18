@@ -11,7 +11,6 @@ angular.module('TicTacToeApp', ['ngRoute'])
     .factory('$logger', () => new DefaultLogger())
     .controller('TicTacToeUIController', TicTacToeUIController)
     .config(($routeProvider: ng.route.IRouteProvider) => {
-        console.log('$routeProvider', $routeProvider);
         $routeProvider
             .when('/', {
                 controller: 'TicTacToeUIController',

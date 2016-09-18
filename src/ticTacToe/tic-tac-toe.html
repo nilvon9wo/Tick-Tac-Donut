@@ -1,6 +1,6 @@
 <h1 class="ticTacToe--title">Tick 'Tac Donut</h1>
 
-<div class="ticTacToe--main-container"> 
+<div class="ticTacToe--main-container" ng-controller="TicTacToeUIController"> 
     <div class="ticTacToe--control">
         <div class="ticTacToe--initialization">
             <div class="ticTacToe--levels">
@@ -9,8 +9,8 @@
                 <span class="ticTacToe--level--not-selected" id="impossible">Omnipotent</span>
             </div>
 
-            <div class="ticTacToe--action--start">Start</div>
-            <div class="ticTacToe--action--refresh">Refresh</div>
+            <div class="ticTacToe--action--start" data-ng-click="start()">Start</div>
+            <div class="ticTacToe--action--refresh" data-ng-click="refresh()">Refresh</div>
 
             <div class="ticTacToe--ingame--human">Make your move...</div>
             <div class="ticTacToe--ingame--computer">
