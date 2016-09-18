@@ -1,18 +1,24 @@
 import LoggerInterface from '../../logger/LoggerInterface';
+import PlayerType from '../../common/PlayerType';
 import TicTacToeComputerPlayerInterface from '../players/TicTacToeComputerPlayerInterface';
 import TicTacToeMarker from '../markers/TicTacToeMarker';
 import TicTacToeState from '../TicTacToeState';
-import TicTacToeStatus from '../TicTacToeStatus';
+import TicTacToeGameStatus from './TicTacToeGameStatus';
 
 class TicTacToeGame {
+    public currentView: string;
+    public state: TicTacToeState;
+
     private computer: TicTacToeComputerPlayerInterface;
     private currentTurn: TicTacToeMarker;
     private logger: LoggerInterface;
-    private state: TicTacToeState;
-    private status: TicTacToeStatus;
+    private initialControlsVisible: boolean;
+    private status: TicTacToeGameStatus;
 
     constructor(computer: TicTacToeComputerPlayerInterface, $logger: LoggerInterface) {
         this.computer = computer;
+        this.currentView = '';
+        this.initialControlsVisible = true;
         this.logger = $logger;
         this.refresh();
         this.makeSquaresClickable();
@@ -30,15 +36,39 @@ class TicTacToeGame {
         this.state = new TicTacToeState();
         this.state.board.reset();
         this.currentTurn = TicTacToeMarker.X;
-        this.status = TicTacToeStatus.BEGINNING;
+        this.status = TicTacToeGameStatus.BEGINNING;
     }
+
+    public switchViewTo(turn: PlayerType) {
+        if (this.initialControlsVisible) {
+            this.initialControlsVisible = false;
+            $('.ticTacToe--initialization').fadeOut({
+                done: () => this.switchTurn(turn),
+                duration: 'slow'
+            });
+        } else {
+            $(this.currentView).fadeOut({
+                done: () => this.switchTurn(turn),
+                duration: 'false'
+            });
+        }
+    }
+
+    private switchTurn(turn: PlayerType) {
+        this.currentView = '.ticTacToe--ingame--' + turn.toString().toLowerCase();
+        $(this.currentView).fadeIn('fast');
+
+        if (turn === PlayerType.COMPUTER) {
+            this.computer.startFlicker();
+        }
+    };
 
     private makeSquaresClickable() {
         $('ticTacToe--board-cell').each(() => {
             const $this = $(this);
             $this.click(() => {
                 if (
-                    this.status === TicTacToeStatus.RUNNING &&
+                    this.status === TicTacToeGameStatus.RUNNING &&
                     this.currentTurn === TicTacToeMarker.X &&
                     $this.hasClass('ticTacToe--board-cell-empty')
                 ) {

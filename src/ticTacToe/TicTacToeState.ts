@@ -1,18 +1,18 @@
 import TicTacToeBoard from './game/TicTacToeBoard';
 import TicTacToeMarker from './markers/TicTacToeMarker';
-import TicTacToeStatus from './TicTacToeStatus';
+import TicTacToeStateStatus from './TicTacToeStateStatus';
 
 class TicTacToeState {
     public board: TicTacToeBoard;
 
     public turn: TicTacToeMarker;
     public oMoveCount: number = 0;
-    private result: TicTacToeStatus;
+    private result: TicTacToeStateStatus;
 
     constructor(oldState?: TicTacToeState) {
         this.turn = null;
         this.oMoveCount = 0;
-        this.result = TicTacToeStatus.STILL_RUNNING;
+        this.result = TicTacToeStateStatus.STILL_RUNNING;
         this.board = new TicTacToeBoard;
 
         if (oldState) {
@@ -28,7 +28,7 @@ class TicTacToeState {
 
     public isTerminal(): boolean {
         this.result = this.board.status();
-        return this.result !== TicTacToeStatus.STILL_RUNNING;
+        return this.result !== TicTacToeStateStatus.STILL_RUNNING;
     }
 
     private copyFromOldState(oldState: TicTacToeState) {

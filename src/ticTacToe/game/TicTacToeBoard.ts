@@ -1,7 +1,7 @@
 import TicTacToeBadLocationError from './TicTacToeBadLocationError';
 import TicTacToeBadPlayerError from '../players/TicTacToeBadPlayerError';
 import TicTacToeMarker from '../markers/TicTacToeMarker';
-import TicTacToeStatus from '../TicTacToeStatus';
+import TicTacToeStateStatus from '../TicTacToeStateStatus';
 
 class TicTacToeBoard {
     private squares: Array<TicTacToeMarker>;
@@ -44,29 +44,29 @@ class TicTacToeBoard {
         }
     }
 
-    public status(): TicTacToeStatus {
+    public status(): TicTacToeStateStatus {
         const rowsStatus = this.checkRows();
-        if (rowsStatus !== TicTacToeStatus.STILL_RUNNING) {
+        if (rowsStatus !== TicTacToeStateStatus.STILL_RUNNING) {
             return rowsStatus;
         }
 
         const columnStatus = this.checkColumns();
-        if (columnStatus !== TicTacToeStatus.STILL_RUNNING) {
+        if (columnStatus !== TicTacToeStateStatus.STILL_RUNNING) {
             return columnStatus;
         }
 
         const diagnalStatus = this.checkDiagnals();
-        if (diagnalStatus !== TicTacToeStatus.STILL_RUNNING) {
+        if (diagnalStatus !== TicTacToeStateStatus.STILL_RUNNING) {
             return diagnalStatus;
         }
 
         return this.isDraw();
     }
 
-    private checkDiagnals(): TicTacToeStatus {
+    private checkDiagnals(): TicTacToeStateStatus {
         for (let i = 0, j = 4; i <= 2; i = i + 2, j = j - 2) {
             if (!this.squares[i]) {
-                return TicTacToeStatus.STILL_RUNNING;
+                return TicTacToeStateStatus.STILL_RUNNING;
             }
 
             const owner = this.squares[i];
@@ -80,10 +80,10 @@ class TicTacToeBoard {
                 return this.selectWinner(owner);
             }
         }
-        return TicTacToeStatus.STILL_RUNNING;
+        return TicTacToeStateStatus.STILL_RUNNING;
     }
 
-    private checkColumns(): TicTacToeStatus {
+    private checkColumns(): TicTacToeStateStatus {
         return this.check({
             additionalSquaresRequired: [3, 6],
             squareIncrement: 1,
@@ -91,7 +91,7 @@ class TicTacToeBoard {
         });
     }
 
-    private checkRows(): TicTacToeStatus {
+    private checkRows(): TicTacToeStateStatus {
         return this.check({
             additionalSquaresRequired: [1, 2],
             squareIncrement: 3,
@@ -99,10 +99,10 @@ class TicTacToeBoard {
         });
     }
 
-    private check(config: any): TicTacToeStatus {
+    private check(config: any): TicTacToeStateStatus {
         for (let i = 0; i <= config.squaresUntil; i = i + config.squareIncrement) {
             if (!this.squares[i]) {
-                return TicTacToeStatus.STILL_RUNNING;
+                return TicTacToeStateStatus.STILL_RUNNING;
             }
 
             const owner = this.squares[i];
@@ -116,7 +116,7 @@ class TicTacToeBoard {
                 return this.selectWinner(owner);
             }
         }
-        return TicTacToeStatus.STILL_RUNNING;
+        return TicTacToeStateStatus.STILL_RUNNING;
     }
 
     private emptyCells() {
@@ -130,12 +130,12 @@ class TicTacToeBoard {
     }
 
 
-    private isDraw(): TicTacToeStatus {
+    private isDraw(): TicTacToeStateStatus {
         const available = this.emptyCells();
         if (available.length === 0) {
-            return TicTacToeStatus.DRAW;
+            return TicTacToeStateStatus.DRAW;
         } else {
-            return TicTacToeStatus.STILL_RUNNING;
+            return TicTacToeStateStatus.STILL_RUNNING;
         }
     }
 
@@ -148,10 +148,10 @@ class TicTacToeBoard {
         });
     }
 
-    private selectWinner(marker: TicTacToeMarker): TicTacToeStatus {
+    private selectWinner(marker: TicTacToeMarker): TicTacToeStateStatus {
         switch (marker) {
-            case (TicTacToeMarker.O): return TicTacToeStatus.O_WON;
-            case (TicTacToeMarker.X): return TicTacToeStatus.X_WON;
+            case (TicTacToeMarker.O): return TicTacToeStateStatus.O_WON;
+            case (TicTacToeMarker.X): return TicTacToeStateStatus.X_WON;
         }
 
         throw new TicTacToeBadPlayerError('Invalid player: ' + marker);
