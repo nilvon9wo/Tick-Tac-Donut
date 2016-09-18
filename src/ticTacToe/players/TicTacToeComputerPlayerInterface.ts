@@ -1,5 +1,5 @@
-import TicTacToeGame from '../TicTacToeGame';
-import TicTacToeMarker from '../Markers/TicTacToeMarker';
+import TicTacToeGame from '../game/TicTacToeGame';
+import TicTacToeMarker from '../markers/TicTacToeMarker';
 import TicTacToePlayerInterface from './TicTacToePlayerInterface';
 import TicTacToeState from '../TicTacToeState';
 

@@ -1,4 +1,6 @@
 /.env
+/.project
+/.settings/
 /es5/
 /images/
 /nbproject/

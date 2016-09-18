@@ -42,23 +42,23 @@ div[class^="ticTacToe--board-cell"] {
 }
 
 .ticTacToe--board-cell--background {
-    background: url("./Markers/background.png");
+    background: url("./game/background.png");
     background-repeat: no-repeat;   
 }
 
 .ticTacToe--board-cell--win {
-    background: url("./Markers/backgound.png");
+    background: url("./markers/win.png");
     background-repeat: no-repeat;   
 }
 
 .ticTacToe--board-cell--x {
     color: red;
-    background: url("./Markers/tick.png");
+    background: url("./markers/tick.png");
     text-indent: -9999px;
 }
 
 .ticTacToe--board-cell--o {
-    background: url("./Markers/doughnut.png");
+    background: url("./markers/doughnut.png");
     color: green;
     text-indent: -9999px;
 }

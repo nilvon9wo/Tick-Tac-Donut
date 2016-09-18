@@ -1,4 +1,6 @@
 enum TicTacToeStatus {
+    BEGINNING,
+    FINISHED,
     RUNNING,
     STILL_RUNNING,
     X_WON,

@@ -2,10 +2,10 @@
 
 import PlayerType from '../common/PlayerType';
 import LoggerInterface from '../logger/LoggerInterface';
-import TicTacToeComputerPlayerInterface from './Players/TicTacToeComputerPlayerInterface';
-import TicTacToeComputerPlayerSelector from './Players/TicTacToeComputerPlayerSelector';
-import TicTacToeGame from './TicTacToeGame';
-import TicTacToeHumanPlayer from './Players/TicTacToeHumanPlayer';
+import TicTacToeComputerPlayerInterface from './players/TicTacToeComputerPlayerInterface';
+import TicTacToeComputerPlayerSelector from './players/TicTacToeComputerPlayerSelector';
+import TicTacToeGame from './game/TicTacToeGame';
+import TicTacToeHumanPlayer from './players/TicTacToeHumanPlayer';
 import TicTacToeUIControllerInterface from './TicTacToeUIControllerInterface';
 import UIControllerInterface from '../common/UIControllerInterface';
 
@@ -23,7 +23,7 @@ class TicTacToeUIController implements UIControllerInterface {
         this.currentView = '';
         this.human = new TicTacToeHumanPlayer();
 
-        $scope.refresh = () => this.game.refresh($logger);
+        $scope.refresh = () => this.game.refresh();
         $scope.start = () => this.start($logger);
         $scope.selectLevel = this.computerPlayerHelper.selectLevel;
         $scope.switchViewTo = this.switchViewTo;
@@ -32,8 +32,7 @@ class TicTacToeUIController implements UIControllerInterface {
     private start($logger: LoggerInterface) {
         $logger.log('Starting the game...');
         this.computer = this.computerPlayerHelper.setLevel();
-        this.game = new TicTacToeGame(this.computer);
-        this.game.start();
+        this.game = new TicTacToeGame(this.computer, $logger);
     }
 
     private switchViewTo(turn: PlayerType) {

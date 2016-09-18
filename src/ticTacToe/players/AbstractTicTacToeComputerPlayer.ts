@@ -1,6 +1,6 @@
 import PlayerType from '../../common/PlayerType';
-import TicTacToeGame from '../TicTacToeGame';
-import TicTacToeMarker from '../Markers/TicTacToeMarker';
+import TicTacToeGame from '../game/TicTacToeGame';
+import TicTacToeMarker from '../markers/TicTacToeMarker';
 import TicTacToeComputerPlayerInterface from './TicTacToeComputerPlayerInterface';
 import TicTacToeState from '../TicTacToeState';
 

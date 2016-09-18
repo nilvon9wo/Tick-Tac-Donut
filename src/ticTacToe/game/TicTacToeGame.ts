@@ -1,29 +1,36 @@
-import LoggerInterface from '../logger/LoggerInterface';
-import TicTacToeComputerPlayerInterface from './Players/TicTacToeComputerPlayerInterface';
-import TicTacToeMarker from './Markers/TicTacToeMarker';
-import TicTacToeState from './TicTacToeState';
-import TicTacToeStatus from './TicTacToeStatus';
+import LoggerInterface from '../../logger/LoggerInterface';
+import TicTacToeComputerPlayerInterface from '../players/TicTacToeComputerPlayerInterface';
+import TicTacToeMarker from '../markers/TicTacToeMarker';
+import TicTacToeState from '../TicTacToeState';
+import TicTacToeStatus from '../TicTacToeStatus';
 
 class TicTacToeGame {
+    private computer: TicTacToeComputerPlayerInterface;
+    private currentTurn: TicTacToeMarker;
+    private logger: LoggerInterface;
     private state: TicTacToeState;
     private status: TicTacToeStatus;
-    private currentTurn: TicTacToeMarker;
 
-    constructor(computer: TicTacToeComputerPlayerInterface) {
+    constructor(computer: TicTacToeComputerPlayerInterface, $logger: LoggerInterface) {
+        this.computer = computer;
+        this.logger = $logger;
+        this.refresh();
         this.makeSquaresClickable();
     }
 
     public advanceTo(state: TicTacToeState) {
-        console.log('Advanding...');
+        this.logger.log('Advanding...');
+        if (state.isTerminal()) {
+            console.log('Evaluating...');
+        }
     }
 
-    public refresh($logger: LoggerInterface) {
-        $logger.log('Reseting the board...');
+    public refresh() {
+        this.logger.log('Reseting the board...');
         this.state = new TicTacToeState();
-    }
-
-    public start() {
-        this.state = new TicTacToeState();
+        this.state.board.reset();
+        this.currentTurn = TicTacToeMarker.X;
+        this.status = TicTacToeStatus.BEGINNING;
     }
 
     private makeSquaresClickable() {

@@ -1,7 +1,7 @@
 import TicTacToeBadLocationError from './TicTacToeBadLocationError';
-import TicTacToeBadPlayerError from './Players/TicTacToeBadPlayerError';
-import TicTacToeMarker from './Markers/TicTacToeMarker';
-import TicTacToeStatus from './TicTacToeStatus';
+import TicTacToeBadPlayerError from '../players/TicTacToeBadPlayerError';
+import TicTacToeMarker from '../markers/TicTacToeMarker';
+import TicTacToeStatus from '../TicTacToeStatus';
 
 class TicTacToeBoard {
     private squares: Array<TicTacToeMarker>;
@@ -36,6 +36,12 @@ class TicTacToeBoard {
         }
 
         this.squares[location] = marker;
+    }
+
+    public reset() {
+        for (let i = 0; i <= 8; i++) {
+            this.set(i, null);
+        }
     }
 
     public status(): TicTacToeStatus {

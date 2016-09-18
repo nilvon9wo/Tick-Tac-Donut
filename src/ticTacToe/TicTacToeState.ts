@@ -1,5 +1,5 @@
-import TicTacToeBoard from './TicTacToeBoard';
-import TicTacToeMarker from './Markers/TicTacToeMarker';
+import TicTacToeBoard from './game/TicTacToeBoard';
+import TicTacToeMarker from './markers/TicTacToeMarker';
 import TicTacToeStatus from './TicTacToeStatus';
 
 class TicTacToeState {
