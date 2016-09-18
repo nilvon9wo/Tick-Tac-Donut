@@ -9,7 +9,6 @@
 }
 
 .ticTacToe--main-container {
-    display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
     height: 750px;
@@ -17,13 +16,12 @@
 }
 
 .ticTacToe--board {
-    float: right;
     height: 700px;
     margin: 0 auto;
     order: 2;
     display: none;
     width: 700px;
-     min-width: 700px;
+    min-width: 700px;
 }
 
 div[class^="ticTacToe--board-cell"] {
@@ -65,7 +63,6 @@ div[class^="ticTacToe--board-cell"] {
 }
 
 .ticTacToe--control {
-    float: left;
     font-family: "Arial Narrow";
     font-size: 40px;
     font-weight: bold;
