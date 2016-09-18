@@ -6,7 +6,6 @@ import TicTacToeState from '../TicTacToeState';
 
 abstract class AbstractTicTacToeComputerPlayer implements TicTacToeComputerPlayerInterface {
     public playerType = PlayerType.HUMAN;
-    public marker: TicTacToeMarker;
     private aiFlickerHandle: any;
     private game: TicTacToeGame;
 
@@ -22,10 +21,6 @@ abstract class AbstractTicTacToeComputerPlayer implements TicTacToeComputerPlaye
 
     public plays(game: TicTacToeGame) {
         this.game = game;
-    };
-
-    public setMarker(marker: TicTacToeMarker) {
-        this.marker = marker;
     };
 
     public startFlicker() {
