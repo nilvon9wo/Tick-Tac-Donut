@@ -1,5 +1,5 @@
 import LoggerInterface from '../logger/LoggerInterface';
-import TicTacToeComputerPlayer from './Players/TicTacToeComputerPlayer';
+import TicTacToeComputerPlayerInterface from './Players/TicTacToeComputerPlayerInterface';
 import TicTacToeMarker from './Markers/TicTacToeMarker';
 import TicTacToeState from './TicTacToeState';
 import TicTacToeStatus from './TicTacToeStatus';
@@ -9,7 +9,7 @@ class TicTacToeGame {
     private status: TicTacToeStatus;
     private currentTurn: TicTacToeMarker;
 
-    constructor(computer: TicTacToeComputerPlayer) {
+    constructor(computer: TicTacToeComputerPlayerInterface) {
         this.makeSquaresClickable();
     }
 

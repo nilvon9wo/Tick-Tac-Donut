@@ -5,8 +5,8 @@ import TicTacToeStatus from './TicTacToeStatus';
 class TicTacToeState {
     public board: TicTacToeBoard;
 
-    private turn: TicTacToeMarker;
-    private oMoveCount: number = 0;
+    public turn: TicTacToeMarker;
+    public oMoveCount: number = 0;
     private result: TicTacToeStatus;
 
     constructor(oldState?: TicTacToeState) {

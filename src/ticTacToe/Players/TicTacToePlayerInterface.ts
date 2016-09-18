@@ -1,11 +1,11 @@
 import PlayerType from '../../common/PlayerType';
 import TicTacToeMarker from '../Markers/TicTacToeMarker';
 
-interface TicTacToePlayer {
+interface TicTacToePlayerInterface {
     playerType: PlayerType;
     marker: TicTacToeMarker;
 
     setMarker: (marker: TicTacToeMarker) => void;
 }
 
-export default TicTacToePlayer;
+export default TicTacToePlayerInterface;

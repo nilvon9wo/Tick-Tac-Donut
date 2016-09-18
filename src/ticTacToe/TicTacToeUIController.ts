@@ -2,8 +2,8 @@
 
 import PlayerType from '../common/PlayerType';
 import LoggerInterface from '../logger/LoggerInterface';
-import TicTacToeComputerPlayer from './Players/TicTacToeComputerPlayer';
 import TicTacToeComputerPlayerHelper from './Players/TicTacToeComputerPlayerHelper';
+import TicTacToeComputerPlayerInterface from './Players/TicTacToeComputerPlayerInterface';
 import TicTacToeGame from './TicTacToeGame';
 import TicTacToeHumanPlayer from './Players/TicTacToeHumanPlayer';
 import TicTacToeUIControllerInterface from './TicTacToeUIControllerInterface';
@@ -12,7 +12,7 @@ import UIControllerInterface from '../common/UIControllerInterface';
 class TicTacToeUIController implements UIControllerInterface {
     public currentView: string;
     private human: TicTacToeHumanPlayer;
-    private computer: TicTacToeComputerPlayer;
+    private computer: TicTacToeComputerPlayerInterface;
     private initialControlsVisible: boolean;
     private game: TicTacToeGame;
     private computerPlayerHelper: TicTacToeComputerPlayerHelper;

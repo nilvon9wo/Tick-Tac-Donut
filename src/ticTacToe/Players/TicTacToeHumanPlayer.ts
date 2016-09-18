@@ -1,8 +1,8 @@
 import PlayerType from '../../common/PlayerType';
 import TicTacToeMarker from '../Markers/TicTacToeMarker';
-import TicTacToePlayer from './TicTacToePlayer';
+import TicTacToePlayerInterface from './TicTacToePlayerInterface';
 
-class TicTacToeHumanPlayer implements TicTacToePlayer {
+class TicTacToeHumanPlayer implements TicTacToePlayerInterface {
     public playerType = PlayerType.HUMAN;
     public marker: TicTacToeMarker;
 
