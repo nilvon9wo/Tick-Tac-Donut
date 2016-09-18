@@ -37,7 +37,7 @@ class TicTacToeGame {
     }
 
     public advanceTo(state: TicTacToeState) {
-        this.logger.log('Advanding...');
+        this.logger.log('Advancing...');
         if (state.isTerminal()) {
             this.status = TicTacToeGameStatus.FINISHED;
             this.view.switchViewTo(this.winner(state.result));

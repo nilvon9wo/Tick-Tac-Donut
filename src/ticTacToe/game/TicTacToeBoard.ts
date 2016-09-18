@@ -30,14 +30,15 @@ class TicTacToeBoard {
 
     public insertAt(index: number, marker: TicTacToeMarker) {
         console.log('insertAt', index, marker);
-        const board = $('[class^="ticTacToe--board-cell"]');
+        const board = $('.ticTacToe--board-cell--background');
+        console.log('length', board.length);
         const targetCell = $(board[index]);
 
         if (targetCell.hasClass('ticTacToe--board-cell--empty')) {
             targetCell.removeClass('ticTacToe--board-cell--empty');
             const symbol = TicTacToeMarker[marker].toLowerCase();
             console.log('inserting...', symbol);
-            const newMarker = $('<div/>',{
+            const newMarker = $('<div/>', {
                 class: 'ticTacToe--board-cell--' + symbol,
                 text: symbol
             });
