@@ -5,12 +5,13 @@
         <div class="ticTacToe--initialization">
             <div class="ticTacToe--levels">
                 <span class="ticTacToe--level--selected" id="easy">Decrepit</span>
+                <span class="ticTacToe--level-separator">|</span>
                 <span class="ticTacToe--level--not-selected" id="moderate">Middling</span>
+                <span class="ticTacToe--level-separator">|</span>
                 <span class="ticTacToe--level--not-selected" id="impossible">Omnipotent</span>
             </div>
 
             <div class="ticTacToe--action--start" data-ng-click="start()">Start</div>
-            <div class="ticTacToe--action--refresh" data-ng-click="refresh()">Refresh</div>
 
             <div class="ticTacToe--ingame--human">Make your move...</div>
             <div class="ticTacToe--ingame--computer">
@@ -21,6 +22,9 @@
             <div class="ticTacToe--ingame--computer-won">Ha!  I beat you!</div>
             <div class="ticTacToe--ingame--draw">We have reached an impasse...</div>
         </div>
+        <!-- 
+           <div class="ticTacToe--action--refresh" data-ng-click="refresh()">Refresh</div>
+         -->
     </div>
 
     <div class="ticTacToe--board">
