@@ -15,6 +15,7 @@ class TicTacToeGameView {
     public switchViewTo(viewState: TicTacToeGameViewState) {
         if (this.initialControlsVisible) {
             this.initialControlsVisible = false;
+            $('.ticTacToe--board').fadeIn();
             $('.ticTacToe--initialization').fadeOut({
                 done: () => this.switchTurn(viewState),
                 duration: 'slow'

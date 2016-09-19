@@ -1,17 +1,12 @@
 import AbstractTicTacToeComputerPlayer from './AbstractTicTacToeComputerPlayer';
+import TicTacToeComputerPlayerAction from './TicTacToeComputerPlayerAction';
 import TicTacToeState from '../TicTacToeState';
 
 class TicTacToeImpossibleComputerPlayer extends AbstractTicTacToeComputerPlayer {
 
-    public takeTurn(state: TicTacToeState) {
-        state.toggleTurn();
+    public chooseAction(state: TicTacToeState): TicTacToeComputerPlayerAction {
         const availableActions = this.actionCalculator.sortedAvailableActions(state, this.game);
-
-        const chosenAction = availableActions[0];
-
-        this.game.state.board.insertAt(chosenAction.movePosition, state.turn);
-        const nextState = chosenAction.applyTo(state);
-        this.game.advanceTo(nextState);
+        return availableActions[0];
     }
 }
 

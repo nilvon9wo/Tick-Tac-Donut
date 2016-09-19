@@ -19,7 +19,7 @@ class TicTacToeComputerPlayerAction {
             nextState.oMoveCount++;
         }
 
-        nextState.advanceTurn();
+        nextState.toggleTurn();
 
         return nextState;
     }
