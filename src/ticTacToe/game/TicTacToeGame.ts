@@ -91,7 +91,7 @@ class TicTacToeGame {
     }
 
     private nextUp() {
-        const isXTurn = this.state.turn &&  TicTacToeMarker[this.state.turn] === 'X'; 
+        const isXTurn = this.state.turn &&  TicTacToeMarker[this.state.turn] === 'X';
         const turnMarker = isXTurn ? TicTacToeMarker.X : TicTacToeMarker.O;
         return this.playerByMarker.get(turnMarker);
     }

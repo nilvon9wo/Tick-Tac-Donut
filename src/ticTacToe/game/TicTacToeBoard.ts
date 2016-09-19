@@ -20,7 +20,7 @@ class TicTacToeBoard {
 
     public emptyCells() {
         const emptyCells = new Array<number>();
-        
+
         if (this.squares) {
             this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
                 if (!marker) {

@@ -18,15 +18,11 @@ abstract class AbstractTicTacToeComputerPlayer implements TicTacToeComputerPlaye
 
     public takeTurn(state: TicTacToeState) {
         state.toggleTurn();
-        const available = state.board.emptyCells();
-
-        const chosenAction = this.chooseAction(available);
-
+        const chosenAction = this.chooseAction(state);
         state.board.insertAt(chosenAction.movePosition, state.turn);
-        console.log('INSERTED', chosenAction.movePosition, state.turn);
     }
 
-    abstract chooseAction(availableCells: Array<number>): TicTacToeComputerPlayerAction;
+    protected abstract chooseAction(state: TicTacToeState): TicTacToeComputerPlayerAction;
 
     public plays(game: TicTacToeGame) {
         this.game = game;
