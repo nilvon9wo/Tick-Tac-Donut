@@ -15,8 +15,9 @@
         "target": "es5"
     },
     "exclude": [
-        "dist",
+        "es5",
         "nbproject",
-        "node_modules"
+        "node_modules",
+        "public"
     ]
 }
