@@ -15,7 +15,6 @@ To build a tic-tac-toe game in JavaScript that can be played in a browser.
 * The user does not need to be able to play from a different browser.
 * Reseting the history or using an incognito window will invalidate the requirement for resumed play.
 
-
-# Further Reading:
-About Tic-tac-toe: https://en.wikipedia.org/wiki/Tic-tac-toe
-About Tic-tac-toe AI with JavaScript: https://mostafa-samir.github.io/Tic-Tac-Toe-AI/
+## Further Reading:
+* About Tic-tac-toe: https://en.wikipedia.org/wiki/Tic-tac-toe
+* About Tic-tac-toe AI with JavaScript: https://mostafa-samir.github.io/Tic-Tac-Toe-AI/
