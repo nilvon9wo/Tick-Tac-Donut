@@ -49,7 +49,7 @@ module.exports = function(config) {
     // Source files that you wanna generate coverage for.
     // Do not include tests or libraries (these files will be instrumented by Istanbul)
     preprocessors: {
-        '**/*.ts': ['browserify'],
+        '**/*.ts': ['coverage', 'browserify'],
         'es5/**/!(*spec).js': ['coverage']
     },
     
@@ -72,7 +72,14 @@ module.exports = function(config) {
 
     coverageReporter: {
         reporters:[
-            {type: 'json', subdir: '.', file: 'coverage-final.json'}
+            { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
+            { type: 'html', subdir: 'report-html' },
+            { type: 'json', subdir: '.', file: 'coverage-final.json'},
+            { type: 'lcov', subdir: 'report-lcov' },
+            { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
+            { type: 'teamcity', subdir: '.', file: 'teamcity.txt' },
+            { type: 'text', subdir: '.', file: 'text.txt' },
+            { type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
         ]
     },
 

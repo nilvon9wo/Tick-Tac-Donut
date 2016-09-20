@@ -2,6 +2,7 @@
 /.project
 /.settings/
 /coverage/
+/coverage-mapped.json
 /es5/
 /images/
 /nbproject/

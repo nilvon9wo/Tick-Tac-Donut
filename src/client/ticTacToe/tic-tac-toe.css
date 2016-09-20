@@ -41,12 +41,12 @@ div[class^="ticTacToe--board-cell"] {
 }
 
 .ticTacToe--board-cell--background {
-    background: url("./game/background.png");
+    background: url("./board/background.png");
     background-repeat: no-repeat;   
 }
 
 .ticTacToe--board-cell--win {
-    background: url("./game/win.png");
+    background: url("./board/win.png");
     background-repeat: no-repeat;   
 }
 

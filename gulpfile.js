@@ -7,8 +7,8 @@ var PUBLIC = 'public';
 var UI_SCRIPTS = [
         'common/DifficultyLevel',
         'common/PlayerType',
-        'ticTacToe/game/TicTacToeBadLocationError',
-        'ticTacToe/game/TicTacToeBoard',
+        'ticTacToe/board/TicTacToeBadLocationError',
+        'ticTacToe/board/TicTacToeBoard',
         'ticTacToe/game/TicTacToeGame',
         'ticTacToe/game/TicTacToeGameStatus',
         'ticTacToe/game/TicTacToeGameView',

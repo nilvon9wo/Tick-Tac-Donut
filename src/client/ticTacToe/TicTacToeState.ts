@@ -1,4 +1,4 @@
-import TicTacToeBoard from './game/TicTacToeBoard';
+import TicTacToeBoard from './board/TicTacToeBoard';
 import TicTacToeMarker from './markers/TicTacToeMarker';
 import TicTacToeStateStatus from './TicTacToeStateStatus';
 
