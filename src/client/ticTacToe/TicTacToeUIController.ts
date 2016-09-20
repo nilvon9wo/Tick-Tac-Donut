@@ -1,4 +1,4 @@
-/// <reference path='../../declarations/angularjs/angular.d.ts' />
+/// <reference path='../../../declarations/angularjs/angular.d.ts' />
 
 import LoggerInterface from '../logger/LoggerInterface';
 import TicTacToeComputerPlayerInterface from './players/TicTacToeComputerPlayerInterface';

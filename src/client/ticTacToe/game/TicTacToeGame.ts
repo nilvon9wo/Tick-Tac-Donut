@@ -1,4 +1,4 @@
-/// <reference path="../../../declarations/es6-collections/es6-collections.d.ts" />
+/// <reference path="../../../../declarations/es6-collections/es6-collections.d.ts" />
 
 import LoggerInterface from '../../logger/LoggerInterface';
 import TicTacToeComputerPlayerInterface from '../players/TicTacToeComputerPlayerInterface';

@@ -1,5 +1,5 @@
-/// <reference path='../declarations/angularjs/angular.d.ts' />
-/// <reference path='../declarations/angularjs/angular-route.d.ts' />
+/// <reference path='../../declarations/angularjs/angular.d.ts' />
+/// <reference path='../../declarations/angularjs/angular-route.d.ts' />
 
 'use strict';
 

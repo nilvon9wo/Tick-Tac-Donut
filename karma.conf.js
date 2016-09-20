@@ -6,33 +6,28 @@ module.exports = function(config) {
 
     files: [
         // paths loaded by Karma
-        {pattern: 'node_modules/systemjs/dist/system.src.js', included: true, watched: true},
         {pattern: 'public/bower_components/angular/angular.js', included: true, watched: true},
         {pattern: 'public/bower_components/angular-route/angular-route.js', included: true, watched: true},
         {pattern: 'public/bower_components/angular-mocks/angular-mocks.js', included: true, watched: true},
-        {pattern: 'karma-test-shim.js', included: true, watched: true},
-     
-                // paths loaded via module imports
-        {pattern: 'es5/**/*.js', included: false, watched: true},
-     
-                // paths to support debugging with source maps in dev tools
-        {pattern: 'src/**/*.ts', included: false, watched: false},
-        {pattern: 'es5/**/*.js.map', included: false, watched: false}
+        './src/client/**/*.ts',
+        './tests/unit/client/**/*.ts'
     ],
 
     autoWatch: true,
 
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'browserify'],
 
     browsers: ['Chrome'],
 
     plugins: [
+      'karma-browserify',
       'karma-chrome-launcher',
       'karma-coverage',
       'karma-firefox-launcher',
       'karma-jasmine',
       'karma-junit-reporter',
-      'karma-phantomjs-launcher'
+      'karma-phantomjs-launcher',
+      'karma-typescript-preprocessor'
     ],
 
     junitReporter: {
@@ -54,8 +49,26 @@ module.exports = function(config) {
     // Source files that you wanna generate coverage for.
     // Do not include tests or libraries (these files will be instrumented by Istanbul)
     preprocessors: {
-        'dist/**/!(*spec).js': ['coverage']
+        '**/*.ts': ['browserify'],
+        'es5/**/!(*spec).js': ['coverage']
     },
+    
+    browserify: {
+        debug: true,
+        plugin: ['tsify'],
+        transform: ['espowerify'],
+        extensions: ['.ts', '.js']
+    },
+    
+    typescriptPreprocessor: {
+        options: {
+          sourceMap: true, // generate source maps
+          noResolve: false // enforce type resolution
+        },
+        transformPath: function(path) {
+          return path.replace(/\.ts$/, '.js');
+        }
+      },
 
     coverageReporter: {
         reporters:[
@@ -63,7 +76,7 @@ module.exports = function(config) {
         ]
     },
 
-    singleRun: true    
-
+    singleRun: false,
+    concurrency: Infinity
   });
 };

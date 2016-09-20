@@ -1,6 +1,8 @@
 var SRC = 'src';
+var CLIENT_SRC = SRC + '/client';
 var ES5 = 'es5';
-var CLIENT = __dirname + '/public';
+var TESTS = 'tests';
+var PUBLIC = 'public';
 
 var UI_SCRIPTS = [
         'common/DifficultyLevel',
@@ -62,6 +64,7 @@ function build(callback) {
     console.log('Building...');
     return runSeq('clean-fast', [
             'transpile-ts',
+            'transpile-ts-tests',
             'transcribe-html',
             'transcribe-images',
             'transcribe-css'
@@ -84,38 +87,38 @@ function stop() {
     }
 }
 
-function transpile() {
+function transpile(srcConfig) {
     console.log('Transpiling...');
-    var tsProject = typeScript.createProject('src/tsconfig.json');
+    var tsProject = typeScript.createProject(srcConfig);
     return tsProject.src().pipe(typeScript(tsProject)).js.pipe(gulp.dest(ES5));
 }
 
 function transcribeCss() {
     console.log('Transcribing CSS...');
     return gulp.src([
-        SRC + '/**/*.css'
-    ]).pipe(concatCss('index.css')).pipe(gulp.dest(CLIENT));
+        CLIENT_SRC + '/**/*.css'
+    ]).pipe(concatCss('index.css')).pipe(gulp.dest(PUBLIC));
 }
 
 function transcribeHtml() {
     console.log('Transcribing HTML...');
     return gulp.src([
-        SRC + '/**/*.html'
-    ]).pipe(gulp.dest(CLIENT));
+        CLIENT_SRC + '/**/*.html'
+    ]).pipe(gulp.dest(PUBLIC));
 }
 
 function transcribeImages() {
     console.log('Transcribing Images...');
     return gulp.src([
-        SRC + '/**/*.png'
-    ]).pipe(gulp.dest(CLIENT));
+        CLIENT_SRC + '/**/*.png'
+    ]).pipe(gulp.dest(PUBLIC));
 }
 
 function transcribeUiJs() {
     console.log('Transcribing UI JavaScript...');
     function pointTo(scripts) {
         return scripts.map(function(script) {
-            return ES5 + '/' + script + '.js';
+            return ES5 + '/client/' + script + '.js';
         });
     }
 
@@ -131,7 +134,7 @@ function transcribeUiJs() {
         loadMaps : true
     }))
     // .pipe(production(uglify()))
-    .pipe(sourceMaps.write('./')).pipe(gulp.dest(CLIENT));
+    .pipe(sourceMaps.write('./')).pipe(gulp.dest(PUBLIC));
 }
 
 function tslint() {
@@ -149,7 +152,7 @@ function tslint() {
 
 gulp.task('clean-all', function(callback) {
     return del([
-            ES5, CLIENT
+            ES5, PUBLIC
     ], callback);
 });
 
@@ -165,19 +168,20 @@ gulp.task('clean-api', function(callback) {
 
 gulp.task('clean-ui-all', function(callback) {
     return del([
-        CLIENT
+        PUBLIC
     ], callback);
 });
 
 gulp.task('clean-ui-fast', function(callback) {
     return del([
-            CLIENT + '/**/*',
-            CLIENT + '/**/*.*',
-            '!' + CLIENT,
-            '!' + CLIENT + '/bower_components',
-            '!' + CLIENT + '/bower_components/**'
+            PUBLIC + '/**/*',
+            PUBLIC + '/**/*.*',
+            '!' + PUBLIC,
+            '!' + PUBLIC + '/bower_components',
+            '!' + PUBLIC + '/bower_components/**'
     ], callback);
 });
+
 
 // Transformation tasks --------------------------------------
 
@@ -196,11 +200,24 @@ gulp.task('build-ui', [
 gulp.task('transpile', [
     'transpile-ts'
 ]);
-gulp.task('transpile-ts', transpile);
+
+gulp.task('transpile-ts', function(){
+    return transpile(SRC + '/tsconfig.json');
+});
+
+gulp.task('transpile-ts-tests', function(){
+    return transpile(TESTS + '/tsconfig.json');
+});
+
 gulp.task('transcribe-css', transcribeCss);
 gulp.task('transcribe-html', transcribeHtml);
 gulp.task('transcribe-images', transcribeImages);
 gulp.task('transcribe-ui-js', transcribeUiJs);
+
+// Test tasks --------------------------------------
+
+gulp.task('tslint', tslint);
+
 
 // Misc tasks --------------------------------------
 
@@ -211,11 +228,11 @@ gulp.task('start', function() {
         node = nodemon({
             ext : 'css html js json sh ts',
             ignore : [
-                    ES5, CLIENT
+                    ES5, PUBLIC, TESTS
             ],
             legacyWatch : true,
             readable : true,
-            script : ES5 + '/app.js',
+            script : ES5 + '/server/app.js',
             stdout : true
         });
         node.on('restart', function() {
@@ -230,6 +247,5 @@ gulp.task('start', function() {
     });
 });
 
-gulp.task('tslint', tslint);
 
 process.on('exit', stop);
