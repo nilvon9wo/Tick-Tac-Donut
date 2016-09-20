@@ -6,11 +6,7 @@ var PUBLIC = 'public';
 
 var UI_SCRIPTS = [
         'common/DifficultyLevel',
-        'common/ModelInterface',
         'common/PlayerType',
-        'common/UIControllerInterface',
-        'logger/DefaultLogger',
-        'logger/LoggerInterface',
         'ticTacToe/game/TicTacToeBadLocationError',
         'ticTacToe/game/TicTacToeBoard',
         'ticTacToe/game/TicTacToeGame',

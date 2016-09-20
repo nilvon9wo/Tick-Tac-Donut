@@ -3,12 +3,10 @@
 
 'use strict';
 
-import DefaultLogger from './logger/DefaultLogger';
 import TicTacToeUIController from './ticTacToe/TicTacToeUIController';
 
 // Declare app level module which depends on views, and components
 angular.module('TicTacToeApp', ['ngRoute'])
-    .factory('$logger', () => new DefaultLogger())
     .controller('TicTacToeUIController', TicTacToeUIController)
     .config(($routeProvider: ng.route.IRouteProvider) => {
         $routeProvider

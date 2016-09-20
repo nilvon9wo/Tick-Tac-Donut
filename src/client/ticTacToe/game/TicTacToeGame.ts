@@ -1,6 +1,5 @@
 /// <reference path="../../../../declarations/es6-collections/es6-collections.d.ts" />
 
-import LoggerInterface from '../../logger/LoggerInterface';
 import TicTacToeComputerPlayerInterface from '../players/TicTacToeComputerPlayerInterface';
 import TicTacToeGameStatus from './TicTacToeGameStatus';
 import TicTacToeGameView from './TicTacToeGameView';
@@ -17,19 +16,17 @@ class TicTacToeGame {
     private computer: TicTacToeComputerPlayerInterface;
     private currentTurn: TicTacToeMarker;
     private human: TicTacToeHumanPlayer;
-    private logger: LoggerInterface;
     private status: TicTacToeGameStatus;
     private playerByMarker: Map<TicTacToeMarker, TicTacToePlayerInterface> =
         new Map<TicTacToeMarker, TicTacToePlayerInterface>();
     private view: TicTacToeGameView;
 
-    constructor(human: TicTacToeHumanPlayer, computer: TicTacToeComputerPlayerInterface, logger: LoggerInterface) {
+    constructor(human: TicTacToeHumanPlayer, computer: TicTacToeComputerPlayerInterface) {
         this.computer = computer;
         this.human = human;
-        this.logger = logger;
         this.playerByMarker.set(TicTacToeMarker.X, human);
         this.playerByMarker.set(TicTacToeMarker.O, computer);
-        this.refresh(logger);
+        this.refresh();
         this.view = new TicTacToeGameView(computer);
         this.status = TicTacToeGameStatus.RUNNING;
         this.currentTurn = TicTacToeMarker.X;
@@ -37,7 +34,6 @@ class TicTacToeGame {
     }
 
     public advanceTo(state: TicTacToeState) {
-        this.logger.log('Advancing...');
         if (state.isTerminal()) {
             this.status = TicTacToeGameStatus.FINISHED;
             this.view.switchViewTo(this.winner(state.result));
@@ -52,8 +48,7 @@ class TicTacToeGame {
         }
     }
 
-    public refresh(logger: LoggerInterface) {
-        logger.log('Reseting the board...');
+    public refresh() {
         this.state = new TicTacToeState();
         this.state.board.reset();
         this.currentTurn = TicTacToeMarker.X;
