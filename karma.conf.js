@@ -49,7 +49,7 @@ module.exports = function(config) {
     // Source files that you wanna generate coverage for.
     // Do not include tests or libraries (these files will be instrumented by Istanbul)
     preprocessors: {
-        '**/*.ts': ['coverage', 'browserify'],
+        '**/*.ts': ['browserify', 'coverage'],
         'es5/**/!(*spec).js': ['coverage']
     },
     
