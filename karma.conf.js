@@ -5,10 +5,10 @@ module.exports = function(config) {
     basePath: '.',
 
     files: [
-        // paths loaded by Karma
+        'https://code.jquery.com/jquery-3.1.0.min.js',
         {pattern: 'public/bower_components/angular/angular.js', included: true, watched: true},
         {pattern: 'public/bower_components/angular-route/angular-route.js', included: true, watched: true},
-        {pattern: 'public/bower_components/angular-mocks/angular-mocks.js', included: true, watched: true},
+//        {pattern: 'public/bower_components/angular-mocks/angular-mocks.js', included: true, watched: true},
         './src/client/**/*.ts',
         './tests/unit/client/**/*.ts'
     ],
@@ -37,8 +37,12 @@ module.exports = function(config) {
     
     port: 9876,
     
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
+    client: {
+        captureConsole: true
+    },
+    
     colors: true,
 
     autoWatch: true,
