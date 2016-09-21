@@ -8,6 +8,7 @@ var UI_SCRIPTS = [
         'common/DifficultyLevel',
         'common/PlayerType',
         'ticTacToe/board/TicTacToeAdjudicator',
+        'ticTacToe/board/TicTacToeAnnouncer',
         'ticTacToe/board/TicTacToeBadLocationError',
         'ticTacToe/board/TicTacToeBoard',
         'ticTacToe/board/TicTacToeJudge',

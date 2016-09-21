@@ -14,28 +14,8 @@ class TicTacToeAdjudicator {
         this.squares = this.board.getSquares();
     }
 
-    public checkDiagnals() {
-        for (let i = 0, j = 4; i <= 2; i = i + 2, j = j - 2) {
-            if (!this.squares[i]) {
-                return TicTacToeStateStatus.STILL_RUNNING;
-            }
-
-            const owner = this.squares[i];
-            const secondRequiredSquare = i + j;
-            const thirdRequiredSquare = i + 2 * j;
-            if (
-                owner === this.squares[secondRequiredSquare] &&
-                owner === this.squares[thirdRequiredSquare]
-            ) {
-                this.judge.markWinner([i, secondRequiredSquare, thirdRequiredSquare]);
-                return this.judge.selectWinner(owner);
-            }
-        }
-        return TicTacToeStateStatus.STILL_RUNNING;
-    }
-
     public checkColumns() {
-        return this.check({
+        return this.checkEdgeAdjacent({
             additionalSquaresRequired: [3, 6],
             squareIncrement: 1,
             squaresUntil: 2
@@ -43,33 +23,52 @@ class TicTacToeAdjudicator {
     }
 
     public checkRows() {
-        return this.check({
+        return this.checkEdgeAdjacent({
             additionalSquaresRequired: [1, 2],
             squareIncrement: 3,
             squaresUntil: 6
         });
     }
 
-    public check(config: any) {
+    private checkEdgeAdjacent(config: any) {
         for (let i = 0; i <= config.squaresUntil; i = i + config.squareIncrement) {
             if (!this.squares[i]) {
                 return TicTacToeStateStatus.STILL_RUNNING;
             }
 
-            const owner = this.squares[i];
-            const secondRequiredSquare = i + config.additionalSquaresRequired[0];
-            const thirdRequiredSquare = i + config.additionalSquaresRequired[1];
-            if (
-                owner === this.squares[secondRequiredSquare] &&
-                owner === this.squares[thirdRequiredSquare]
-            ) {
-                this.judge.markWinner([i, secondRequiredSquare, thirdRequiredSquare]);
-                return this.judge.selectWinner(owner);
+            const line = [i, i + config.additionalSquaresRequired[0], i + config.additionalSquaresRequired[1]];
+            const result = this.judge.consult(this.squares, line);
+            if (result !== TicTacToeStateStatus.STILL_RUNNING) {
+                return result;
             }
         }
         return TicTacToeStateStatus.STILL_RUNNING;
     }
 
+    public checkDiagnals() {
+        for (let i = 0, j = 4; i <= 2; i = i + 2, j = j - 2) {
+            if (!this.squares[i]) {
+                return TicTacToeStateStatus.STILL_RUNNING;
+            }
+
+            const line = [i, i + j, i + 2 * j];
+            const result = this.judge.consult(this.squares, line);
+            if (result !== TicTacToeStateStatus.STILL_RUNNING) {
+                return result;
+            }
+        }
+        return TicTacToeStateStatus.STILL_RUNNING;
+    }
+    
+    private check(line: Array<number>){
+        const i = line[0];
+        if (!this.squares[i]) {
+            return TicTacToeStateStatus.STILL_RUNNING;
+        }
+
+        return this.judge.consult(this.squares, line);
+    }
+    
     public isDraw(): TicTacToeStateStatus {
         const available = this.board.emptyCells();
         if (available.length === 0) {
