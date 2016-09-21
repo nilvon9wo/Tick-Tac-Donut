@@ -9,12 +9,13 @@
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noImplicitUseStrict": true,
-        "outDir": "../es5",
-        "removeComments": true,
+        "removeComments": false,
         "sourceMap": true,
         "target": "es5"
     },
     "exclude": [
+		"src",
+		"tests",
         "es5",
         "nbproject",
         "node_modules",
