@@ -60,15 +60,6 @@ class TicTacToeAdjudicator {
         return TicTacToeStateStatus.STILL_RUNNING;
     }
     
-    private check(line: Array<number>){
-        const i = line[0];
-        if (!this.squares[i]) {
-            return TicTacToeStateStatus.STILL_RUNNING;
-        }
-
-        return this.judge.consult(this.squares, line);
-    }
-    
     public isDraw(): TicTacToeStateStatus {
         const available = this.board.emptyCells();
         if (available.length === 0) {
