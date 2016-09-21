@@ -6,10 +6,10 @@ import TicTacToeStateStatus from '../TicTacToeStateStatus';
 class TicTacToeJudge {
     private announcer: TicTacToeAnnouncer;
 
-    constructor(announcer?: TicTacToeAnnouncer){
+    constructor(announcer?: TicTacToeAnnouncer) {
         this.announcer = announcer || new TicTacToeAnnouncer();
     }
-    
+
     public consult(squares: Array<TicTacToeMarker>, positions: Array<number>) {
         const firstSqure = positions[0];
         const secondRequiredSquare = positions[1];
@@ -22,10 +22,10 @@ class TicTacToeJudge {
                 this.announcer.markWinner([firstSqure, secondRequiredSquare, thirdRequiredSquare]);
                 return this.selectWinner(owner);
             }
-        
+
         return TicTacToeStateStatus.STILL_RUNNING;
     }
-    
+
     private selectWinner(marker: TicTacToeMarker): TicTacToeStateStatus {
         switch (marker) {
             case (TicTacToeMarker.O): return TicTacToeStateStatus.O_WON;

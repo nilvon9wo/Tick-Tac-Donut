@@ -30,29 +30,10 @@ class TicTacToeAdjudicator {
         });
     }
 
-    private checkEdgeAdjacent(config: any) {
-        for (let i = 0; i <= config.squaresUntil; i = i + config.squareIncrement) {
-            if (!this.squares[i]) {
-                return TicTacToeStateStatus.STILL_RUNNING;
-            }
-
-            const line = [i, i + config.additionalSquaresRequired[0], i + config.additionalSquaresRequired[1]];
-            const result = this.judge.consult(this.squares, line);
-            if (result !== TicTacToeStateStatus.STILL_RUNNING) {
-                return result;
-            }
-        }
-        return TicTacToeStateStatus.STILL_RUNNING;
-    }
-
     public checkDiagnals() {
         for (let i = 0, j = 4; i <= 2; i = i + 2, j = j - 2) {
-            if (!this.squares[i]) {
-                return TicTacToeStateStatus.STILL_RUNNING;
-            }
-
             const line = [i, i + j, i + 2 * j];
-            const result = this.judge.consult(this.squares, line);
+            const result = this.check(line);
             if (result !== TicTacToeStateStatus.STILL_RUNNING) {
                 return result;
             }
@@ -67,6 +48,25 @@ class TicTacToeAdjudicator {
         } else {
             return TicTacToeStateStatus.STILL_RUNNING;
         }
+    }
+
+    private checkEdgeAdjacent(config: any) {
+        for (let i = 0; i <= config.squaresUntil; i = i + config.squareIncrement) {
+            const line = [i, i + config.additionalSquaresRequired[0], i + config.additionalSquaresRequired[1]];
+            const result = this.check(line);
+            if (result !== TicTacToeStateStatus.STILL_RUNNING) {
+                return result;
+            }
+        }
+        return TicTacToeStateStatus.STILL_RUNNING;
+    }
+
+    private check(line: Array<number>) {
+            let i = line[0];
+            if (!this.squares[i]) {
+                return TicTacToeStateStatus.STILL_RUNNING;
+            }
+            return this.judge.consult(this.squares, line);
     }
 }
 
