@@ -1,10 +1,10 @@
 class TicTacToeAnnouncer {
-    public markWinner( winningSquares: Array<number> ) {
+    public markWinner( winningCells: Array<number> ) {
         const board = $( '.ticTacToe--board-cell--background' );
-        winningSquares.forEach(( index ) => {
-            const targetSquare = $( board[ index ] );
-            targetSquare.removeClass( 'ticTacToe--board-cell--background' );
-            targetSquare.addClass( 'ticTacToe--board-cell--win' );
+        winningCells.forEach(( index ) => {
+            const targetCell = $( board[ index ] );
+            targetCell.removeClass( 'ticTacToe--board-cell--background' );
+            targetCell.addClass( 'ticTacToe--board-cell--win' );
         });
     }
 }

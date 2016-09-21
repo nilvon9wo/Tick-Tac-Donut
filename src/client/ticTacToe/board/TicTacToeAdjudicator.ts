@@ -1,16 +1,17 @@
+import TicTacToeBadPlayerError from '../players/TicTacToeBadPlayerError';
 import TicTacToeBoard from './TicTacToeBoard';
-import TicTacToeJudge from './TicTacToeJudge';
+import TicTacToeAnnouncer from './TicTacToeAnnouncer';
 import TicTacToeMarker from '../markers/TicTacToeMarker';
 import TicTacToeStateStatus from '../TicTacToeStateStatus';
 
 class TicTacToeAdjudicator {
     private board: TicTacToeBoard;
-    private judge: TicTacToeJudge;
+    private announcer: TicTacToeAnnouncer;
     private cells: Array<TicTacToeMarker>;
 
-    constructor(board: TicTacToeBoard, judge?: TicTacToeJudge) {
+    constructor(board: TicTacToeBoard, announcer?: TicTacToeAnnouncer) {
         this.board = board;
-        this.judge = judge || new TicTacToeJudge();
+        this.announcer = announcer || new TicTacToeAnnouncer();
         this.cells = this.board.getCells();
     }
 
@@ -19,14 +20,6 @@ class TicTacToeAdjudicator {
             additionalCellsRequired: [3, 6],
             cellIncrement: 1,
             cellsUntil: 2
-        });
-    }
-
-    public checkRows() {
-        return this.checkEdgeAdjacent({
-            additionalCellsRequired: [1, 2],
-            cellIncrement: 3,
-            cellsUntil: 6
         });
     }
 
@@ -41,6 +34,14 @@ class TicTacToeAdjudicator {
         return TicTacToeStateStatus.STILL_RUNNING;
     }
 
+    public checkRows() {
+        return this.checkEdgeAdjacent({
+            additionalCellsRequired: [1, 2],
+            cellIncrement: 3,
+            cellsUntil: 6
+        });
+    }
+
     public isDraw(): TicTacToeStateStatus {
         const available = this.board.emptyCells();
         if (available.length === 0) {
@@ -48,6 +49,32 @@ class TicTacToeAdjudicator {
         } else {
             return TicTacToeStateStatus.STILL_RUNNING;
         }
+    }
+
+    private check(line: Array<number>) {
+        let i = line[0];
+        if (!this.cells[i]) {
+            return TicTacToeStateStatus.STILL_RUNNING;
+        }
+        return this.decide(this.cells, line);
+    }
+
+    public decide (cells: Array<TicTacToeMarker>, positions: Array<number>) {
+        console.log('$$$ decide', cells, positions);
+        const firstCell = positions[0];
+        const secondCell = positions[1];
+        const thirdCell = positions[2];
+        const owner = cells[firstCell];
+        if (
+                owner === cells[secondCell] &&
+                owner === cells[thirdCell]
+            ) {
+                this.announcer.markWinner(positions);
+                console.log('$$$ decide owner', owner);
+                return this.selectWinner(owner);
+            }
+
+        return TicTacToeStateStatus.STILL_RUNNING;
     }
 
     private checkEdgeAdjacent(config: any) {
@@ -61,12 +88,15 @@ class TicTacToeAdjudicator {
         return TicTacToeStateStatus.STILL_RUNNING;
     }
 
-    private check(line: Array<number>) {
-            let i = line[0];
-            if (!this.cells[i]) {
-                return TicTacToeStateStatus.STILL_RUNNING;
-            }
-            return this.judge.consult(this.cells, line);
+    private selectWinner(marker: TicTacToeMarker): TicTacToeStateStatus {
+        console.log('$$$ selectWinner marker', marker);
+        
+        switch (marker) {
+            case (TicTacToeMarker.O): console.log('$$$ Winner O'); return TicTacToeStateStatus.O_WON;
+            case (TicTacToeMarker.X): console.log('$$$ Winner X'); return TicTacToeStateStatus.X_WON;
+        }
+
+        throw new TicTacToeBadPlayerError('Invalid player: ' + marker);
     }
 }
 
