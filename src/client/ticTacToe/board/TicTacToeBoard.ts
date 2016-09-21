@@ -4,18 +4,18 @@ import TicTacToeAdjudicator from './TicTacToeAdjudicator';
 import TicTacToeStateStatus from '../TicTacToeStateStatus';
 
 class TicTacToeBoard {
-    private squares: Array<TicTacToeMarker>;
+    private cells: Array<TicTacToeMarker>;
     private adjudicator: TicTacToeAdjudicator;
 
     constructor(adjudicator?: TicTacToeAdjudicator) {
-        this.squares = new Array<TicTacToeMarker>();
+        this.cells = new Array<TicTacToeMarker>();
         this.adjudicator = adjudicator || new TicTacToeAdjudicator(this);
     }
 
     public clone() {
         const newBoard = new TicTacToeBoard();
-        this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
-            newBoard.squares[index] = marker;
+        this.cells.forEach(function(marker: TicTacToeMarker, index: number) {
+            newBoard.cells[index] = marker;
         });
         return newBoard;
     }
@@ -23,8 +23,8 @@ class TicTacToeBoard {
     public emptyCells() {
         const emptyCells = new Array<number>();
 
-        if (this.squares) {
-            this.squares.forEach(function(marker: TicTacToeMarker, index: number) {
+        if (this.cells) {
+            this.cells.forEach(function(marker: TicTacToeMarker, index: number) {
                 if (!marker) {
                     emptyCells.push(index);
                 }
@@ -33,8 +33,8 @@ class TicTacToeBoard {
         return emptyCells;
     }
 
-    public getSquares() {
-        return this.squares;
+    public getCells() {
+        return this.cells;
     }
 
     public insertAt(index: number, marker: TicTacToeMarker) {
@@ -57,7 +57,7 @@ class TicTacToeBoard {
             throw new TicTacToeBadLocationError('Invalid y coordinate: ' + location);
         }
 
-        this.squares[location] = marker;
+        this.cells[location] = marker;
     }
 
     public reset() {
