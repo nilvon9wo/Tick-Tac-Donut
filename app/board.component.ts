@@ -15,6 +15,7 @@ import Marker from './marker';
 export class BoardComponent { 
     cells: Array<Cell> = [];
     selectedCell: Cell;
+    turn: Marker = Marker.X;
     
     constructor(){
         for (let i = 0; i <= 8; i++) {
@@ -23,6 +24,13 @@ export class BoardComponent {
     }
     
     onSelect(cell: Cell){
-        cell.setMarker(Marker.X);
+        if (this.turn === Marker.X){
+            cell.setMarker(Marker.X);
+            this.toggleTurn();
+        }
+    }
+    
+    toggleTurn() {
+        this.turn = (this.turn === Marker.X) ? Marker.O : Marker.X;
     }
 }
