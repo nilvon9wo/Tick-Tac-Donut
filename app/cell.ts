@@ -2,7 +2,7 @@ import  Marker  from './Marker';
 
 export class Cell {
     id: number;
-    marker: Marker;
+    private marker: Marker;
 
     constructor(id: number){
         this.id = id;
@@ -11,6 +11,13 @@ export class Cell {
     getMarker() {
         return Marker[this.marker];
     }
+    
+    setMarker(marker: Marker) {
+        if (!this.marker) {
+            this.marker = marker;
+        }
+    }
+    
   }
 
 export default Cell;
