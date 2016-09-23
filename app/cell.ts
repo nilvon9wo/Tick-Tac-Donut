@@ -1,21 +1,30 @@
-import  Marker  from './Marker';
+import  Marker  from './marker.enum';
 
 export class Cell {
     id: number;
     private marker: Marker;
+    private background = "background";
 
     constructor(id: number){
         this.id = id;
     }
+
+    displayMarker() {
+        return Marker[this.marker];
+    }
     
     getMarker() {
-        return Marker[this.marker];
+        return this.marker;
     }
     
     setMarker(marker: Marker) {
         if (!this.marker) {
             this.marker = marker;
         }
+    }
+    
+    declareWinner() {
+        this.background = "winner";
     }
     
   }

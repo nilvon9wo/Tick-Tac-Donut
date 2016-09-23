@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
-import { Cell } from './cell';
-import Marker from './marker';
+
+import { AdjudicatorService } from './adjudicator.service';
+import { AnnouncerService } from './announcer.service';
+import Cell from './cell';
+import Ending from './ending';
+import Marker from './marker.enum';
+import State from './state';
 
 @Component({
+  providers: [AdjudicatorService, AnnouncerService],
   selector: 'board',
   template:`
     <div class="ticTacToe--board">
@@ -12,25 +18,26 @@ import Marker from './marker';
     </div>
       `
 })
-export class BoardComponent { 
+export class BoardComponent {
     cells: Array<Cell> = [];
-    selectedCell: Cell;
-    turn: Marker = Marker.X;
+    state: State;
     
-    constructor(){
-        for (let i = 0; i <= 8; i++) {
-            this.cells.push(new Cell(i));
-        }
+    constructor(private adjudicatorService: AdjudicatorService, private announcerService: AnnouncerService){
+        this.state = new State();
+        this.cells = this.state.cells;
     }
     
     onSelect(cell: Cell){
-        if (this.turn === Marker.X){
+        let result: Ending;
+        if (this.state.turn === Marker.X){
             cell.setMarker(Marker.X);
-            this.toggleTurn();
+                result = this.adjudicatorService.judge(this.state); 
+            if (result) {
+                this.announcerService.displayVictor(result, this.cells);
+            } else {
+                // TODO: Advance
+            }
         }
     }
     
-    toggleTurn() {
-        this.turn = (this.turn === Marker.X) ? Marker.O : Marker.X;
-    }
 }

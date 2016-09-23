@@ -63,7 +63,7 @@ div[class^="ticTacToe--board-cell"] {
     background-repeat: no-repeat;   
 }
 
-.ticTacToe--board-cell--win {
+.ticTacToe--board-cell--winner {
     background: url("./images/win.png");
     background-repeat: no-repeat;   
 }
