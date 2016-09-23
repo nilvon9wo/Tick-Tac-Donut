@@ -3,10 +3,12 @@ import Ending from './ending';
 import Marker from './marker.enum';
 
 export class State {
+    computer = Marker.O;
+    human = Marker.X;
     state: State;
     cells: Array<Cell> = [];
     turn: Marker = Marker.X;
-    ending: Ending;
+    winner: Marker;
 
     constructor () {
         for ( let i = 0; i <= 8; i++ ) {
@@ -15,16 +17,21 @@ export class State {
     }
     
     emptyCells() {
-        const emptyCells = new Array<number>();
+        const emptyCells = new Array<Cell>();
 
         if (this.cells) {
             this.cells.forEach((cell) => {
                 if (!cell.getMarker()) {
-                    emptyCells.push(cell.id);
+                    emptyCells.push(cell);
                 }
             });
         }
         return emptyCells;
+    }
+    
+    setWinner(winner:Marker) {
+        this.winner = winner;
+        delete this.turn;
     }
     
     toggleTurn() {

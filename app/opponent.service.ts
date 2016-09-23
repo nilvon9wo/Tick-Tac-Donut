@@ -5,19 +5,12 @@ import { State } from './state';
 
 @Injectable()
 export class OpponentService {
-    public advanceTo(state: State) {
-        /*
-        if (state.winner) {
-            // TODO
-        } else {
-            const nextPlayer = this.nextUp();
-            if (nextPlayer === this.human) {
-                this.view.switchViewTo(TicTacToeGameViewState.HUMAN);
-            } else {
-                this.view.switchViewTo(TicTacToeGameViewState.COMPUTER);
-                this.computer.takeTurn(state);
-            }
+    public takeTurn(state: State) {
+        if (state.turn === state.computer) {
+            const availableCells = state.emptyCells();
+            const randomCell = availableCells[Math.floor(Math.random() * availableCells.length)];
+            randomCell.setMarker(state.computer)
         }
-        */
+        state.toggleTurn();
     }
 }
