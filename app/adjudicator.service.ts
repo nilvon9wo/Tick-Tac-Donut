@@ -79,7 +79,7 @@ export class AdjudicatorService {
 
     private check(cells: Array<Cell>, line: Array<number>) {
             let i = line[0];
-            if (!cells[i]) {
+            if (!cells[i].getMarker()) {
                 return null;
             }
             const firstSqure = line[0];
