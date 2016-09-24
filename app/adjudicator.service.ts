@@ -79,9 +79,11 @@ export class AdjudicatorService {
 
     private check(cells: Array<Cell>, line: Array<number>) {
             let i = line[0];
-            if (!cells[i].getMarker()) {
+            if (cells[i].isEmpty()) {
                 return null;
             }
+            
+            
             const firstSqure = line[0];
             const secondRequiredSquare = line[1];
             const thirdRequiredSquare = line[2];

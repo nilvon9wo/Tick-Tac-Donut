@@ -27,6 +27,10 @@ export class Cell {
         this.background = "winner";
     }
     
+    isEmpty() {
+        return this.marker === undefined;
+    }
+    
   }
 
 export default Cell;

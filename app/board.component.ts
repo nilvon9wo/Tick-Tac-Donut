@@ -34,17 +34,27 @@ export class BoardComponent {
     
     onSelect(cell: Cell){
         let result: Ending;
-        if (this.state.turn === this.state.human){
+        if (cell.isEmpty() && this.state.turn === this.state.human){
             this.state.toggleTurn();
             cell.setMarker(Marker.X);
-                result = this.adjudicatorService.judge(this.state);
-                if (result) {
-                    this.state.setWinner(result.winner);
-                    this.announcerService.displayVictor(result, this.cells);
-                } else {
-                    this.opponentService.takeTurn(this.state);
-                }
+            this.advance();
         }
     }
     
+    advance() {
+        const humanResult = this.adjudicatorService.judge(this.state);
+        if (humanResult) {
+            this.state.setWinner(humanResult.winner);
+            this.announcerService.displayVictor(humanResult, this.cells);
+        } else {
+            this.state = this.opponentService.takeTurn(this.state);
+            const computerResult = this.adjudicatorService.judge(this.state);
+            if (computerResult) {
+                this.state.setWinner(computerResult.winner);
+                this.announcerService.displayVictor(computerResult, this.cells);
+            } else {
+                this.state.toggleTurn();
+            }    
+        }
+   }
 }

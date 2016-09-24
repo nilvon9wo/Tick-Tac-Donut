@@ -21,7 +21,7 @@ export class State {
 
         if (this.cells) {
             this.cells.forEach((cell) => {
-                if (!cell.getMarker()) {
+                if (cell.isEmpty()) {
                     emptyCells.push(cell);
                 }
             });
