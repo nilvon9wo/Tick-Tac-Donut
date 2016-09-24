@@ -1,25 +1,13 @@
 {
-    "compilerOptions": {
-        "declaration": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "noFallthroughCasesInSwitch": true,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noImplicitUseStrict": true,
-        "outDir": "./es5",
-        "removeComments": false,
-        "sourceMap": true,
-        "target": "es5"
-    },
-    "exclude": [
-		"src",
-		"tests",
-        "es5",
-        "nbproject",
-        "node_modules",
-        "public"
-    ]
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
+  }
 }

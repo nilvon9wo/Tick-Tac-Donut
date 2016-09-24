@@ -1,89 +1,102 @@
-//jshint strict: false
+// #docregion
 module.exports = function(config) {
+
+  var appBase    = 'app/';       // transpiled app JS and map files
+  var appSrcBase = 'app/';       // app source TS files
+  var appAssets  = '/base/app/'; // component assets fetched by Angular's compiler
+
+  var testBase    = 'testing/';       // transpiled test JS and map files
+  var testSrcBase = 'testing/';       // test source TS files
+
   config.set({
-
-    basePath: '.',
-
-    files: [
-        // paths loaded by Karma
-        {pattern: 'public/bower_components/angular/angular.js', included: true, watched: true},
-        {pattern: 'public/bower_components/angular-route/angular-route.js', included: true, watched: true},
-        {pattern: 'public/bower_components/angular-mocks/angular-mocks.js', included: true, watched: true},
-        './src/client/**/*.ts',
-        './tests/unit/client/**/*.ts'
-    ],
-
-    autoWatch: true,
-
-    frameworks: ['jasmine', 'browserify'],
-
-    browsers: ['Chrome'],
-
+    basePath: '',
+    frameworks: ['jasmine'],
     plugins: [
-      'karma-browserify',
-      'karma-chrome-launcher',
-      'karma-coverage',
-      'karma-firefox-launcher',
-      'karma-jasmine',
-      'karma-junit-reporter',
-      'karma-phantomjs-launcher',
-      'karma-typescript-preprocessor'
+      require('karma-jasmine'),
+      require('karma-chrome-launcher'),
+      require('karma-htmlfile-reporter')
     ],
 
-    junitReporter: {
-      outputFile: 'test_out/unit.xml',
-      suite: 'unit'
+    customLaunchers: {
+      // From the CLI. Not used here but interesting
+      // chrome setup for travis CI using chromium
+      Chrome_travis_ci: {
+        base: 'Chrome',
+        flags: ['--no-sandbox']
+      }
     },
-    
+    files: [
+      // System.js for module loading
+      'node_modules/systemjs/dist/system.src.js',
+
+      // Polyfills
+      'node_modules/core-js/client/shim.js',
+      'node_modules/reflect-metadata/Reflect.js',
+
+      // zone.js
+      'node_modules/zone.js/dist/zone.js',
+      'node_modules/zone.js/dist/long-stack-trace-zone.js',
+      'node_modules/zone.js/dist/proxy.js',
+      'node_modules/zone.js/dist/sync-test.js',
+      'node_modules/zone.js/dist/jasmine-patch.js',
+      'node_modules/zone.js/dist/async-test.js',
+      'node_modules/zone.js/dist/fake-async-test.js',
+
+      // RxJs
+      { pattern: 'node_modules/rxjs/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/rxjs/**/*.js.map', included: false, watched: false },
+
+      // Paths loaded via module imports:
+      // Angular itself
+      {pattern: 'node_modules/@angular/**/*.js', included: false, watched: false},
+      {pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false},
+
+      {pattern: 'systemjs.config.js', included: false, watched: false},
+      {pattern: 'systemjs.config.extras.js', included: false, watched: false},
+      'karma-test-shim.js',
+
+      // transpiled application & spec code paths loaded via module imports
+      {pattern: appBase + '**/*.js', included: false, watched: true},
+      {pattern: testBase + '**/*.js', included: false, watched: true},
+
+
+      // Asset (HTML & CSS) paths loaded via Angular's component compiler
+      // (these paths need to be rewritten, see proxies section)
+      {pattern: appBase + '**/*.html', included: false, watched: true},
+      {pattern: appBase + '**/*.css', included: false, watched: true},
+
+      // Paths for debugging with source maps in dev tools
+      {pattern: appSrcBase + '**/*.ts', included: false, watched: false},
+      {pattern: appBase + '**/*.js.map', included: false, watched: false},
+      {pattern: testSrcBase + '**/*.ts', included: false, watched: false},
+      {pattern: testBase + '**/*.js.map', included: false, watched: false}
+    ],
+
+    // Proxied base paths for loading assets
+    proxies: {
+      // required for component assets fetched by Angular's compiler
+      "/app/": appAssets
+    },
+
+    exclude: [],
+    preprocessors: {},
+    reporters: ['progress', 'html'],
+
+    // HtmlReporter configuration
+    htmlReporter: {
+      // Open this file to see results in browser
+      outputFile: '_test-output/tests.html',
+
+      // Optional
+      pageTitle: 'Unit Tests',
+      subPageTitle: __dirname
+    },
+
     port: 9876,
-    
-    logLevel: config.LOG_INFO,
-
     colors: true,
-
+    logLevel: config.LOG_INFO,
     autoWatch: true,
-    
-    // Coverage reporter generates the coverage
-    reporters: ['progress', 'dots', 'coverage'],
-
-    // Source files that you wanna generate coverage for.
-    // Do not include tests or libraries (these files will be instrumented by Istanbul)
-    preprocessors: {
-        '**/*.ts': ['browserify', 'coverage'],
-        'es5/**/!(*spec).js': ['coverage']
-    },
-    
-    browserify: {
-        debug: true,
-        plugin: ['tsify'],
-        transform: ['espowerify'],
-        extensions: ['.ts', '.js']
-    },
-    
-    typescriptPreprocessor: {
-        options: {
-          sourceMap: true, // generate source maps
-          noResolve: false // enforce type resolution
-        },
-        transformPath: function(path) {
-          return path.replace(/\.ts$/, '.js');
-        }
-      },
-
-    coverageReporter: {
-        reporters:[
-            { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
-            { type: 'html', subdir: 'report-html' },
-            { type: 'json', subdir: '.', file: 'coverage-final.json'},
-            { type: 'lcov', subdir: 'report-lcov' },
-            { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
-            { type: 'teamcity', subdir: '.', file: 'teamcity.txt' },
-            { type: 'text', subdir: '.', file: 'text.txt' },
-            { type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
-        ]
-    },
-
-    singleRun: false,
-    concurrency: Infinity
-  });
-};
+    browsers: ['Chrome'],
+    singleRun: false
+  })
+}
