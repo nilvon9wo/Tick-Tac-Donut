@@ -19,13 +19,12 @@ export class State {
     emptyCells() {
         const emptyCells = new Array<Cell>();
 
-        if (this.cells) {
-            this.cells.forEach((cell) => {
-                if (cell.isEmpty()) {
-                    emptyCells.push(cell);
-                }
-            });
-        }
+        this.cells.forEach((cell) => {
+            if (cell.isEmpty()) {
+                emptyCells.push(cell);
+            }
+        });
+
         return emptyCells;
     }
     

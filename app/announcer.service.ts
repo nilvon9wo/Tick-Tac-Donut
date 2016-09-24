@@ -9,7 +9,7 @@ import State from './state';
 @Injectable()
 export class AnnouncerService {
     public displayVictor(ending: Ending, cells: Array<Cell>) {
-        if (ending.winner !== undefined) {
+        if (ending.hasWinner()) {
             ending.line.forEach(position => {
                 cells[position].declareWinner();
             });

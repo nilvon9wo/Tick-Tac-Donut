@@ -8,6 +8,10 @@ class Ending {
         this.winner = winner;
         this.line = line;
     }
+    
+    public hasWinner() {
+        return this.winner !== null;
+    }
 }
 
 export default Ending;

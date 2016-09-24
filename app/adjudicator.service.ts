@@ -78,23 +78,23 @@ export class AdjudicatorService {
     }
 
     private check(cells: Array<Cell>, line: Array<number>) {
-            let i = line[0];
-            if (cells[i].isEmpty()) {
-                return null;
-            }
-            
-            
-            const firstSqure = line[0];
-            const secondRequiredSquare = line[1];
-            const thirdRequiredSquare = line[2];
-            const owner = cells[firstSqure].getMarker();
-            if (
-                    owner === cells[secondRequiredSquare].getMarker() &&
-                    owner === cells[thirdRequiredSquare].getMarker()
-                ) {
-                    return new Ending(owner, line);
-                }
-
+        let i = line[0];
+        if (cells[i].isEmpty()) {
             return null;
+        }
+        
+        
+        const firstSqure = line[0];
+        const secondRequiredSquare = line[1];
+        const thirdRequiredSquare = line[2];
+        const owner = cells[firstSqure].getMarker();
+        if (
+                owner === cells[secondRequiredSquare].getMarker() &&
+                owner === cells[thirdRequiredSquare].getMarker()
+            ) {
+                return new Ending(owner, line);
+            }
+
+        return null;
     }
 }
