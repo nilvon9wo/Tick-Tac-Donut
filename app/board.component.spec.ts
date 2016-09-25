@@ -3,24 +3,52 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement }    from '@angular/core';
 
 import { BoardComponent } from './board.component';
+import { AdjudicatorService } from './adjudicator.service';
+import { AnnouncerService } from './announcer.service';
+import { OpponentService } from './opponent.service';
+import Marker from './marker.enum';
 
 // let componentUnderTest: BoardComponent;
 let fixture: ComponentFixture<BoardComponent>;
 let debugElement: DebugElement;
 
-describe('BoardComponent', () => {
+class MockAdjudicatorService {}
+class MockAnnouncerService {}
+class MockOpponentService {}
+
+xdescribe('BoardComponent', () => {
 
     beforeEach(() => {
        TestBed.configureTestingModule({
-           declarations: [BoardComponent]
+           declarations: [BoardComponent],
+           providers: [
+                       {provide: AdjudicatorService, useClass: MockAdjudicatorService}, 
+                       {provide: AnnouncerService, useClass: MockAnnouncerService}, 
+                       {provide: OpponentService, useClass: MockOpponentService} 
+           ]
        });
-
-       fixture = TestBed.createComponent(BoardComponent);
-       debugElement = fixture.debugElement.query(By.css('.ticTacToe--board'));
     });
 
+    
+    
     describe('onSelect', () => {
-        it('should set an X and change to the computer\'s turn, when appropriate', () => { });
+        it('should set an X and change to the computer\'s turn, when appropriate', async() => { 
+            TestBed.compileComponents().then(() => {
+                // Arrange
+                const fixture = TestBed.createComponent(BoardComponent);
+                const componentUnderTest = fixture.nativeElement;
+                const state = componentUnderTest.state;
+                const cell = state.cells[0];
+                
+                // Act
+                componentUnderTest.onSelect(cell);
+                
+                // Assert
+                expect(state.turn).toEqual(Marker.O);
+                expect(cell['marker']).toEqual(Marker.X);
+                // TODO: Test Advance;
+            });
+        });
         it('should do nothing if the selected sell is not empty', () => { });
         it('should do nothing if it is not the human\'s turn', () => { });
     });

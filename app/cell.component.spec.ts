@@ -1,38 +1,39 @@
+import { async, inject, TestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { By }              from '@angular/platform-browser';
-import { ComponentFixture, async, inject, TestBed } from '@angular/core/testing';
-import { DebugElement }    from '@angular/core';
+import { ReflectiveInjector } from '@angular/core';
 
 import { CellComponent } from './cell.component';
 import Cell from './cell';
 import Marker from './marker.enum';
 
-TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
+//TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
-describe('CellComponent', () => {
-
+xdescribe('CellComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [CellComponent]
         });
-
-        this.fixture = TestBed.createComponent(CellComponent);
     });
 
     it ('should render a cell', async(() => {
-        // Arrange
-        const outerDiv = this.fixture.nativeElement;
-        const testId = 1;
-        const testMarker = Marker.X;
-        const testCell: Cell = new Cell(1);
-        testCell.setMarker(testMarker);
-        const componentUnderTest = this.fixture.componentInstance.cell = testCell;
-        this.fixture.detectChanges();
+        TestBed.compileComponents().then(() => {
+            // Arrange
+            const fixture = TestBed.createComponent(CellComponent);
+            const componentUnderTest = fixture.nativeElement;
+            const testId = 1; 
+            const testMarker = Marker.X;
+            const testCell = new Cell(1);
+            testCell['marker'] = testMarker;
 
-        // const innerDiv = this.fixture.debugElement.query(By.css('div div'));
+            // Act
+            componentUnderTest.cell = testCell;
 
-        console.log('###### outerDiv', outerDiv);
-        // Act
+            // Assert
+            fixture.detectChanges();
+            expect(componentUnderTest.querySelectorAll('div.ticTacToe--board-cell').length).toBe(1);
+            expect(componentUnderTest.querySelectorAll('div.ticTacToe--board-cell--background').length).toBe(1);
+            expect(componentUnderTest.querySelectorAll('div.ticTacToe--board-cell--X').length).toBe(1);
+            expect(componentUnderTest.querySelectorAll('div.ticTacToe--board-cell--X')[0].innerText).toBe('X');
+        });
     }));
-
 });
