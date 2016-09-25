@@ -1,0 +1,5 @@
+<div class="ticTacToe--board">
+    <div *ngFor="let cell of cells" (click)="onSelect(cell)">
+        <cell [cell]="cell"></cell>
+    </div>
+</div>

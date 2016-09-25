@@ -4,11 +4,8 @@ import Cell from './cell';
 
 @Component({
     selector: 'cell',
-    template: `
-        <div class="ticTacToe--board-cell--{{cell.background}}">
-            <div class="ticTacToe--board-cell--{{cell.displayMarker()}}">{{cell.displayMarker()}}</div>
-        </div>
-      `
+    templateUrl: 'app/cell.component.html',
+    styleUrls: ['app/cell.component.css']
 })
 
 export class CellComponent {

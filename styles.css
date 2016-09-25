@@ -26,20 +26,11 @@ h2, h3 {
     width: 700px;
 }
 
-.ticTacToe--main-container {
+.ticTacToe--board {
     flex-flow: row wrap;
     justify-content: space-around;
-    height: 750px;
+    width: 780px;   
     margin: 0 auto;
-}
-
-.ticTacToe--board {
-    height: 700px;
-    margin: 0 auto;
-    order: 2;
-    /* display: none; */
-    width: 700px;
-    min-width: 700px;
 }
 
 div[class^="ticTacToe--board-cell"] {
@@ -91,7 +82,6 @@ div[class^="ticTacToe--board-cell"] {
     margin-top: 40px;
     width: 800px;
 }
-
 
 div[class^="ticTacToe--level"] {
     margin: 0 15px;

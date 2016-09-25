@@ -11,14 +11,10 @@ import State from './state';
 @Component({
   providers: [AdjudicatorService, AnnouncerService, OpponentService],
   selector: 'board',
-  template:`
-    <div class="ticTacToe--board">
-        <div *ngFor="let cell of cells" (click)="onSelect(cell)">
-            <cell [cell]="cell"></cell>
-        </div>
-    </div>
-      `
+  templateUrl: 'app/board.component.html',
+  styleUrls: ['app/board.component.css']
 })
+
 export class BoardComponent {
     cells: Array<Cell> = [];
     state: State;

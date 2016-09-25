@@ -1,0 +1,8 @@
+.ticTacToe--board {
+    height: 700px;
+    margin: 0 auto;
+    order: 2;
+    /* display: none; */
+     width: 700px;
+     min-width: 700px;
+}
