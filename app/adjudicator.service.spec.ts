@@ -10,17 +10,17 @@ describe( 'AdjudicatorService', () => {
         serviceUnderTest = new AdjudicatorService();
     });
 
+    function createTestState( marker: Marker, positions: Array<number> ) {
+        const state = new State();
+        const markedState = modifyState( state, marker, positions );
+        return markedState;
+    }
+
     function modifyState( state: State, marker: Marker, positions: Array<number> ) {
         positions.forEach( position => {
             state.cells[position].setMarker( marker );
         });
         return state;
-    }
-
-    function createTestState( marker: Marker, positions: Array<number> ) {
-        const state = new State();
-        const markedState = modifyState( state, marker, positions );
-        return markedState;
     }
 
     describe( 'judge', () => {
