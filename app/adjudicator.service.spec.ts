@@ -31,6 +31,15 @@ describe("AdjudicatorService", () => {
         expect(sortedResultLine[2]).toEqual(sortedRequiredPositionsd[2]);
     }
 
+    function noPlayerShouldWinWithoutLineTest(testPlayer: Marker, testPositions: Array<number>){
+        // Arrange
+        const testState = createTestState(testPlayer, testPositions);
+        // Act
+        const result = serviceUnderTest.judge(testState);
+        // Assert
+        expect(result).toEqual(null);
+    }
+
     
     describe("judge", () => {
         // Positive (Winning) Scenarios
@@ -66,7 +75,40 @@ describe("AdjudicatorService", () => {
             playerShouldWinTest(Marker.O, [6,7,8]);
         });
         
-        
+        // Negative (Winnerless) Scenarios - Player does not have a complete line
+        it("should not declare X the player when X is in positions 0, 1", () => {
+            noPlayerShouldWinWithoutLineTest(Marker.X, [0,1]);
+        });
+
+        it("should not declare O the player when O is in positions 0, 3, 5", () => {
+            noPlayerShouldWinWithoutLineTest(Marker.O, [0,3,5]);
+        });
+
+        it("should not declare X the player when X is in positions 1, 4, 8", () => {
+            noPlayerShouldWinWithoutLineTest(Marker.X, [1, 4, 8]);
+        });
+
+        it("should not declare X the player when X is in positions 2, 3, 4", () => {
+            noPlayerShouldWinWithoutLineTest(Marker.X, [2, 3, 4]);
+        });
+
+        it("should not declare O the player when O is in positions 2, 3, 6", () => {
+            noPlayerShouldWinWithoutLineTest(Marker.O, [2, 3, 6]);
+        });
+
+        it("should not declare X the player when X is in positions 2, 4, 7", () => {
+            noPlayerShouldWinWithoutLineTest(Marker.X, [2, 4, 7]);
+        });
+
+        it("should not declare O the player when O is in positions 2, 6, 8", () => {
+            noPlayerShouldWinWithoutLineTest(Marker.O, [2, 6, 8]);
+        });
+
+        it("should not declare O the player when O is in positions 5, 6, 7", () => {
+            noPlayerShouldWinWithoutLineTest(Marker.O, [5, 6, 7]);
+        });
+
+
         
         
         
