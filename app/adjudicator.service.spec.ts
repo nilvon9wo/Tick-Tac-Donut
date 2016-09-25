@@ -1,5 +1,6 @@
 import { AdjudicatorService } from './adjudicator.service';
-import Marker  from './marker.enum';
+import Ending from './ending';
+import Marker from './marker.enum';
 import State from './state';
 
 describe("AdjudicatorService", () => {
@@ -43,6 +44,19 @@ describe("AdjudicatorService", () => {
         const result = serviceUnderTest.judge(testState);
         // Assert
         expect(result).toEqual(null);
+    }
+
+    function gameIsADraw(
+                                                  player1: Marker, player1Positions: Array<number>, 
+                                                  player2: Marker, player2Positions: Array<number>
+                                                  ){
+        // Arrange
+        const testState = createTestState(player1, player1Positions);
+        const comarkedState = modifyState(testState, player2, player2Positions);
+        // Act
+        const result = serviceUnderTest.judge(comarkedState);
+        // Assert
+        expect(result instanceof Ending).toBeTruthy();
     }
 
     function noPlayerShouldWinIfLineIsInterrupted(
@@ -159,26 +173,12 @@ describe("AdjudicatorService", () => {
             it("should declare no winner when O is in positions 6 and X is in position  7, 8", () => {
                 noPlayerShouldWinIfLineIsInterrupted(Marker.O, [6], Marker.X, [7, 8]);
             });
-});
+        });
 
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        describe("Negative (Winnerles) Scenarios - Full board without winner", () => {
+            it("should declare ending without winner when X is in positions 0,1,4,5,6 and O is in position  2,3,7, 8", () => {
+                gameIsADraw(Marker.X, [0,1,4,5,6], Marker.O, [2,3,7, 8]);
+            });
+        });
     });
 });
