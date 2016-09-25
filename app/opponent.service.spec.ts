@@ -1,7 +1,5 @@
 import { OpponentService } from './opponent.service';
 
-import Cell from './cell';
-import Marker from './marker.enum';
 import State  from './state';
 
 describe( 'OpponentService', () => {
@@ -16,7 +14,7 @@ describe( 'OpponentService', () => {
         it( 'should mark a random unoccupied cell', () => {
             // Arrange
             const testState = new State();
-            
+
             const randomBackup = Math.random;
             const floorBackup = Math.floor;
             const randomResult = 1;
@@ -33,10 +31,9 @@ describe( 'OpponentService', () => {
                 return randomResult;
             };
 
-            
             // Act
             const resultState = serviceUnderTest.takeTurn(testState);
-            
+
             // Assert
             expect( randomWasCalled ).toEqual( true );
             expect( floorWasCalled ).toEqual( true );

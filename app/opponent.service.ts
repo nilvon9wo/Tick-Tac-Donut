@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import { Cell } from './cell';
 import { State } from './state';
 
 @Injectable()

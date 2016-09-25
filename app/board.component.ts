@@ -4,7 +4,6 @@ import { AdjudicatorService } from './adjudicator.service';
 import { AnnouncerService } from './announcer.service';
 import { OpponentService } from './opponent.service';
 import Cell from './cell';
-import Ending from './ending';
 import Marker from './marker.enum';
 import State from './state';
 
@@ -19,25 +18,24 @@ import State from './state';
 export class BoardComponent {
     cells: Array<Cell> = [];
     state: State;
-    
+
     constructor(
             private adjudicatorService: AdjudicatorService, 
             private announcerService: AnnouncerService,
             private opponentService: OpponentService
-            ){
+            ) {
         this.state = new State();
         this.cells = this.state.cells;
     }
-    
-    onSelect(cell: Cell){
-        let result: Ending;
-        if (cell.isEmpty() && this.state.turn === this.state.human){
+
+    onSelect(cell: Cell) {
+        if (cell.isEmpty() && this.state.turn === this.state.human) {
             this.state.toggleTurn();
             cell.setMarker(Marker.X);
             this.advance();
         }
     }
-    
+
     advance() {
         const humanResult = this.adjudicatorService.judge(this.state);
         if (humanResult) {

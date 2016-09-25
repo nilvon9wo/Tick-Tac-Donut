@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 
 import Cell from './cell';
 import Ending from './ending';
-import Marker from './marker.enum';
 import State from './state';
-import Wnding from './ending';
 
 @Injectable()
 export class AdjudicatorService {
@@ -26,7 +24,7 @@ export class AdjudicatorService {
 
         return this.checkForDraw(state);
     }
-    
+
     private checkColumns(cells: Array<Cell>) {
         return this.checkEdgeAdjacent({
             additionalCellsRequired: [3, 6],
@@ -81,8 +79,7 @@ export class AdjudicatorService {
         if (cells[i].isEmpty()) {
             return null;
         }
-        
-        
+
         const firstSqure = line[0];
         const secondRequiredSquare = line[1];
         const thirdRequiredSquare = line[2];

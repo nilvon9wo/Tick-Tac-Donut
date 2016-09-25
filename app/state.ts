@@ -1,5 +1,4 @@
 import Cell from './cell';
-import Ending from './ending';
 import Marker from './marker.enum';
 
 export class State {
@@ -15,7 +14,7 @@ export class State {
             this.cells.push( new Cell( i ) );
         }
     }
-    
+
     emptyCells() {
         const emptyCells = new Array<Cell>();
 
@@ -27,12 +26,12 @@ export class State {
 
         return emptyCells;
     }
-    
-    setWinner(winner:Marker) {
+
+    setWinner(winner: Marker) {
         this.winner = winner;
         delete this.turn;
     }
-    
+
     toggleTurn() {
         this.turn = (this.turn === Marker.X) ? Marker.O : Marker.X;
     }

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import Cell from './cell';
 import Ending  from './ending';
-import Marker from './marker.enum';
 
 @Injectable()
 export class AnnouncerService {

@@ -9,13 +9,13 @@ import Marker from './marker.enum';
 
 TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
-describe("CellComponent", () => {
-    
+describe('CellComponent', () => {
+
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [CellComponent]
         });
-        
+
         this.fixture = TestBed.createComponent(CellComponent);
     });
 
@@ -29,10 +29,10 @@ describe("CellComponent", () => {
         const componentUnderTest = this.fixture.componentInstance.cell = testCell;
         this.fixture.detectChanges();
 
-        //const innerDiv = this.fixture.debugElement.query(By.css('div div'));
-        
+        // const innerDiv = this.fixture.debugElement.query(By.css('div div'));
+
         console.log('###### outerDiv', outerDiv);
         // Act
     }));
-         
+
 });
