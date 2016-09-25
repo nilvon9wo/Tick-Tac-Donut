@@ -9,10 +9,11 @@ import Marker from './marker.enum';
 import State from './state';
 
 @Component({
+  moduleId: module.id,
   providers: [AdjudicatorService, AnnouncerService, OpponentService],
   selector: 'board',
-  templateUrl: 'app/board.component.html',
-  styleUrls: ['app/board.component.css']
+  templateUrl: 'board.component.html',
+  styleUrls: ['board.component.css']
 })
 
 export class BoardComponent {

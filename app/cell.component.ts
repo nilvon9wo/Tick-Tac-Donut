@@ -3,9 +3,10 @@ import { Component, Input } from '@angular/core';
 import Cell from './cell';
 
 @Component({
+    moduleId: module.id,
     selector: 'cell',
-    templateUrl: 'app/cell.component.html',
-    styleUrls: ['app/cell.component.css']
+    templateUrl: 'cell.component.html',
+    styleUrls: ['cell.component.css']
 })
 
 export class CellComponent {
