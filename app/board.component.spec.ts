@@ -16,7 +16,7 @@ class MockAdjudicatorService {}
 class MockAnnouncerService {}
 class MockOpponentService {}
 
-xdescribe('BoardComponent', () => {
+describe('BoardComponent', () => {
 
     beforeEach(() => {
        TestBed.configureTestingModule({
@@ -31,8 +31,9 @@ xdescribe('BoardComponent', () => {
 
     
     
-    describe('onSelect', () => {
-        it('should set an X and change to the computer\'s turn, when appropriate', async() => { 
+    xdescribe('onSelect', () => {
+        /*
+        xit('should set an X and change to the computer\'s turn, when appropriate', async() => { 
             TestBed.compileComponents().then(() => {
                 // Arrange
                 const fixture = TestBed.createComponent(BoardComponent);
@@ -51,6 +52,7 @@ xdescribe('BoardComponent', () => {
         });
         it('should do nothing if the selected sell is not empty', () => { });
         it('should do nothing if it is not the human\'s turn', () => { });
+        */
     });
 
     describe('advance', () => {
