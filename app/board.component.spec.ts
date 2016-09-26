@@ -62,42 +62,65 @@ class MockOpponentService extends OpponentService {
 
 describe('BoardComponent', () => {
 
-    /*
-    beforeEach(() => {
-       TestBed.configureTestingModule({
-           declarations: [BoardComponent],
-           providers: [
-                       {provide: AdjudicatorService, useClass: MockAdjudicatorService}, 
-                       {provide: AnnouncerService, useClass: MockAnnouncerService}, 
-                       {provide: OpponentService, useClass: MockOpponentService} 
-           ]
-       });
-    });
-    */
-    
-    
-    xdescribe('onSelect', () => {
-        /*
-        xit('should set an X and change to the computer\'s turn, when appropriate', async() => { 
+    describe('onSelect', () => {
+        it('should set an X and change to the computer\'s turn, when appropriate', () => { 
             TestBed.compileComponents().then(() => {
                 // Arrange
-                const fixture = TestBed.createComponent(BoardComponent);
-                const componentUnderTest = fixture.nativeElement;
-                const state = componentUnderTest.state;
-                const cell = state.cells[0];
+                const testHumanMarker = Marker.X;
+                const mockAdjudicatorService = new MockAdjudicatorService(null);
+                const mockAnnouncerService = new MockAnnouncerService();
+                const mockOpponentService = new MockOpponentService(null);
+                const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
+                componentUnderTest.state.turn = testHumanMarker;
+                const cell = componentUnderTest.cells[0];
                 
                 // Act
                 componentUnderTest.onSelect(cell);
                 
                 // Assert
-                expect(state.turn).toEqual(Marker.O);
+                expect(componentUnderTest.state.turn).toEqual(Marker.O);
                 expect(cell['marker']).toEqual(Marker.X);
-                // TODO: Test Advance;
+                expect(mockOpponentService.tookTurn).toEqual(true);
             });
         });
-        it('should do nothing if the selected sell is not empty', () => { });
-        it('should do nothing if it is not the human\'s turn', () => { });
-        */
+        
+        it('should do nothing if the selected sell is not empty', () => { 
+            const testHumanMarker = Marker.X;
+            const mockAdjudicatorService = new MockAdjudicatorService(null);
+            const mockAnnouncerService = new MockAnnouncerService();
+            const mockOpponentService = new MockOpponentService(null);
+            const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
+            componentUnderTest.state.turn = testHumanMarker;
+            const cell = componentUnderTest.cells[0];
+            cell['marker'] = Marker.O;
+            
+            // Act
+            componentUnderTest.onSelect(cell);
+            
+            // Assert
+            expect(componentUnderTest.state.turn).toEqual(Marker.X);
+            expect(cell['marker']).toEqual(Marker.O);
+            expect(mockOpponentService.tookTurn).toEqual(false);
+        });
+        
+        it('should do nothing if it is not the human\'s turn', () => {
+            const testHumanMarker = Marker.X;
+            const mockAdjudicatorService = new MockAdjudicatorService(null);
+            const mockAnnouncerService = new MockAnnouncerService();
+            const mockOpponentService = new MockOpponentService(null);
+            const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
+            componentUnderTest.state.turn = Marker.O;
+            const cell = componentUnderTest.cells[0];
+            cell['marker'] = undefined;
+            
+            // Act
+            componentUnderTest.onSelect(cell);
+            
+            // Assert
+            expect(componentUnderTest.state.turn).toEqual(Marker.O);
+            expect(cell['marker']).toEqual(undefined);
+            expect(mockOpponentService.tookTurn).toEqual(false);
+        });
     });
 
     describe('advance', () => {
