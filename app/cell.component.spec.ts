@@ -9,13 +9,13 @@ import Marker from './marker.enum';
 //TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
 describe('CellComponent', () => {
-/*    beforeEach(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [CellComponent]
         });
     });
 
-    xit ('should render a cell', async(() => {
+    it ('should render a cell', async(() => {
         TestBed.compileComponents().then(() => {
             // Arrange
             const fixture = TestBed.createComponent(CellComponent);
@@ -26,7 +26,7 @@ describe('CellComponent', () => {
             testCell['marker'] = testMarker;
 
             // Act
-            fixture.nativeElement.cell = testCell;
+            fixture.componentInstance.cell = testCell;
 
             // Assert
             fixture.detectChanges();
@@ -36,5 +36,4 @@ describe('CellComponent', () => {
             expect(componentUnderTest.querySelectorAll('div.ticTacToe--board-cell--X')[0].innerText).toBe('X');
         });
     }));
-*/    
 });

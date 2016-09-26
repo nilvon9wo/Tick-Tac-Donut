@@ -10,5 +10,5 @@ import Cell from './cell';
 })
 
 export class CellComponent {
-    @Input() cell = Cell;
+    @Input() cell: Cell;
 }
