@@ -6,18 +6,63 @@ import { BoardComponent } from './board.component';
 import { AdjudicatorService } from './adjudicator.service';
 import { AnnouncerService } from './announcer.service';
 import { OpponentService } from './opponent.service';
+import Cell from './cell';
+import Ending from './ending';
 import Marker from './marker.enum';
+import State from './state';
 
 // let componentUnderTest: BoardComponent;
-let fixture: ComponentFixture<BoardComponent>;
-let debugElement: DebugElement;
+//let fixture: ComponentFixture<BoardComponent>;
+//let debugElement: DebugElement;
 
-class MockAdjudicatorService {}
-class MockAnnouncerService {}
-class MockOpponentService {}
+class MockAdjudicatorService extends AdjudicatorService {
+    ending: Ending;
+
+    constructor (ending: Ending) {
+        super();
+        this.ending = ending;
+    }
+    
+    judge(state: State) {
+        return this.ending;
+    }
+    
+    setEnding (ending: Ending) {
+        this.ending = ending;
+    }
+}
+
+class MockAnnouncerService extends AnnouncerService {
+    ending: Ending;
+    cells: Array<Cell>;
+
+    displayVictor(ending:Ending, cells: Array<Cell>){
+        this.ending = ending;
+        this.cells = cells;
+    }
+}
+
+class MockOpponentService extends OpponentService {
+    onTurn: () => void;
+    tookTurn = false;
+    
+    constructor(onTurn: () => void){
+        super();
+        this.onTurn = onTurn;
+    }
+    
+    takeTurn (state: State) {
+        this.tookTurn = true;
+        if (this.onTurn) {
+            this.onTurn();
+        }
+        return state;
+    }
+}
 
 describe('BoardComponent', () => {
 
+    /*
     beforeEach(() => {
        TestBed.configureTestingModule({
            declarations: [BoardComponent],
@@ -28,7 +73,7 @@ describe('BoardComponent', () => {
            ]
        });
     });
-
+    */
     
     
     xdescribe('onSelect', () => {
@@ -56,9 +101,63 @@ describe('BoardComponent', () => {
     });
 
     describe('advance', () => {
-        it('should set the human as the winner when the board is in an appropriate state', () => { });
-        it('should give the computer a turn when the human has not won', () => { });
-        it('should set the computer as the winner when the computer makes a winning move', () => { });
-        it('should return control to the human when the computer does not make a winning move', () => { });
+        it('should set the human as the winner when the board is in an appropriate state', () => {
+            // Arrange
+            const testHumanMarker = Marker.X;
+            const testWinningPositions = [0, 1, 2];
+            const mockAdjudicatorService = new MockAdjudicatorService(new Ending(testHumanMarker, testWinningPositions));
+            const mockAnnouncerService = new MockAnnouncerService();
+            const mockOpponentService = new MockOpponentService(null);
+            const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
+            componentUnderTest.state.turn = Marker.X;
+            
+            // Act
+            componentUnderTest.advance();
+            
+            // Assert
+            expect(componentUnderTest.state.winner).toEqual(testHumanMarker);
+            expect(mockAnnouncerService.ending.winner).toEqual(testHumanMarker);
+            expect(mockAnnouncerService.ending.line).toEqual(testWinningPositions);
+            expect(mockAnnouncerService.cells).toEqual(componentUnderTest.cells);
+            expect(componentUnderTest.state.turn).toEqual(undefined);
+        });
+        
+        it('should give the computer a turn when the human has not won', () => { 
+            const mockAdjudicatorService = new MockAdjudicatorService(null);
+            const mockAnnouncerService = new MockAnnouncerService();
+            const mockOpponentService = new MockOpponentService(null);
+            const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
+            componentUnderTest.state.turn = Marker.X;
+            
+            // Act
+            componentUnderTest.advance();
+            
+            // Assert
+            expect(mockOpponentService.tookTurn).toEqual(true);
+            expect(componentUnderTest.state.turn).toEqual(Marker.O);
+        });
+        
+        it('should set the computer as the winner when the computer makes a winning move', () => {
+            const testComputerMarker = Marker.O;
+            const testWinningPositions = [3, 4, 5];
+            const mockAdjudicatorService = new MockAdjudicatorService(null);
+            const mockAnnouncerService = new MockAnnouncerService();
+            const mockOpponentService = new MockOpponentService(() => {
+                mockAdjudicatorService.setEnding(new Ending(testComputerMarker, testWinningPositions))
+            });
+            const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
+            componentUnderTest.state.turn = Marker.X;
+            
+            // Act
+            componentUnderTest.advance();
+            
+            // Assert
+            expect(mockOpponentService.tookTurn).toEqual(true);
+            expect(componentUnderTest.state.winner).toEqual(testComputerMarker);
+            expect(mockAnnouncerService.ending.winner).toEqual(testComputerMarker);
+            expect(mockAnnouncerService.ending.line).toEqual(testWinningPositions);
+            expect(mockAnnouncerService.cells).toEqual(componentUnderTest.cells);
+            expect(componentUnderTest.state.turn).toEqual(undefined);
+        });
     }); 
 });
