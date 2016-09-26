@@ -1,5 +1,5 @@
 import { By }              from '@angular/platform-browser';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement }    from '@angular/core';
 
 import { AdjudicatorService } from './adjudicator.service';
@@ -11,10 +11,6 @@ import Cell from './cell';
 import Ending from './ending';
 import Marker from './marker.enum';
 import State from './state';
-
-// let componentUnderTest: BoardComponent;
-//let fixture: ComponentFixture<BoardComponent>;
-//let debugElement: DebugElement;
 
 class MockAdjudicatorService extends AdjudicatorService {
     ending: Ending;
@@ -63,26 +59,8 @@ class MockOpponentService extends OpponentService {
 
 describe( 'BoardComponent', () => {
 
-    describe( 'template', () => {
-        beforeEach(() => {
-            TestBed.configureTestingModule( {
-                declarations: [BoardComponent, CellComponent]
-            });
-        });
-
-        it( 'should render list', async(() => {
-            TestBed.compileComponents().then(() => {
-                const fixture = TestBed.createComponent( BoardComponent );
-                const componentUnderTest = fixture.nativeElement;
-                fixture.componentInstance.cells = [new Cell( 1 )];
-                fixture.detectChanges();
-                expect( componentUnderTest.querySelectorAll( 'cell' ).length ).toBe( 1 );
-            });
-        }) );
-    });
-
     describe( 'onSelect', () => {
-        xit( 'should set an X and change to the computer\'s turn, when appropriate', () => {
+        it( 'should set an X and change to the computer\'s turn, when appropriate', () => {
             TestBed.compileComponents().then(() => {
                 // Arrange
                 const testHumanMarker = Marker.X;
@@ -103,7 +81,7 @@ describe( 'BoardComponent', () => {
             });
         });
 
-        xit( 'should do nothing if the selected cell is not empty', () => {
+        it( 'should do nothing if the selected cell is not empty', () => {
             const testHumanMarker = Marker.X;
             const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
@@ -122,7 +100,7 @@ describe( 'BoardComponent', () => {
             expect( mockOpponentService.tookTurn ).toEqual( false );
         });
 
-        xit( 'should do nothing if it is not the human\'s turn', () => {
+        it( 'should do nothing if it is not the human\'s turn', () => {
             const testHumanMarker = Marker.X;
             const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
@@ -143,7 +121,7 @@ describe( 'BoardComponent', () => {
     });
 
     describe( 'advance', () => {
-        xit( 'should set the human as the winner when the board is in an appropriate state', () => {
+        it( 'should set the human as the winner when the board is in an appropriate state', () => {
             // Arrange
             const testHumanMarker = Marker.X;
             const testWinningPositions = [0, 1, 2];
@@ -164,7 +142,7 @@ describe( 'BoardComponent', () => {
             expect( componentUnderTest.state.turn ).toEqual( undefined );
         });
 
-        xit( 'should give the computer a turn when the human has not won', () => {
+        it( 'should give the computer a turn when the human has not won', () => {
             const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
@@ -179,7 +157,7 @@ describe( 'BoardComponent', () => {
             expect( componentUnderTest.state.turn ).toEqual( Marker.O );
         });
 
-        xit( 'should set the computer as the winner when the computer makes a winning move', () => {
+        it( 'should set the computer as the winner when the computer makes a winning move', () => {
             const testComputerMarker = Marker.O;
             const testWinningPositions = [3, 4, 5];
             const mockAdjudicatorService = new MockAdjudicatorService();
