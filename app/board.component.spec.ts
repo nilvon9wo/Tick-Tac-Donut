@@ -18,7 +18,7 @@ import State from './state';
 class MockAdjudicatorService extends AdjudicatorService {
     ending: Ending;
 
-    constructor (ending: Ending) {
+    constructor (ending?: Ending) {
         super();
         this.ending = ending;
     }
@@ -46,7 +46,7 @@ class MockOpponentService extends OpponentService {
     onTurn: () => void;
     tookTurn = false;
     
-    constructor(onTurn: () => void){
+    constructor(onTurn?: () => void){
         super();
         this.onTurn = onTurn;
     }
@@ -67,9 +67,9 @@ describe('BoardComponent', () => {
             TestBed.compileComponents().then(() => {
                 // Arrange
                 const testHumanMarker = Marker.X;
-                const mockAdjudicatorService = new MockAdjudicatorService(null);
+                const mockAdjudicatorService = new MockAdjudicatorService();
                 const mockAnnouncerService = new MockAnnouncerService();
-                const mockOpponentService = new MockOpponentService(null);
+                const mockOpponentService = new MockOpponentService();
                 const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
                 componentUnderTest.state.turn = testHumanMarker;
                 const cell = componentUnderTest.cells[0];
@@ -86,9 +86,9 @@ describe('BoardComponent', () => {
         
         it('should do nothing if the selected sell is not empty', () => { 
             const testHumanMarker = Marker.X;
-            const mockAdjudicatorService = new MockAdjudicatorService(null);
+            const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
-            const mockOpponentService = new MockOpponentService(null);
+            const mockOpponentService = new MockOpponentService();
             const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
             componentUnderTest.state.turn = testHumanMarker;
             const cell = componentUnderTest.cells[0];
@@ -105,9 +105,9 @@ describe('BoardComponent', () => {
         
         it('should do nothing if it is not the human\'s turn', () => {
             const testHumanMarker = Marker.X;
-            const mockAdjudicatorService = new MockAdjudicatorService(null);
+            const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
-            const mockOpponentService = new MockOpponentService(null);
+            const mockOpponentService = new MockOpponentService();
             const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
             componentUnderTest.state.turn = Marker.O;
             const cell = componentUnderTest.cells[0];
@@ -130,7 +130,7 @@ describe('BoardComponent', () => {
             const testWinningPositions = [0, 1, 2];
             const mockAdjudicatorService = new MockAdjudicatorService(new Ending(testHumanMarker, testWinningPositions));
             const mockAnnouncerService = new MockAnnouncerService();
-            const mockOpponentService = new MockOpponentService(null);
+            const mockOpponentService = new MockOpponentService();
             const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
             componentUnderTest.state.turn = Marker.X;
             
@@ -146,9 +146,9 @@ describe('BoardComponent', () => {
         });
         
         it('should give the computer a turn when the human has not won', () => { 
-            const mockAdjudicatorService = new MockAdjudicatorService(null);
+            const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
-            const mockOpponentService = new MockOpponentService(null);
+            const mockOpponentService = new MockOpponentService();
             const componentUnderTest = new BoardComponent(mockAdjudicatorService, mockAnnouncerService, mockOpponentService);
             componentUnderTest.state.turn = Marker.X;
             
@@ -163,7 +163,7 @@ describe('BoardComponent', () => {
         it('should set the computer as the winner when the computer makes a winning move', () => {
             const testComputerMarker = Marker.O;
             const testWinningPositions = [3, 4, 5];
-            const mockAdjudicatorService = new MockAdjudicatorService(null);
+            const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService(() => {
                 mockAdjudicatorService.setEnding(new Ending(testComputerMarker, testWinningPositions))
