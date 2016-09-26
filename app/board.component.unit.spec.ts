@@ -1,12 +1,8 @@
-import { By }              from '@angular/platform-browser';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement }    from '@angular/core';
-
 import { AdjudicatorService } from './adjudicator.service';
 import { AnnouncerService } from './announcer.service';
 import { BoardComponent } from './board.component';
-import { CellComponent } from './cell.component';
 import { OpponentService } from './opponent.service';
+import { TestBed } from '@angular/core/testing';
 import Cell from './cell';
 import Ending from './ending';
 import Marker from './marker.enum';
@@ -101,7 +97,6 @@ describe( 'BoardComponent', () => {
         });
 
         it( 'should do nothing if it is not the human\'s turn', () => {
-            const testHumanMarker = Marker.X;
             const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
@@ -163,7 +158,7 @@ describe( 'BoardComponent', () => {
             const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService(() => {
-                mockAdjudicatorService.setEnding( new Ending( testComputerMarker, testWinningPositions ) )
+                mockAdjudicatorService.setEnding( new Ending( testComputerMarker, testWinningPositions ) );
             });
             const componentUnderTest = new BoardComponent( mockAdjudicatorService, mockAnnouncerService, mockOpponentService );
             componentUnderTest.state.turn = Marker.X;

@@ -20,7 +20,7 @@ export class BoardComponent {
     state: State;
 
     constructor(
-            private adjudicatorService: AdjudicatorService, 
+            private adjudicatorService: AdjudicatorService,
             private announcerService: AnnouncerService,
             private opponentService: OpponentService
             ) {
@@ -49,7 +49,7 @@ export class BoardComponent {
                 this.announcerService.displayVictor(computerResult, this.cells);
             } else {
                 this.state.toggleTurn();
-            }    
+            }
         }
    }
 }

@@ -1,12 +1,7 @@
-import { async, inject, TestBed } from '@angular/core/testing';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { ReflectiveInjector } from '@angular/core';
-
+import { async, TestBed } from '@angular/core/testing';
 import { CellComponent } from './cell.component';
 import Cell from './cell';
 import Marker from './marker.enum';
-
-//TestBed.initTestEnvironment(BrowserDynamicTestingModule, platformBrowserDynamicTesting());
 
 describe('CellComponent', () => {
     beforeEach(() => {
@@ -20,9 +15,9 @@ describe('CellComponent', () => {
             // Arrange
             const fixture = TestBed.createComponent(CellComponent);
             const componentUnderTest = fixture.nativeElement;
-            const testId = 1; 
+            const testId = 1;
             const testMarker = Marker.X;
-            const testCell = new Cell(1);
+            const testCell = new Cell(testId);
             testCell['marker'] = testMarker;
 
             // Act

@@ -1,7 +1,4 @@
-import { By }              from '@angular/platform-browser';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement }    from '@angular/core';
-
+import { async, TestBed } from '@angular/core/testing';
 import { AdjudicatorService } from './adjudicator.service';
 import { AnnouncerService } from './announcer.service';
 import { BoardComponent } from './board.component';
@@ -9,7 +6,6 @@ import { CellComponent } from './cell.component';
 import { OpponentService } from './opponent.service';
 import Cell from './cell';
 import Ending from './ending';
-import Marker from './marker.enum';
 import State from './state';
 
 class MockAdjudicatorService extends AdjudicatorService {
