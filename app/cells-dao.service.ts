@@ -12,7 +12,6 @@ export class CellsDaoService {
     }
     
     public loadMarkers(cells: Array<Cell>): Array<Cell> {
-        console.log('######### load');
         for (let i = 0; i <= 8; i++){
             const marker: string = localStorage.getItem('cell_' + i);
             if (marker) {

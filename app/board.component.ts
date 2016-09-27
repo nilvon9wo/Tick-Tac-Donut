@@ -27,7 +27,6 @@ export class BoardComponent {
             private cellsDao: CellsDaoService
             ) {
         this.state = new State();
-        console.log('######### constructor');
         this.cells = cellsDao.loadMarkers(this.state.cells);
     }
 
