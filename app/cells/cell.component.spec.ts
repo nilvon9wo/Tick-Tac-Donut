@@ -1,7 +1,7 @@
 import { async, TestBed } from '@angular/core/testing';
 import { CellComponent } from './cell.component';
 import Cell from './cell';
-import Marker from './marker.enum';
+import Marker from '../etc/marker.enum';
 
 describe('CellComponent', () => {
     beforeEach(() => {

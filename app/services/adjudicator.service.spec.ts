@@ -1,7 +1,7 @@
 import { AdjudicatorService } from './adjudicator.service';
-import Ending from './ending';
-import Marker from './marker.enum';
-import State from './state';
+import Ending from '../etc/ending';
+import Marker from '../etc/marker.enum';
+import State from '../etc/state';
 
 describe( 'AdjudicatorService', () => {
     let serviceUnderTest: AdjudicatorService;

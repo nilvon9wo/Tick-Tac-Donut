@@ -1,4 +1,4 @@
-import  Marker  from './marker.enum';
+import  Marker  from '../etc/marker.enum';
 
 export class Cell {
     id: number;

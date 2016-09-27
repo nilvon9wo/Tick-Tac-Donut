@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import Cell from './cell';
-import Marker from './marker.enum';
+import Marker from '../etc/marker.enum';
 
 @Injectable()
 export class CellsDaoService {

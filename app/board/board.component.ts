@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 
-import { AdjudicatorService } from './adjudicator.service';
-import { AnnouncerService } from './announcer.service';
-import { CellsDaoService } from './cells-dao.service';
-import { OpponentService } from './opponent.service';
-import Cell from './cell';
-import Marker from './marker.enum';
-import State from './state';
+import { AdjudicatorService } from '../services/adjudicator.service';
+import { AnnouncerService } from '../services/announcer.service';
+import { CellsDaoService } from '../cells/cells-dao.service';
+import { OpponentService } from '../services/opponent.service';
+import Cell from '../cells/cell';
+import Marker from '../etc/marker.enum';
+import State from '../etc/state';
 
 @Component({
   moduleId: module.id,

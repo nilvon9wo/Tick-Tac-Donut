@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { State } from './state';
+import { State } from '../etc/state';
 
 @Injectable()
 export class OpponentService {

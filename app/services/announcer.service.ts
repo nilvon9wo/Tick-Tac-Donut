@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import Cell from './cell';
-import Ending  from './ending';
+import Cell from '../cells/cell';
+import Ending  from '../etc/ending';
 
 @Injectable()
 export class AnnouncerService {

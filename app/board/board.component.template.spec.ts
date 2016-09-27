@@ -1,11 +1,11 @@
 import { async, TestBed } from '@angular/core/testing';
-import { AdjudicatorService } from './adjudicator.service';
-import { AnnouncerService } from './announcer.service';
+import { AdjudicatorService } from '../services/adjudicator.service';
+import { AnnouncerService } from '../services/announcer.service';
 import { BoardComponent } from './board.component';
-import { CellComponent } from './cell.component';
-import { CellsDaoService } from './cells-dao.service';
-import { OpponentService } from './opponent.service';
-import Cell from './cell';
+import { CellComponent } from '../cells/cell.component';
+import { CellsDaoService } from '../cells/cells-dao.service';
+import { OpponentService } from '../services/opponent.service';
+import Cell from '../cells/cell';
 
 class MockAdjudicatorService extends AdjudicatorService {}
 class MockAnnouncerService extends AnnouncerService {}

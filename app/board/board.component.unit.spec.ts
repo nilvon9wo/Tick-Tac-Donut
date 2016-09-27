@@ -1,13 +1,13 @@
-import { AdjudicatorService } from './adjudicator.service';
-import { AnnouncerService } from './announcer.service';
+import { AdjudicatorService } from '../services/adjudicator.service';
+import { AnnouncerService } from '../services/announcer.service';
 import { BoardComponent } from './board.component';
-import { CellsDaoService } from './cells-dao.service';
-import { OpponentService } from './opponent.service';
+import { CellsDaoService } from '../cells/cells-dao.service';
+import { OpponentService } from '../services/opponent.service';
 import { TestBed } from '@angular/core/testing';
-import Cell from './cell';
-import Ending from './ending';
-import Marker from './marker.enum';
-import State from './state';
+import Cell from '../cells/cell';
+import Ending from '../etc/ending';
+import Marker from '../etc/marker.enum';
+import State from '../etc/state';
 
 class MockAdjudicatorService extends AdjudicatorService {
     ending: Ending;

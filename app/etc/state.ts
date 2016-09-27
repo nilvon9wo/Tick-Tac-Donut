@@ -1,4 +1,4 @@
-import Cell from './cell';
+import Cell from '../cells/cell';
 import Marker from './marker.enum';
 
 export class State {

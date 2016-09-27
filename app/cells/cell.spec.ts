@@ -1,5 +1,5 @@
 import Cell from './cell';
-import Marker from './marker.enum';
+import Marker from '../etc/marker.enum';
 
 describe('Cell', () => {
     describe('constructor', () => {

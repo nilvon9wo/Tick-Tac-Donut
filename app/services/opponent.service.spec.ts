@@ -1,6 +1,6 @@
 import { OpponentService } from './opponent.service';
 
-import State  from './state';
+import State  from '../etc/state';
 
 describe( 'OpponentService', () => {
 

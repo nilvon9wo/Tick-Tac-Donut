@@ -1,7 +1,7 @@
 import { AnnouncerService } from './announcer.service';
-import Cell from './cell';
-import Ending from './ending';
-import Marker from './marker.enum';
+import Cell from '../cells/cell';
+import Ending from '../etc/ending';
+import Marker from '../etc/marker.enum';
 
 describe('AnnouncerService', () => {
     let serviceUnderTest: AnnouncerService;
