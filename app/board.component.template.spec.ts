@@ -27,6 +27,7 @@ describe( 'BoardComponent', () => {
                                 { provide: AdjudicatorService, useClass: MockAdjudicatorService },
                                 { provide: AnnouncerService, useClass: MockAnnouncerService },
                                 { provide: OpponentService, useClass: MockOpponentService },
+                                { provide: CellsDaoService, useClass: MockCellsDaoService }
                             ]
                         }
                     })

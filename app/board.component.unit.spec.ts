@@ -54,7 +54,18 @@ class MockOpponentService extends OpponentService {
     }
 }
 
-class MockCellsDaoService extends CellsDaoService {}
+class MockCellsDaoService extends CellsDaoService {
+    markersDeleted = false;
+    markersSaved = false;
+    
+    deleteMarkers() {
+        this.markersDeleted = true;
+    }
+
+    saveMarkers() {
+        this.markersDeleted = true;
+    }
+}
 
 describe( 'BoardComponent', () => {
 
@@ -83,6 +94,7 @@ describe( 'BoardComponent', () => {
                 expect( componentUnderTest.state.turn ).toEqual( Marker.O );
                 expect( cell['marker'] ).toEqual( Marker.X );
                 expect( mockOpponentService.tookTurn ).toEqual( true );
+                expect( mockCellsDaoService.markersSaved ).toEqual( true );
             });
         });
 
@@ -162,6 +174,7 @@ describe( 'BoardComponent', () => {
             expect( mockAnnouncerService.ending.line ).toEqual( testWinningPositions );
             expect( mockAnnouncerService.cells ).toEqual( componentUnderTest.cells );
             expect( componentUnderTest.state.turn ).toEqual( undefined );
+            expect( mockCellsDaoService.markersDeleted ).toEqual( true );
         });
 
         it( 'should give the computer a turn when the human has not won', () => {
@@ -212,6 +225,7 @@ describe( 'BoardComponent', () => {
             expect( mockAnnouncerService.ending.line ).toEqual( testWinningPositions );
             expect( mockAnnouncerService.cells ).toEqual( componentUnderTest.cells );
             expect( componentUnderTest.state.turn ).toEqual( undefined );
+            expect( mockCellsDaoService.markersDeleted ).toEqual( true );
         });
     });
 });
