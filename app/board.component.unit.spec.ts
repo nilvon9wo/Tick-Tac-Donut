@@ -54,7 +54,7 @@ class MockOpponentService extends OpponentService {
     }
 }
 
-class MockCellsDaoService extends CellsDaoService{} 
+class MockCellsDaoService extends CellsDaoService {}
 
 describe( 'BoardComponent', () => {
 
@@ -67,9 +67,9 @@ describe( 'BoardComponent', () => {
                 const mockAnnouncerService = new MockAnnouncerService();
                 const mockOpponentService = new MockOpponentService();
                 const mockCellsDaoService = new MockCellsDaoService();
-                const componentUnderTest = new BoardComponent( 
-                        mockAdjudicatorService, 
-                        mockAnnouncerService, 
+                const componentUnderTest = new BoardComponent(
+                        mockAdjudicatorService,
+                        mockAnnouncerService,
                         mockOpponentService,
                         mockCellsDaoService
                         );
@@ -92,9 +92,9 @@ describe( 'BoardComponent', () => {
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
             const mockCellsDaoService = new MockCellsDaoService();
-            const componentUnderTest = new BoardComponent( 
-                    mockAdjudicatorService, 
-                    mockAnnouncerService, 
+            const componentUnderTest = new BoardComponent(
+                    mockAdjudicatorService,
+                    mockAnnouncerService,
                     mockOpponentService,
                     mockCellsDaoService
                     );
@@ -116,9 +116,9 @@ describe( 'BoardComponent', () => {
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
             const mockCellsDaoService = new MockCellsDaoService();
-            const componentUnderTest = new BoardComponent( 
-                    mockAdjudicatorService, 
-                    mockAnnouncerService, 
+            const componentUnderTest = new BoardComponent(
+                    mockAdjudicatorService,
+                    mockAnnouncerService,
                     mockOpponentService,
                     mockCellsDaoService
                     );
@@ -145,9 +145,9 @@ describe( 'BoardComponent', () => {
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
             const mockCellsDaoService = new MockCellsDaoService();
-            const componentUnderTest = new BoardComponent( 
-                    mockAdjudicatorService, 
-                    mockAnnouncerService, 
+            const componentUnderTest = new BoardComponent(
+                    mockAdjudicatorService,
+                    mockAnnouncerService,
                     mockOpponentService,
                     mockCellsDaoService
                     );
@@ -169,9 +169,9 @@ describe( 'BoardComponent', () => {
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
             const mockCellsDaoService = new MockCellsDaoService();
-            const componentUnderTest = new BoardComponent( 
-                    mockAdjudicatorService, 
-                    mockAnnouncerService, 
+            const componentUnderTest = new BoardComponent(
+                    mockAdjudicatorService,
+                    mockAnnouncerService,
                     mockOpponentService,
                     mockCellsDaoService
                     );
@@ -194,9 +194,9 @@ describe( 'BoardComponent', () => {
                 mockAdjudicatorService.setEnding( new Ending( testComputerMarker, testWinningPositions ) );
             });
             const mockCellsDaoService = new MockCellsDaoService();
-            const componentUnderTest = new BoardComponent( 
-                    mockAdjudicatorService, 
-                    mockAnnouncerService, 
+            const componentUnderTest = new BoardComponent(
+                    mockAdjudicatorService,
+                    mockAnnouncerService,
                     mockOpponentService,
                     mockCellsDaoService
                     );

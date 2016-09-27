@@ -6,13 +6,11 @@ import { CellComponent } from './cell.component';
 import { CellsDaoService } from './cells-dao.service';
 import { OpponentService } from './opponent.service';
 import Cell from './cell';
-import Ending from './ending';
-import State from './state';
 
 class MockAdjudicatorService extends AdjudicatorService {}
 class MockAnnouncerService extends AnnouncerService {}
 class MockOpponentService extends OpponentService {}
-class MockCellsDaoService extends CellsDaoService{} 
+class MockCellsDaoService extends CellsDaoService {}
 
 describe( 'BoardComponent', () => {
     describe( 'template', () => {
