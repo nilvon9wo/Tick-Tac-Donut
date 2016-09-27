@@ -10,7 +10,7 @@ To build a tic-tac-toe game in JavaScript that can be played in a browser.
 * IMPORTANT: If the user closes their browser or navigates away from the site by accident, they have to be able to continue the interrupted game later on.
 
 ### Assumptions
-* It is only necessary to support modern browsers, whereby modern is delimited to those which support indexedDB.
+* It is only necessary to support modern browsers, whereby modern is delimited to those which support localStorage.
 * Any person using the same browser can be interpreted as the same user.
 * The user does not need to be able to play from a different browser.
 * Reseting the history or using an incognito window will invalidate the requirement for resumed play.
