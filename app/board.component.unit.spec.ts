@@ -57,7 +57,7 @@ class MockOpponentService extends OpponentService {
 class MockCellsDaoService extends CellsDaoService {
     markersDeleted = false;
     markersSaved = false;
-    
+
     deleteMarkers() {
         this.markersDeleted = true;
     }
