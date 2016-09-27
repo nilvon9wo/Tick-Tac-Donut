@@ -1,6 +1,7 @@
 import { AdjudicatorService } from './adjudicator.service';
 import { AnnouncerService } from './announcer.service';
 import { BoardComponent } from './board.component';
+import { CellsDaoService } from './cells-dao.service';
 import { OpponentService } from './opponent.service';
 import { TestBed } from '@angular/core/testing';
 import Cell from './cell';
@@ -53,6 +54,8 @@ class MockOpponentService extends OpponentService {
     }
 }
 
+class MockCellsDaoService extends CellsDaoService{} 
+
 describe( 'BoardComponent', () => {
 
     describe( 'onSelect', () => {
@@ -63,7 +66,13 @@ describe( 'BoardComponent', () => {
                 const mockAdjudicatorService = new MockAdjudicatorService();
                 const mockAnnouncerService = new MockAnnouncerService();
                 const mockOpponentService = new MockOpponentService();
-                const componentUnderTest = new BoardComponent( mockAdjudicatorService, mockAnnouncerService, mockOpponentService );
+                const mockCellsDaoService = new MockCellsDaoService();
+                const componentUnderTest = new BoardComponent( 
+                        mockAdjudicatorService, 
+                        mockAnnouncerService, 
+                        mockOpponentService,
+                        mockCellsDaoService
+                        );
                 componentUnderTest.state.turn = testHumanMarker;
                 const cell = componentUnderTest.cells[0];
 
@@ -82,7 +91,13 @@ describe( 'BoardComponent', () => {
             const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
-            const componentUnderTest = new BoardComponent( mockAdjudicatorService, mockAnnouncerService, mockOpponentService );
+            const mockCellsDaoService = new MockCellsDaoService();
+            const componentUnderTest = new BoardComponent( 
+                    mockAdjudicatorService, 
+                    mockAnnouncerService, 
+                    mockOpponentService,
+                    mockCellsDaoService
+                    );
             componentUnderTest.state.turn = testHumanMarker;
             const cell = componentUnderTest.cells[0];
             cell['marker'] = Marker.O;
@@ -100,7 +115,13 @@ describe( 'BoardComponent', () => {
             const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
-            const componentUnderTest = new BoardComponent( mockAdjudicatorService, mockAnnouncerService, mockOpponentService );
+            const mockCellsDaoService = new MockCellsDaoService();
+            const componentUnderTest = new BoardComponent( 
+                    mockAdjudicatorService, 
+                    mockAnnouncerService, 
+                    mockOpponentService,
+                    mockCellsDaoService
+                    );
             componentUnderTest.state.turn = Marker.O;
             const cell = componentUnderTest.cells[0];
             cell['marker'] = undefined;
@@ -123,7 +144,13 @@ describe( 'BoardComponent', () => {
             const mockAdjudicatorService = new MockAdjudicatorService( new Ending( testHumanMarker, testWinningPositions ) );
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
-            const componentUnderTest = new BoardComponent( mockAdjudicatorService, mockAnnouncerService, mockOpponentService );
+            const mockCellsDaoService = new MockCellsDaoService();
+            const componentUnderTest = new BoardComponent( 
+                    mockAdjudicatorService, 
+                    mockAnnouncerService, 
+                    mockOpponentService,
+                    mockCellsDaoService
+                    );
             componentUnderTest.state.turn = Marker.X;
 
             // Act
@@ -141,7 +168,13 @@ describe( 'BoardComponent', () => {
             const mockAdjudicatorService = new MockAdjudicatorService();
             const mockAnnouncerService = new MockAnnouncerService();
             const mockOpponentService = new MockOpponentService();
-            const componentUnderTest = new BoardComponent( mockAdjudicatorService, mockAnnouncerService, mockOpponentService );
+            const mockCellsDaoService = new MockCellsDaoService();
+            const componentUnderTest = new BoardComponent( 
+                    mockAdjudicatorService, 
+                    mockAnnouncerService, 
+                    mockOpponentService,
+                    mockCellsDaoService
+                    );
             componentUnderTest.state.turn = Marker.X;
 
             // Act
@@ -160,7 +193,13 @@ describe( 'BoardComponent', () => {
             const mockOpponentService = new MockOpponentService(() => {
                 mockAdjudicatorService.setEnding( new Ending( testComputerMarker, testWinningPositions ) );
             });
-            const componentUnderTest = new BoardComponent( mockAdjudicatorService, mockAnnouncerService, mockOpponentService );
+            const mockCellsDaoService = new MockCellsDaoService();
+            const componentUnderTest = new BoardComponent( 
+                    mockAdjudicatorService, 
+                    mockAnnouncerService, 
+                    mockOpponentService,
+                    mockCellsDaoService
+                    );
             componentUnderTest.state.turn = Marker.X;
 
             // Act

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { AdjudicatorService } from './adjudicator.service';
 import { AnnouncerService } from './announcer.service';
+import { CellsDaoService } from './cells-dao.service';
 import { OpponentService } from './opponent.service';
 import Cell from './cell';
 import Marker from './marker.enum';
@@ -9,7 +10,7 @@ import State from './state';
 
 @Component({
   moduleId: module.id,
-  providers: [AdjudicatorService, AnnouncerService, OpponentService],
+  providers: [AdjudicatorService, AnnouncerService, CellsDaoService, OpponentService],
   selector: 'board',
   templateUrl: 'board.component.html',
   styleUrls: ['board.component.css']
@@ -22,10 +23,12 @@ export class BoardComponent {
     constructor(
             private adjudicatorService: AdjudicatorService,
             private announcerService: AnnouncerService,
-            private opponentService: OpponentService
+            private opponentService: OpponentService,
+            private cellsDao: CellsDaoService
             ) {
         this.state = new State();
-        this.cells = this.state.cells;
+        console.log('######### constructor');
+        this.cells = cellsDao.loadMarkers(this.state.cells);
     }
 
     onSelect(cell: Cell) {
@@ -41,13 +44,16 @@ export class BoardComponent {
         if (humanResult) {
             this.state.setWinner(humanResult.winner);
             this.announcerService.displayVictor(humanResult, this.cells);
+            this.cellsDao.deleteMarkers();
         } else {
             this.state = this.opponentService.takeTurn(this.state);
             const computerResult = this.adjudicatorService.judge(this.state);
             if (computerResult) {
                 this.state.setWinner(computerResult.winner);
                 this.announcerService.displayVictor(computerResult, this.cells);
+                this.cellsDao.deleteMarkers();
             } else {
+                this.cellsDao.saveMarkers(this.cells);
                 this.state.toggleTurn();
             }
         }
