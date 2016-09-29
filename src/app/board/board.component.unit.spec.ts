@@ -10,41 +10,41 @@ import Marker from '../etc/marker.enum';
 import State from '../etc/state';
 
 class MockAdjudicatorService extends AdjudicatorService {
-    ending: Ending;
+    public ending: Ending;
 
     constructor() {
         super();
     }
 
-    judge( state: State ) {
+    protected judge( state: State ) {
         return this.ending;
     }
 
-    setEnding( ending: Ending ) {
+    public setEnding( ending: Ending ) {
         this.ending = ending;
     }
 }
 
 class MockAnnouncerService extends AnnouncerService {
-    ending: Ending;
-    cells: Array<Cell>;
+    public ending: Ending;
+    public cells: Array<Cell>;
 
-    displayVictor( ending: Ending, cells: Array<Cell> ) {
+    public displayVictor( ending: Ending, cells: Array<Cell> ) {
         this.ending = ending;
         this.cells = cells;
     }
 }
 
 class MockOpponentService extends OpponentService {
-    onTurn: () => void;
-    tookTurn = false;
+    public tookTurn = false;
+    private onTurn: () => void;
 
     constructor( onTurn?: () => void ) {
         super();
         this.onTurn = onTurn;
     }
 
-    takeTurn( state: State ) {
+    public takeTurn( state: State ) {
         this.tookTurn = true;
         if ( this.onTurn ) {
             this.onTurn();
@@ -54,14 +54,14 @@ class MockOpponentService extends OpponentService {
 }
 
 class MockCellsDaoService extends CellsDaoService {
-    markersDeleted = false;
-    markersSaved = false;
+    public markersDeleted = false;
+    public markersSaved = false;
 
-    deleteMarkers() {
+    public deleteMarkers() {
         this.markersDeleted = true;
     }
 
-    saveMarkers() {
+    public saveMarkers() {
         this.markersDeleted = true;
     }
 }
@@ -72,6 +72,7 @@ let mockOpponentService: MockOpponentService;
 let mockCellsDaoService: MockCellsDaoService;
 let componentUnderTest: BoardComponent;
 
+/* tslint:disable */
 describe( 'BoardComponent', () => {
 
     beforeEach(() => {
@@ -80,11 +81,11 @@ describe( 'BoardComponent', () => {
         mockOpponentService = new MockOpponentService();
         mockCellsDaoService = new MockCellsDaoService();
         componentUnderTest = new BoardComponent(
-                mockAdjudicatorService,
-                mockAnnouncerService,
-                mockOpponentService,
-                mockCellsDaoService
-                );
+            mockAdjudicatorService,
+            mockAnnouncerService,
+            mockOpponentService,
+            mockCellsDaoService
+        );
     });
 
     describe( 'onSelect', () => {
@@ -143,7 +144,7 @@ describe( 'BoardComponent', () => {
             // Arrange
             const testHumanMarker = Marker.X;
             const testWinningPositions = [0, 1, 2];
-            mockAdjudicatorService.setEnding(new Ending( testHumanMarker, testWinningPositions ));
+            mockAdjudicatorService.setEnding( new Ending( testHumanMarker, testWinningPositions ) );
             componentUnderTest.state.turn = Marker.X;
 
             // Act
@@ -174,14 +175,16 @@ describe( 'BoardComponent', () => {
             const testComputerMarker = Marker.O;
             const testWinningPositions = [3, 4, 5];
             mockOpponentService = new MockOpponentService(() => {
-                mockAdjudicatorService.setEnding( new Ending( testComputerMarker, testWinningPositions ) );
+                mockAdjudicatorService.setEnding(
+                    new Ending( testComputerMarker, testWinningPositions )
+                );
             });
             componentUnderTest = new BoardComponent(
-                    mockAdjudicatorService,
-                    mockAnnouncerService,
-                    mockOpponentService,
-                    mockCellsDaoService
-                    );
+                mockAdjudicatorService,
+                mockAnnouncerService,
+                mockOpponentService,
+                mockCellsDaoService
+            );
             componentUnderTest.state.turn = Marker.X;
 
             // Act

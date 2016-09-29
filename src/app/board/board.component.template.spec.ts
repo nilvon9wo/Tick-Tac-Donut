@@ -7,10 +7,10 @@ import { CellsDaoService } from '../cells/cells-dao.service';
 import { OpponentService } from '../services/opponent.service';
 import Cell from '../cells/cell';
 
-class MockAdjudicatorService extends AdjudicatorService {}
-class MockAnnouncerService extends AnnouncerService {}
-class MockOpponentService extends OpponentService {}
-class MockCellsDaoService extends CellsDaoService {}
+class MockAdjudicatorService extends AdjudicatorService { }
+class MockAnnouncerService extends AnnouncerService { }
+class MockOpponentService extends OpponentService { }
+class MockCellsDaoService extends CellsDaoService { }
 
 describe( 'BoardComponent', () => {
     describe( 'template', () => {

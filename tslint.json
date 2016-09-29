@@ -104,7 +104,7 @@
     "interface-name": true,
     "jsdoc-format": true,
     "no-consecutive-blank-lines": true,
-    "no-constructor-vars": true,
+    "no-constructor-vars": false,
     "one-line": [
       true,
       "check-open-brace",

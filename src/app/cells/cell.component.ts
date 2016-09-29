@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 
 import Cell from './cell';
 
-@Component({
+@Component( {
     moduleId: module.id,
     selector: 'cell',
-    templateUrl: 'cell.component.html',
-    styleUrls: ['cell.component.css']
+    styleUrls: ['cell.component.css'],
+    templateUrl: 'cell.component.html'
 })
 
 export class CellComponent {
-    @Input() cell: Cell;
+    @Input() public cell: Cell;
 }

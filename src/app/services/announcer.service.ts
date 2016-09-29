@@ -5,9 +5,9 @@ import Ending  from '../etc/ending';
 
 @Injectable()
 export class AnnouncerService {
-    public displayVictor(ending: Ending, cells: Array<Cell>) {
-        if (ending.hasWinner()) {
-            ending.line.forEach(position => {
+    public displayVictor( ending: Ending, cells: Array<Cell> ) {
+        if ( ending.hasWinner() ) {
+            ending.line.forEach( position => {
                 cells[position].declareWinner();
             });
         }

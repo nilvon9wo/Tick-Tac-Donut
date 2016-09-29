@@ -7,53 +7,53 @@ import Cell from '../cells/cell';
 import Marker from '../etc/marker.enum';
 import State from '../etc/state';
 
-@Component({
-  moduleId: module.id,
-  providers: [AdjudicatorService, AnnouncerService, CellsDaoService, OpponentService],
-  selector: 'board',
-  templateUrl: 'board.component.html',
-  styleUrls: ['board.component.css']
+@Component( {
+    moduleId: module.id,
+    providers: [AdjudicatorService, AnnouncerService, CellsDaoService, OpponentService],
+    selector: 'board',
+    styleUrls: ['board.component.css'],
+    templateUrl: 'board.component.html'
 })
 
 export class BoardComponent {
-    cells: Array<Cell> = [];
-    state: State;
+    private cells: Array<Cell> = [];
+    private state: State;
 
     constructor(
-            private adjudicatorService: AdjudicatorService,
-            private announcerService: AnnouncerService,
-            private opponentService: OpponentService,
-            private cellsDao: CellsDaoService
-            ) {
+        private adjudicatorService: AdjudicatorService,
+        private announcerService: AnnouncerService,
+        private opponentService: OpponentService,
+        private cellsDao: CellsDaoService
+    ) {
         this.state = new State();
-        this.cells = cellsDao.loadMarkers(this.state.cells);
+        this.cells = cellsDao.loadMarkers( this.state.cells );
     }
 
-    onSelect(cell: Cell) {
-        if (cell.isEmpty() && this.state.turn === this.state.human) {
+    public onSelect( cell: Cell ) {
+        if ( cell.isEmpty() && this.state.turn === this.state.human ) {
             this.state.toggleTurn();
-            cell.setMarker(Marker.X);
+            cell.setMarker( Marker.X );
             this.advance();
         }
     }
 
-    advance() {
-        const humanResult = this.adjudicatorService.judge(this.state);
-        if (humanResult) {
-            this.state.setWinner(humanResult.winner);
-            this.announcerService.displayVictor(humanResult, this.cells);
+    private advance() {
+        const humanResult = this.adjudicatorService.judge( this.state );
+        if ( humanResult ) {
+            this.state.setWinner( humanResult.winner );
+            this.announcerService.displayVictor( humanResult, this.cells );
             this.cellsDao.deleteMarkers();
         } else {
-            this.state = this.opponentService.takeTurn(this.state);
-            const computerResult = this.adjudicatorService.judge(this.state);
-            if (computerResult) {
-                this.state.setWinner(computerResult.winner);
-                this.announcerService.displayVictor(computerResult, this.cells);
+            this.state = this.opponentService.takeTurn( this.state );
+            const computerResult = this.adjudicatorService.judge( this.state );
+            if ( computerResult ) {
+                this.state.setWinner( computerResult.winner );
+                this.announcerService.displayVictor( computerResult, this.cells );
                 this.cellsDao.deleteMarkers();
             } else {
-                this.cellsDao.saveMarkers(this.cells);
+                this.cellsDao.saveMarkers( this.cells );
                 this.state.toggleTurn();
             }
         }
-   }
+    }
 }

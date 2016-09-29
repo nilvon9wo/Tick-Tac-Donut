@@ -5,78 +5,80 @@ import State from '../etc/state';
 
 @Injectable()
 export class AdjudicatorService {
-    public judge(state: State): Ending {
-        const rowsStatus = this.checkRows(state.cells);
-        if (rowsStatus) {
+    public judge( state: State ): Ending {
+        const rowsStatus = this.checkRows( state.cells );
+        if ( rowsStatus ) {
             return rowsStatus;
         }
 
-        const columnStatus = this.checkColumns(state.cells);
-        if (columnStatus) {
+        const columnStatus = this.checkColumns( state.cells );
+        if ( columnStatus ) {
             return columnStatus;
         }
 
-        const diagnalStatus = this.checkDiagnals(state.cells);
-        if (diagnalStatus) {
+        const diagnalStatus = this.checkDiagnals( state.cells );
+        if ( diagnalStatus ) {
             return diagnalStatus;
         }
 
-        return this.checkForDraw(state);
+        return this.checkForDraw( state );
     }
 
-    private checkColumns(cells: Array<Cell>) {
-        return this.checkEdgeAdjacent({
+    private checkColumns( cells: Array<Cell> ) {
+        return this.checkEdgeAdjacent( {
             additionalCellsRequired: [3, 6],
-            cells: cells,
             cellIncrement: 1,
+            cells: cells,
             cellsUntil: 2
         });
     }
 
-    private checkRows(cells: Array<Cell>) {
-        return this.checkEdgeAdjacent({
+    private checkRows( cells: Array<Cell> ) {
+        return this.checkEdgeAdjacent( {
             additionalCellsRequired: [1, 2],
-            cells: cells,
             cellIncrement: 3,
+            cells: cells,
             cellsUntil: 6
         });
     }
 
-    private checkDiagnals(cells: Array<Cell>) {
-        for (let i = 0, j = 4; i <= 2; i = i + 2, j = j - 2) {
+    private checkDiagnals( cells: Array<Cell> ) {
+        for ( let i = 0, j = 4; i <= 2; i = i + 2, j = j - 2 ) {
             const line = [i, i + j, i + 2 * j];
-            const result = this.check(cells, line);
-            if (result) {
+            const result = this.check( cells, line );
+            if ( result ) {
                 return result;
             }
         }
-        return null;
+        return undefined;
     }
 
-    public checkForDraw(state: State) {
+    private checkForDraw( state: State ) {
         const available = state.emptyCells();
-        if (available.length === 0) {
-            return new Ending(null, null);
+        if ( available.length === 0 ) {
+            return new Ending( undefined, undefined );
         } else {
-            return null;
+            return undefined;
         }
     }
 
-    private checkEdgeAdjacent(config: any) {
-        for (let i = 0; i <= config.cellsUntil; i = i + config.cellIncrement) {
+    /* tslint:disable */
+    private checkEdgeAdjacent( config: any ) {
+        for ( let i = 0; i <= config.cellsUntil; i = i + config.cellIncrement ) {
             const line = [i, i + config.additionalCellsRequired[0], i + config.additionalCellsRequired[1]];
-            const result = this.check(config.cells, line);
-            if (result) {
+            const result = this.check( config.cells, line );
+            if ( result ) {
                 return result;
             }
         }
-        return null;
+        return undefined;
     }
+    /* tslint:enable */
 
-    private check(cells: Array<Cell>, line: Array<number>) {
+    private check( cells: Array<Cell>, line: Array<number> ) {
         let i = line[0];
-        if (cells[i].isEmpty()) {
-            return null;
+        if ( cells[i].isEmpty() ) {
+            return undefined;
         }
 
         const firstSqure = line[0];
@@ -84,12 +86,12 @@ export class AdjudicatorService {
         const thirdRequiredSquare = line[2];
         const owner = cells[firstSqure].getMarker();
         if (
-                owner === cells[secondRequiredSquare].getMarker() &&
-                owner === cells[thirdRequiredSquare].getMarker()
-            ) {
-                return new Ending(owner, line);
-            }
+            owner === cells[secondRequiredSquare].getMarker() &&
+            owner === cells[thirdRequiredSquare].getMarker()
+        ) {
+            return new Ending( owner, line );
+        }
 
-        return null;
+        return undefined;
     }
 }

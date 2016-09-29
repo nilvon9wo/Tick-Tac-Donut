@@ -1,36 +1,36 @@
-import  Marker  from '../etc/marker.enum';
+import Marker  from '../etc/marker.enum';
 
 export class Cell {
-    id: number;
+    public id: number;
     private marker: Marker;
     private background = 'background';
 
-    constructor(id: number) {
+    constructor( id: number ) {
         this.id = id;
     }
 
-    displayMarker() {
+    public displayMarker() {
         return Marker[this.marker];
     }
 
-    getMarker() {
+    public getMarker() {
         return this.marker;
     }
 
-    setMarker(marker: Marker) {
-        if (!this.marker) {
+    public setMarker( marker: Marker ) {
+        if ( !this.marker ) {
             this.marker = marker;
         }
     }
 
-    declareWinner() {
+    public declareWinner() {
         this.background = 'winner';
     }
 
-    isEmpty() {
+    public isEmpty() {
         return this.marker === undefined;
     }
 
-  }
+}
 
 export default Cell;

@@ -2,6 +2,7 @@ import { CellsDaoService } from './cells-dao.service';
 import Cell from './cell';
 import Marker from '../etc/marker.enum';
 
+/* tslint:disable */
 describe( 'CellsDaoService', () => {
     let serviceUnderTest: CellsDaoService;
 
@@ -48,7 +49,7 @@ describe( 'CellsDaoService', () => {
 
             // Assert
             for ( let i = 0; i <= 8; i++ ) {
-                expect (resultCells[i].getMarker()).toEqual(Marker.X);
+                expect( resultCells[i].getMarker() ).toEqual( Marker.X );
             }
 
             // Clean up

@@ -2,6 +2,7 @@ import { OpponentService } from './opponent.service';
 
 import State  from '../etc/state';
 
+/* tslint:disable */
 describe( 'OpponentService', () => {
 
     let serviceUnderTest: OpponentService;
@@ -32,12 +33,12 @@ describe( 'OpponentService', () => {
             };
 
             // Act
-            const resultState = serviceUnderTest.takeTurn(testState);
+            const resultState = serviceUnderTest.takeTurn( testState );
 
             // Assert
             expect( randomWasCalled ).toEqual( true );
             expect( floorWasCalled ).toEqual( true );
-            expect(resultState.cells[randomResult]['marker']).toEqual(testState.computer);
+            expect( resultState.cells[randomResult]['marker'] ).toEqual( testState.computer );
 
             // Clean-up
             Math.random = randomBackup;
