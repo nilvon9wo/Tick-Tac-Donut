@@ -1,4 +1,4 @@
-**Note: for support questions, please use one of these channels:** [Chat: AngularClass.slack](http://angularclass.com/member-join/) or [Twitter: @AngularClass](https://twitter.com/AngularClass)
+**Note: for support questions, please use this channel: https://github.com/nilvon9wo/Tick-Tack-Doughnuts/issues
 
 * **I'm submitting a ...**
 [ ] bug report
