@@ -41,7 +41,6 @@ _test-output
 _temp
 __build__/**
 **/*npm-debug.log.*
-*.js
 *.js.map
 .lock-wscript
 *.log
