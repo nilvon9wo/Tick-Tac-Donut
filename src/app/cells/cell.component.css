@@ -1,38 +1,37 @@
 div[class^="ticTacToe--board-cell"] {
-    border: 2px dashed #111;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    cursor:pointer;
-    float:left;
-    font-family: "Arial Narrow";
-    font-weight: bold;
-    font-size: 180px;
-    height: 233px;
-    line-height: 233px;
-    text-align: center;
-    width: 233px;
+	border: 2px dashed #111;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	cursor: pointer;
+	float: left;
+	font-family: "Arial Narrow";
+	font-weight: bold;
+	font-size: 180px;
+	height: 233px;
+	line-height: 233px;
+	text-align: center;
+	width: 233px;
 }
 
 .ticTacToe--board-cell--background {
-    /*background: url("./assets/img/background.png");*/
-    background-repeat: no-repeat;   
+	background: url("img/background.png");
+	background-repeat: no-repeat;
 }
 
 .ticTacToe--board-cell--winner {
-    /*background: url("./assets/img/win.png");*/
-    background-repeat: no-repeat;   
+	background: url("img/win.png");
+	background-repeat: no-repeat;
 }
 
-.ticTacToe--board-cell--x {
-    color: red;
-    /*background: url("./assets/img/tick.png");*/
-    text-indent: -9999px;
+.ticTacToe--board-cell--X {
+	color: red;
+	background: url("img/tick.png");
+	text-indent: -9999px;
 }
 
-.ticTacToe--board-cell--o {
-    /*background: url("./assets/img/doughnut.png");*/
-    color: green;
-    text-indent: -9999px;
+.ticTacToe--board-cell--O {
+	background: url("img/doughnut.png");
+	color: green;
+	text-indent: -9999px;
 }
-
