@@ -70,10 +70,10 @@ let mockAdjudicatorService: MockAdjudicatorService;
 let mockAnnouncerService: MockAnnouncerService;
 let mockOpponentService: MockOpponentService;
 let mockCellsDaoService: MockCellsDaoService;
-let componentUnderTest: BoardComponent
+let componentUnderTest: BoardComponent;
 
 describe( 'BoardComponent', () => {
-    
+
     beforeEach(() => {
         mockAdjudicatorService = new MockAdjudicatorService();
         mockAnnouncerService = new MockAnnouncerService();
