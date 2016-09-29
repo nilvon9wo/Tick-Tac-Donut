@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { AdjudicatorService } from '../services/adjudicator.service';
 import { AnnouncerService } from '../services/announcer.service';
 import { CellsDaoService } from '../cells/cells-dao.service';
