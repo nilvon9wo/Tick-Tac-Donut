@@ -29,18 +29,16 @@ To build a tic-tac-toe game in JavaScript that can be played in a browser.
 * Lint: npm run lint
 
 ## Tested environments:
-### Operating System: 
 * Windows Version 5.1 (Build 2600.xpsp_sp3_qfe.160814-1135: Service Pack 3)
+### Operating System: 
 ### Node: 
 * v5.12.0
 ### Web browsers:
 * Google Chrome Version 49.0.2623.112 m
 * Mozilla Firefox 47.0.1
 * Mozilla Firefox Developer Edition 51.0a2(2016-09-28)(32-bit)
-
+* Opera Version 15.0.1147.141
  
-
-
 ## Further Reading:
 * About Tic-tac-toe: https://en.wikipedia.org/wiki/Tic-tac-toe
 * About Tic-tac-toe AI with JavaScript: https://mostafa-samir.github.io/Tic-Tac-Toe-AI/

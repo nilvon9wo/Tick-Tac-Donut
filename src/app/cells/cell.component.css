@@ -15,23 +15,23 @@ div[class^="ticTacToe--board-cell"] {
 }
 
 .ticTacToe--board-cell--background {
-    background: url("./assets/images/background.png");
+    /*background: url("./assets/img/background.png");*/
     background-repeat: no-repeat;   
 }
 
 .ticTacToe--board-cell--winner {
-    background: url("./assets/images/win.png");
+    /*background: url("./assets/img/win.png");*/
     background-repeat: no-repeat;   
 }
 
 .ticTacToe--board-cell--x {
     color: red;
-    background: url("./assets/images/tick.png");
+    /*background: url("./assets/img/tick.png");*/
     text-indent: -9999px;
 }
 
 .ticTacToe--board-cell--o {
-    background: url("./assets/images/doughnut.png");
+    /*background: url("./assets/img/doughnut.png");*/
     color: green;
     text-indent: -9999px;
 }
