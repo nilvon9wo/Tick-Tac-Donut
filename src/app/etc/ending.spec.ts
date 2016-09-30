@@ -2,7 +2,7 @@ import Ending  from './ending';
 import Marker  from './marker.enum';
 
 describe( 'Ending', () => {
-    describe( 'constructor', () => {
+    describe( 'constructor(test)', () => {
         it( 'should store the value of the winner and the winning positions', () => {
             // Arrange
             const testMarker = Marker.X;

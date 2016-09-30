@@ -10,7 +10,7 @@ describe( 'State', () => {
         }
     }
 
-    describe( 'constructor', () => {
+    describe( 'constructor(test)', () => {
         it( 'should create a new array of unclaimed cells and the first turn should belong to X',
             () => {
                 // Arrange

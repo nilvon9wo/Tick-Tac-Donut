@@ -105,7 +105,6 @@ module.exports = function(options) {
          * See: http://webpack.github.io/docs/configuration.html#module
          */
         module : {
-
             /*
              * An array of applied pre and post loaders.
              * 

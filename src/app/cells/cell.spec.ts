@@ -3,7 +3,7 @@ import Marker from '../etc/marker.enum';
 
 /* tslint:disable */
 describe( 'Cell', () => {
-    describe( 'constructor', () => {
+    describe( 'constructor(test)', () => {
         it( 'should create a new cell with the supplied id and no marker', () => {
             // Arrange
             const testId = 1;

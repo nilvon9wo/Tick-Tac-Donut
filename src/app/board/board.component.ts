@@ -8,7 +8,6 @@ import Marker from '../etc/marker.enum';
 import State from '../etc/state';
 
 @Component( {
-    //moduleId: module.id, -- unnecessary and incompatible with webpack
     providers: [AdjudicatorService, AnnouncerService, CellsDaoService, OpponentService],
     selector: 'board',
     styles: [require('./board.component.css')],
