@@ -10,10 +10,10 @@
       "static-before-instance",
       "variables-before-functions"
     ],
-    "no-any": true,
+    "no-any": false,
     "no-inferrable-types": true,
     "no-internal-module": true,
-    "no-var-requires": true,
+    "no-var-requires": false,
     "typedef": true,
     "typedef-whitespace": [
       true,
@@ -101,12 +101,12 @@
       true,
       "check-space"
     ],
-    "interface-name": true,
+    "interface-name": false,
     "jsdoc-format": true,
-    "no-consecutive-blank-lines": true,
+    "no-consecutive-blank-lines": false,
     "no-constructor-vars": false,
     "one-line": [
-      true,
+      false,
       "check-open-brace",
       "check-catch",
       "check-else",
