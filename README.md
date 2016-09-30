@@ -30,8 +30,8 @@ To build a tic-tac-toe game in JavaScript that can be played in a browser.
 ** After executing unit tests, coverage report will be available at ./coverage/html/index.html
 
 ## Tested environments:
-* Windows Version 5.1 (Build 2600.xpsp_sp3_qfe.160814-1135: Service Pack 3)
 ### Operating System: 
+* Windows Version 5.1 (Build 2600.xpsp_sp3_qfe.160814-1135: Service Pack 3)
 ### Node: 
 * v5.12.0
 ### Web browsers:
