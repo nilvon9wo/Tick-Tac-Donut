@@ -63,7 +63,7 @@ describe( 'CellsDaoService', () => {
             const setBackup = localStorage.setItem;
             const savedMarkers: Array<string> = [];
             localStorage.setItem = ( item: string, value: string ) => {
-                savedMarkers[<any>item] = value.toString();
+                savedMarkers[<any>item] = value ? value.toString() : undefined;
             };
             const testCells: Array<Cell> = ( function() {
                 const cells: Array<Cell> = [];
