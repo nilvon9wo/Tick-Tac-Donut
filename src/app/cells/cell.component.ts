@@ -3,10 +3,10 @@ import { Component, Input } from '@angular/core';
 import Cell from './cell';
 
 @Component( {
-    moduleId: module.id,
+    //moduleId: module.id, -- unnecessary and incompatible with webpack
     selector: 'cell',
-    styleUrls: ['cell.component.css'],
-    templateUrl: 'cell.component.html'
+    styles: [require('./cell.component.css')],
+    template: require('./cell.component.html')
 })
 
 export class CellComponent {
