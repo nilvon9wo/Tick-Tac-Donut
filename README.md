@@ -21,12 +21,13 @@ To build a tic-tac-toe game in JavaScript that can be played in a browser.
 2. npm install
 
 ## Play
-1. npm start
+1. npm run server
 2. browse http://localhost:3000
 
 ## Run Tests
-* Unit tests: npm test
 * Lint: npm run lint
+* Unit tests: npm test
+** After executing unit tests, coverage report will be available at ./coverage/html/index.html
 
 ## Tested environments:
 * Windows Version 5.1 (Build 2600.xpsp_sp3_qfe.160814-1135: Service Pack 3)
