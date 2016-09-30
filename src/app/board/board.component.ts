@@ -16,8 +16,8 @@ import State from '../etc/state';
 })
 
 export class BoardComponent {
-    private cells: Array<Cell> = [];
-    private state: State;
+    public cells: Array<Cell> = [];
+    public state: State;
 
     constructor(
         private adjudicatorService: AdjudicatorService,
@@ -37,7 +37,7 @@ export class BoardComponent {
         }
     }
 
-    private advance() {
+    public advance() {
         const humanResult = this.adjudicatorService.judge( this.state );
         if ( humanResult ) {
             this.state.setWinner( humanResult.winner );

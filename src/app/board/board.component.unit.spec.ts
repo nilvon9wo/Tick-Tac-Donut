@@ -16,7 +16,7 @@ class MockAdjudicatorService extends AdjudicatorService {
         super();
     }
 
-    protected judge( state: State ) {
+    public judge( state: State ) {
         return this.ending;
     }
 

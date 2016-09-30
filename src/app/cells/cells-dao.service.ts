@@ -13,9 +13,11 @@ export class CellsDaoService {
 
     public loadMarkers( cells: Array<Cell> ): Array<Cell> {
         for ( let i = 0; i <= 8; i++ ) {
-            const marker: string | null = localStorage.getItem( 'cell_' + i );
+            const marker: string | undefined = localStorage.getItem( 'cell_' + i );
             if ( marker ) {
+                /* tslint:disable */
                 const cellMarker: Marker = (<any>Marker)[marker];
+                /* tslint:enable */
                 cells[i].setMarker( cellMarker );
             }
         }

@@ -62,8 +62,8 @@ describe( 'CellsDaoService', () => {
             // Arrange
             const setBackup = localStorage.setItem;
             const savedMarkers: Array<string> = [];
-            localStorage.setItem = ( item, value ) => {
-                savedMarkers[item] = value;
+            localStorage.setItem = ( item: string, value: string ) => {
+                savedMarkers[<any>item] = value.toString();
             };
             const testCells: Array<Cell> = ( function() {
                 const cells: Array<Cell> = [];
@@ -79,8 +79,8 @@ describe( 'CellsDaoService', () => {
             serviceUnderTest.saveMarkers( testCells );
 
             // Assert
-            expect( savedMarkers['cell_0'] ).toEqual( 'X' );
-            expect( savedMarkers['cell_1'] ).toEqual( 'O' );
+            expect(savedMarkers[<any>'cell_0']).toEqual( 'X' );
+            expect(savedMarkers[<any>'cell_1']).toEqual( 'O' );
 
             // Clean up
             localStorage.setItem = setBackup;
