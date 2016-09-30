@@ -59,7 +59,7 @@
 		"github-deploy:prod": "webpack --config config/webpack.github-deploy.js --progress --profile --github-prod",
 		"github-deploy": "npm run github-deploy:dev",
 		"lint": "npm run tslint \"src/**/*.ts\"",
-		"postinstall": "webpack -p --config ./webpack.prod.config.js --progress",
+		"postinstall": "webpack -p --config ./config/webpack.prod.js --progress",
 		"postversion": "git push && git push --tags",
 		"prebuild:dev": "npm run clean:dist",
 		"prebuild:prod": "npm run clean:dist",
