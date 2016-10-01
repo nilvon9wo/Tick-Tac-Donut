@@ -92,11 +92,6 @@
       "from": "ecstatic@>=1.4.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/ecstatic/-/ecstatic-1.4.1.tgz"
     },
-    "emojis-list": {
-      "version": "2.0.1",
-      "from": "emojis-list@>=2.0.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/emojis-list/-/emojis-list-2.0.1.tgz"
-    },
     "eventemitter3": {
       "version": "1.2.0",
       "from": "eventemitter3@>=1.0.0 <2.0.0",
