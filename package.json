@@ -57,7 +57,6 @@
 		"github-deploy:prod": "webpack --config config/webpack.github-deploy.js --progress --profile --github-prod",
 		"github-deploy": "npm run github-deploy:dev",
 		"lint": "npm run tslint \"src/**/*.ts\"",
-		"postinstall": "webpack --config ./config/webpack.prod.js --progress",
 		"postversion": "git push && git push --tags",
 		"prebuild:dev": "npm run clean:dist",
 		"prebuild:prod": "npm run clean:dist",
@@ -93,6 +92,8 @@
 		"@types/hammerjs": "^2.0.33",
 		"@types/jasmine": "^2.2.34",
 		"@types/node": "^6.0.38",
+		"@types/protractor": "^1.5.20",
+		"@types/selenium-webdriver": "2.44.29",
 		"@types/source-map": "^0.1.27",
 		"@types/uglify-js": "^2.0.27",
 		"@types/webpack": "^1.12.34",
@@ -124,6 +125,7 @@
 		"karma-webpack": "1.8.0",
 		"lodash": "^4.11.1",
 		"parse5": "^1.3.2",
+		"protractor": "^3.3.0",
 		"raw-loader": "0.5.1",
 		"rimraf": "^2.5.2",
 		"source-map-loader": "^0.1.5",
@@ -153,7 +155,7 @@
 	},
 	"homepage": "https://github.com/nilvon9wo/Tick-Tack-Doughnuts#readme",
     "engines": {
-        "node": "5.12.0",
-        "npm": "3.8.6"
+        "node": ">= 5.12.0",
+        "npm": ">= 3.8.6"
     }
 }
