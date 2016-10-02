@@ -15,6 +15,12 @@ export class State {
         }
     }
 
+    private clearMarkers() {
+        this.cells.forEach(cell => {
+            cell.resetMarker();
+        });
+    }
+    
     public emptyCells() {
         const emptyCells = new Array<Cell>();
 
@@ -25,6 +31,12 @@ export class State {
         });
 
         return emptyCells;
+    }
+    
+    public reset(){
+        this.clearMarkers();
+        this.turn = Marker.X;
+        this.winner = undefined;
     }
 
     public setWinner( winner: Marker ) {
