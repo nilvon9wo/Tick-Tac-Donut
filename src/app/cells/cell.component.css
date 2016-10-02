@@ -8,10 +8,10 @@ div[class^="ticTacToe--board-cell"] {
 	font-family: "Arial Narrow";
 	font-weight: bold;
 	font-size: 180px;
-	height: 233px;
-	line-height: 233px;
+	height: 250px;
+	line-height: 250px;
 	text-align: center;
-	width: 233px;
+	width: 250px;
 }
 
 .ticTacToe--board-cell--background {
