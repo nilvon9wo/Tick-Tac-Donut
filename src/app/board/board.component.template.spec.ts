@@ -5,7 +5,7 @@ import { BoardComponent } from './board.component';
 import { CellComponent } from '../cells/cell.component';
 import { CellsDaoService } from '../cells/cells-dao.service';
 import { OpponentService } from '../services/opponent.service';
-import Cell from '../cells/cell';
+import State from '../etc/state';
 
 class MockAdjudicatorService extends AdjudicatorService { }
 class MockAnnouncerService extends AnnouncerService { }
@@ -32,10 +32,12 @@ describe( 'BoardComponent', () => {
                         }
                     })
                     .createComponent( BoardComponent );
-                const componentUnderTest = fixture.nativeElement;
-                fixture.componentInstance.cells = [new Cell( 1 )];
+                fixture.componentInstance.state = new State();
+                fixture.componentInstance.ngOnInit();
                 fixture.detectChanges();
-                expect( componentUnderTest.querySelectorAll( 'cell' ).length ).toBe( 1 );
+
+                const componentUnderTest = fixture.nativeElement;
+                expect( componentUnderTest.querySelectorAll( 'cell' ).length ).toBe( 9 );
             });
         }) );
     });

@@ -80,13 +80,22 @@ describe( 'BoardComponent', () => {
         mockAnnouncerService = new MockAnnouncerService();
         mockOpponentService = new MockOpponentService();
         mockCellsDaoService = new MockCellsDaoService();
-        componentUnderTest = new BoardComponent(
+        componentUnderTest = createBoard( mockOpponentService );
+    });
+
+    function createBoard( mockOpponentService: MockOpponentService ) {
+        const board = new BoardComponent(
             mockAdjudicatorService,
             mockAnnouncerService,
             mockOpponentService,
             mockCellsDaoService
         );
-    });
+
+        const testState = new State();
+        board.state = testState;
+        board.ngOnInit();
+        return board;
+    }
 
     describe( 'onSelect', () => {
         it( 'should set an X and change to the computer\'s turn, when appropriate', () => {
@@ -179,12 +188,7 @@ describe( 'BoardComponent', () => {
                     new Ending( testComputerMarker, testWinningPositions )
                 );
             });
-            componentUnderTest = new BoardComponent(
-                mockAdjudicatorService,
-                mockAnnouncerService,
-                mockOpponentService,
-                mockCellsDaoService
-            );
+            componentUnderTest = createBoard( mockOpponentService );
             componentUnderTest.state.turn = Marker.X;
 
             // Act
