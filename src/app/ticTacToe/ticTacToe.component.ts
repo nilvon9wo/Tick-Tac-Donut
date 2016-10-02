@@ -5,7 +5,7 @@ import State from '../etc/state';
 @Component( {
     providers: [CellsDaoService],
     selector: 'tic-tac-toe',
-    //    styles: [require('./ticTacToe.component.css')],
+    styles: [require('./ticTacToe.component.css')],
     template: require( './ticTacToe.component.html' )
 })
 
