@@ -23,7 +23,7 @@ export class Cell {
             this.marker = marker;
         }
     }
-    
+
     public resetMarker() {
         this.marker = undefined;
         this.background = this.DEFAULT_BACKGROUND;

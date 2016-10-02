@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AdjudicatorService } from '../services/adjudicator.service';
 import { AnnouncerService } from '../services/announcer.service';
 import { CellsDaoService } from '../cells/cells-dao.service';
@@ -10,8 +10,8 @@ import State from '../etc/state';
 @Component( {
     providers: [AdjudicatorService, AnnouncerService, CellsDaoService, OpponentService],
     selector: 'board',
-    styles: [require('./board.component.css')],
-    template: require('./board.component.html')
+    styles: [require( './board.component.css' )],
+    template: require( './board.component.html' )
 })
 
 export class BoardComponent {
@@ -26,10 +26,10 @@ export class BoardComponent {
     ) {
     }
 
-    ngOnInit(){
+    public ngOnInit() {
         this.cells = this.cellsDao.loadMarkers( this.state.cells );
     }
-    
+
     public onSelect( cell: Cell ) {
         if ( cell.isEmpty() && this.state.turn === this.state.human ) {
             this.state.toggleTurn();
