@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AdjudicatorService } from '../services/adjudicator.service';
 import { AnnouncerService } from '../services/announcer.service';
 import { CellsDaoService } from '../cells/cells-dao.service';
@@ -15,8 +15,8 @@ import State from '../etc/state';
 })
 
 export class BoardComponent {
+    @Input() public state: State;
     public cells: Array<Cell> = [];
-    public state: State;
 
     constructor(
         private adjudicatorService: AdjudicatorService,
@@ -24,10 +24,12 @@ export class BoardComponent {
         private opponentService: OpponentService,
         private cellsDao: CellsDaoService
     ) {
-        this.state = new State();
-        this.cells = cellsDao.loadMarkers( this.state.cells );
     }
 
+    ngOnInit(){
+        this.cells = this.cellsDao.loadMarkers( this.state.cells );
+    }
+    
     public onSelect( cell: Cell ) {
         if ( cell.isEmpty() && this.state.turn === this.state.human ) {
             this.state.toggleTurn();

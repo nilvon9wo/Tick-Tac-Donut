@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import State from '../etc/state';
 
 @Component( {
     selector: 'tic-tac-toe',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
     template: require('./ticTacToe.component.html')
 })
 
-export class TicTacToeComponent {}
+export class TicTacToeComponent {
+    public state: State;
+
+    constructor(){
+        this.state = new State();
+    }
+}
