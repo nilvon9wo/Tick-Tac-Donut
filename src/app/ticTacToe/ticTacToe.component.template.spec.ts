@@ -3,15 +3,10 @@ import { BoardComponent } from '../board/board.component';
 import { CellComponent } from '../cells/cell.component';
 import { CellsDaoService } from '../cells/cells-dao.service';
 import { TicTacToeComponent } from './ticTacToe.component';
-import Marker from '../etc/marker.enum';
 
 class MockCellsDaoService extends CellsDaoService { }
 
-let mockCellsDaoService: MockCellsDaoService;
-let componentUnderTest: TicTacToeComponent;
-
 describe( 'TicTacToeComponent', () => {
-
     describe( 'template', () => {
         it( 'should render a board', async(() => {
             TestBed.configureTestingModule( {
