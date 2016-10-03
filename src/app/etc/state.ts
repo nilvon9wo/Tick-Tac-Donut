@@ -27,6 +27,12 @@ export class State {
         return emptyCells;
     }
 
+    public reset(){
+        this.clearMarkers();
+        this.turn = Marker.X;
+        this.winner = undefined;
+    }
+
     public setWinner( winner: Marker ) {
         this.winner = winner;
         delete this.turn;
@@ -34,6 +40,12 @@ export class State {
 
     public toggleTurn() {
         this.turn = ( this.turn === Marker.X ) ? Marker.O : Marker.X;
+    }
+
+    private clearMarkers() {
+        this.cells.forEach(cell => {
+            cell.resetMarker();
+        });
     }
 }
 

@@ -2,8 +2,9 @@ import Marker  from '../etc/marker.enum';
 
 export class Cell {
     public id: number;
+    private DEFAULT_BACKGROUND = 'background';
     private marker: Marker;
-    private background = 'background';
+    private background = this.DEFAULT_BACKGROUND;
 
     constructor( id: number ) {
         this.id = id;
@@ -21,6 +22,11 @@ export class Cell {
         if ( !this.marker ) {
             this.marker = marker;
         }
+    }
+
+    public resetMarker() {
+        this.marker = undefined;
+        this.background = this.DEFAULT_BACKGROUND;
     }
 
     public declareWinner() {

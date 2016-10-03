@@ -1,4 +1,6 @@
 div[class^="ticTacToe--board-cell"] {
+    background-repeat: no-repeat;
+	background-size: 200px 200px;
 	border: 2px dashed #111;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -8,25 +10,23 @@ div[class^="ticTacToe--board-cell"] {
 	font-family: "Arial Narrow";
 	font-weight: bold;
 	font-size: 180px;
-	height: 233px;
-	line-height: 233px;
+	height: 200px;
+	line-height: 200px;
 	text-align: center;
-	width: 233px;
+	width: 200px;
 }
 
 .ticTacToe--board-cell--background {
 	background: url("img/background.png");
-	background-repeat: no-repeat;
 }
 
 .ticTacToe--board-cell--winner {
 	background: url("img/win.png");
-	background-repeat: no-repeat;
 }
 
 .ticTacToe--board-cell--X {
-	color: red;
 	background: url("img/tick.png");
+    color: red;
 	text-indent: -9999px;
 }
 

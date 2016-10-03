@@ -1,0 +1,9 @@
+.tic-tac-toe--reset-button {
+	background-color: #A4BDA8;
+	margin-top: 86px;
+	float:right;
+}
+
+.tic-tac-toe--reset-button:hover {
+    background-color: #C6DFCA;
+}

@@ -70,6 +70,29 @@ describe( 'State', () => {
         });
     });
 
+    describe( 'reset', () => {
+        it( 'should should clear the markers, set the turn back to X, and unset the winner',
+            () => {
+                // Arrange
+                const testState = new State();
+                testState.cells.forEach( cell => {
+                    cell['marker'] = Marker.X;
+                });
+                testState.turn = Marker.O;
+                testState.winner = Marker.O;
+
+                // Act
+                testState.reset();
+
+                // Assert
+                const emptyCells = testState.emptyCells();
+                expect( emptyCells.length ).toEqual( 9 );
+                expect( testState.turn ).toEqual( Marker.X );
+                expect( testState.winner ).toBe( undefined );
+
+            });
+    });
+
     describe( 'setWinner', () => {
         it( 'should set the winner to the specified marker and the turn property should be deleted',
             () => {
