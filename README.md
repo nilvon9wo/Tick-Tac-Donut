@@ -15,16 +15,20 @@ To build a tic-tac-toe game in JavaScript that can be played in a browser.
 * The user does not need to be able to play from a different browser.
 * Reseting the history or using an incognito window will invalidate the requirement for resumed play.
 
+## Play Online:
+https://tick-tac-donut.herokuapp.com/
 
-## Installation:
+## Develop
+
+### Installation:
 1. git clone git@github.com:nilvon9wo/Tick-Tack-Doughnuts.git
 2. npm install
 
-## Play
+### Play
 1. npm run server
 2. browse http://localhost:3000
 
-## Run Tests
+### Run Tests
 * Lint: npm run lint
 * Unit tests: npm test
 ** After executing unit tests, coverage report will be available at ./coverage/html/index.html
