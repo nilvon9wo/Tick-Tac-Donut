@@ -1,5 +1,5 @@
-# Tick-Tack-Doughnuts
-Tick Tack Doughtnuts is a traditional Tic-tac-toe game which enables users to play in a modern web-browser.  Disrupted play can be continued within the same web-browser, provided the user has not destroyed the browser history.
+# Tick-Tac-Donut
+Tick Tac Donut is a traditional Tic-tac-toe game which enables users to play in a modern web-browser.  Disrupted play can be continued within the same web-browser, provided the user has not destroyed the browser history.
 
 ## The Challenge
 To build a tic-tac-toe game in JavaScript that can be played in a browser.
